@@ -20,7 +20,7 @@
       <property name="orientation">
        <enum>Qt::Horizontal</enum>
       </property>
-      <widget class="QListWidget" name="listWidgetTemplate">
+      <widget class="ListWidget" name="listWidgetTemplate">
        <property name="minimumSize">
         <size>
          <width>206</width>
@@ -34,7 +34,7 @@
         </size>
        </property>
       </widget>
-      <widget class="QWidget" name="widgetMiddle" native="true">
+      <widget class="WidgetShowScene" name="widgetMiddle" native="true">
        <property name="styleSheet">
         <string notr="true">background-color: rgb(137, 173, 255);</string>
        </property>
@@ -147,6 +147,19 @@
   </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>ListWidget</class>
+   <extends>QListWidget</extends>
+   <header>ListWidget.h</header>
+  </customwidget>
+  <customwidget>
+   <class>WidgetShowScene</class>
+   <extends>QWidget</extends>
+   <header>widgetshowscene.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

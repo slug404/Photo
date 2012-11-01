@@ -2,6 +2,9 @@
 #include <QDebug>
 #include <QFileDialog>
 #include <QDir>
+#include "ListWidget.h"
+#include "ListWidgetItem.h"
+#include "ListWidgetItem_Form.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent)
@@ -34,7 +37,18 @@ void MainWindow::initData()
 {
     QString file = "./Template/";
     templateFilesName_ = getComponentsName(file);
+    qSort(templateFilesName_.begin(), templateFilesName_.end());
+    foreach (QString name, templateFilesName_)
+    {
+        QPixmap pix(251, 171);
+        pix.load(file+name);
 
+        ListWidgetItem_Form *pWidget = new ListWidgetItem_Form(name, pix.scaled(251, 171), this);
+        ListWidgetItem *pItem = new ListWidgetItem(pWidget, this);
+        pItem->setSizeHint(QSize(251, 201));
+        listWidgetTemplate->addItem(pItem);
+        listWidgetTemplate->setItemWidget(pItem, pWidget);
+    }
 }
 
 void MainWindow::initGui()
@@ -62,6 +76,7 @@ QStringList MainWindow::getComponentsName(const QString &filePath)
         }
         ++iter;
     }
+    qDebug() << strFileNameList;
     return strFileNameList;
 }
 
