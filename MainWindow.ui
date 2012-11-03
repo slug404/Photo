@@ -113,7 +113,7 @@
        </attribute>
        <layout class="QGridLayout" name="gridLayout">
         <item row="0" column="0">
-         <widget class="QListWidget" name="listWidgetLayer"/>
+         <widget class="ListWidgetLayout" name="listWidgetLayer"/>
         </item>
         <item row="1" column="0">
          <widget class="QSlider" name="horizontalSlider">
@@ -239,6 +239,11 @@
    <extends>QWidget</extends>
    <header>widgetshowscene.h</header>
    <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>ListWidgetLayout</class>
+   <extends>QListWidget</extends>
+   <header>ListWidgetLayout.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

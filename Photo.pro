@@ -18,7 +18,8 @@ SOURCES += main.cpp\
     GraphicsView.cpp \
     GraphicsScene.cpp \
     GraphicsItem.cpp \
-    WidgetShowScene.cpp
+    WidgetShowScene.cpp \
+    ListWidgetLayout.cpp
 
 HEADERS  += MainWindow.h \
     ListWidgetItem_Form.h \
@@ -27,7 +28,8 @@ HEADERS  += MainWindow.h \
     GraphicsView.h \
     GraphicsScene.h \
     GraphicsItem.h \
-    WidgetShowScene.h
+    WidgetShowScene.h \
+    ListWidgetLayout.h
 
 FORMS    += MainWindow.ui \
     ListWidgetItem_Form.ui

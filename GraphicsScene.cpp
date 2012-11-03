@@ -102,6 +102,7 @@ void GraphicsScene::slotCreateItem(const QString &path, const QPointF &pos)
     int h = pix.height();
     rect_ = QRect(0, 0, w, h);
     GraphicsItem *pItem = new GraphicsItem(rect_ , pix, this);
+    list_GraphicsItem_.append(pItem);
     this->addItem(pItem);
 }
 

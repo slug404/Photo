@@ -35,6 +35,7 @@ private:
     QRect rect_;
     ListWidget *pListWidget_;
     QGraphicsPixmapItem *pPixmapItem_;
+    QList<QGraphicsItem *> list_GraphicsItem_;
 };
 
 #endif // GRAPHICSSCENE_H

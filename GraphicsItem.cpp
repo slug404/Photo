@@ -18,10 +18,10 @@ QRectF GraphicsItem::boundingRect() const
 
 void GraphicsItem::initSetting()
 {
-    setFlag(QGraphicsItem::ItemIsMovable, true);
-    setFlag(QGraphicsItem::ItemIsSelectable, true);
-    setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
-    this->setAcceptHoverEvents(true);
+//    setFlag(QGraphicsItem::ItemIsMovable, true);
+//    setFlag(QGraphicsItem::ItemIsSelectable, true);
+//    setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
+//    this->setAcceptHoverEvents(true);
 }
 
 void GraphicsItem::initData()
