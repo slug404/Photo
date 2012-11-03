@@ -4,21 +4,19 @@
 #include <QWidget>
 
 class GraphicsScene;
-
+class ListWidget;
 class WidgetShowScene : public QWidget
 {
     Q_OBJECT
 public:
     explicit WidgetShowScene(QWidget *parent = 0);
-    
+    void setGraphicsScene(GraphicsScene *p);
+
 signals:
-    
+
 public slots:
 
 private:
-    void initSetting();
-    void initData();
-    void initGui();
 
 private:
     GraphicsScene *pGraphicsScene_;

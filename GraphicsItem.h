@@ -24,6 +24,9 @@ signals:
     
 public slots:
 
+protected:
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
+
 private:
     void initSetting();
     void initData();

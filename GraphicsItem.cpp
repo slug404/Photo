@@ -1,5 +1,7 @@
 #include "GraphicsItem.h"
 #include <QDebug>
+#include <QPainter>
+
 GraphicsItem::GraphicsItem(const QRect &rect, const QPixmap &bgImage, QObject *parent) :
     bgRect_(rect), bgPixmap_(bgImage), QObject(parent)
 {
@@ -28,4 +30,9 @@ void GraphicsItem::initData()
 
 void GraphicsItem::initGui()
 {
+}
+
+void GraphicsItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+{
+    painter->drawPixmap(bgRect_, bgPixmap_);
 }

@@ -38,7 +38,7 @@ void ListWidget::initSetting()
 
 void ListWidget::initData()
 {
-        connect(this, SIGNAL(itemPressed(QListWidgetItem*)), SLOT(slotItemPressed(QListWidgetItem*)));
+    connect(this, SIGNAL(itemPressed(QListWidgetItem*)), SLOT(slotItemPressed(QListWidgetItem*)));
 }
 
 void ListWidget::initGui()
