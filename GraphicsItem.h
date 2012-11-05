@@ -16,9 +16,10 @@ public:
     {
         return Type;
     }
-
+    //void resetMatrix();
     //返回可用矩形区域
     QRectF boundingRect() const;
+    void setOldTransformation();
     
 signals:
     
@@ -27,6 +28,7 @@ public slots:
 protected:
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
     void keyPressEvent(QKeyEvent *event);
+    void mouseMoveEvent(QGraphicsSceneMouseEvent *event);
 
 private:
     void initSetting();
@@ -38,6 +40,11 @@ private:
     QRect bgRect_;
     QPixmap bgPixmap_;
     int offset_;
+    qreal size_;
+    qreal rotate_;
+    qreal sum_;
+    QTransform oldTransform_;
+    QPointF originPoint_;
 };
 
 #endif // GRAPHICSITEM_H

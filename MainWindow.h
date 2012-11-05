@@ -31,6 +31,8 @@ private slots:
     //设置焦点, 为了接受键盘事件
     void slotSetFcous(const QString &name);
 
+    void on_action_undo_triggered();
+
 private:
     void initSetting();
     void initData();

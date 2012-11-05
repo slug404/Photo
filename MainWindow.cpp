@@ -193,3 +193,15 @@ void MainWindow::on_action_Clear_triggered()
         pGraphicsScene_->clear();
     }
 }
+
+void MainWindow::on_action_undo_triggered()
+{
+    QHash<QString, QGraphicsItem *>::iterator iter;
+    for(iter = hash_Name_GraphicsItem_.begin(); iter != hash_Name_GraphicsItem_.end(); ++iter)
+    {
+        GraphicsItem *p = (GraphicsItem *)iter.value();
+        //p->setOldTransformation();
+        p->setRotation(0);
+        p->setScale(0.9);
+    }
+}
