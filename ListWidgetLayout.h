@@ -10,11 +10,16 @@ public:
     explicit ListWidgetLayout(QWidget *parent = 0);
     
 signals:
-    
+    void signalResetZvalue(const QString &name, int index);
+    void signalSetFocus(const QString &name);
+
 public slots:
     
 protected:
     void dropEvent(QDropEvent *event);
+
+private slots:
+    void slotClicked(QListWidgetItem *p);
 
 private:
     void initSetting();

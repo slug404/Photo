@@ -27,31 +27,6 @@ void GraphicsScene::setItemName(const QString &name)
     qDebug() << name_;
 }
 
-void GraphicsScene::addPhotoItem(const QPixmap &pix)
-{
-    pPixmapItem_ = this->addPixmap(pix);
-
-    pPixmapItem_->setFlag(QGraphicsItem::ItemIsMovable);
-
-    ////实验
-    QGraphicsPixmapItem *p1 = addPixmap(QPixmap("./UI/UI_Block_Pin.png"));
-    QGraphicsPixmapItem *p2 = addPixmap(QPixmap("./UI/UI_Block_Pin.png"));
-    QGraphicsPixmapItem *p3 = addPixmap(QPixmap("./UI/UI_Block_Pin.png"));
-    QGraphicsPixmapItem *p4 = addPixmap(QPixmap("./UI/UI_Block_Pin.png"));
-    QGraphicsPixmapItem *p5 = addPixmap(QPixmap("./UI/UI_Block_Pin.png"));
-
-//    p1->setFlag(QGraphicsItem::ItemIsMovable);
-//    p2->setFlag(QGraphicsItem::ItemIsMovable);
-//    p3->setFlag(QGraphicsItem::ItemIsMovable);
-//    p4->setFlag(QGraphicsItem::ItemIsMovable);
-//    p5->setFlag(QGraphicsItem::ItemIsMovable);
-    QList<QGraphicsItem *> items;
-    items<< p1 << p2 << p3 << p4 << p5;
-    QGraphicsItemGroup *p = this->createItemGroup(items);
-    p->setFlag(QGraphicsItem::ItemIsMovable);
-    this->update();
-}
-
 void GraphicsScene::saveFile(const QString path)
 {
         //保存Scene中的图片
@@ -102,7 +77,9 @@ void GraphicsScene::slotCreateItem(const QString &path, const QPointF &pos)
     int h = pix.height();
     rect_ = QRect(0, 0, w, h);
     GraphicsItem *pItem = new GraphicsItem(rect_ , pix, this);
-    list_GraphicsItem_.append(pItem);
+    //qDebug() << "是这里么";
+    pItem->setFlag(QGraphicsItem::ItemIsMovable, false);
+    pItem->setFlag(QGraphicsItem::ItemIsFocusable, false);
     this->addItem(pItem);
 }
 

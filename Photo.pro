@@ -19,7 +19,9 @@ SOURCES += main.cpp\
     GraphicsScene.cpp \
     GraphicsItem.cpp \
     WidgetShowScene.cpp \
-    ListWidgetLayout.cpp
+    ListWidgetLayout.cpp \
+    eresizefocus.cpp \
+    eobject.cpp
 
 HEADERS  += MainWindow.h \
     ListWidgetItem_Form.h \
@@ -29,7 +31,9 @@ HEADERS  += MainWindow.h \
     GraphicsScene.h \
     GraphicsItem.h \
     WidgetShowScene.h \
-    ListWidgetLayout.h
+    ListWidgetLayout.h \
+    eresizefocus.h \
+    eobject.h
 
 FORMS    += MainWindow.ui \
     ListWidgetItem_Form.ui

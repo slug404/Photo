@@ -12,7 +12,6 @@ public:
     explicit GraphicsScene(const QRectF &sceneRect, QObject *parent = 0);
     void setItemName(const QString &name);
     void setListWidget(ListWidget *p) {pListWidget_ = p;}
-    void addPhotoItem(const QPixmap &pix);
     void saveFile(const QString path);
 
 signals:
@@ -35,7 +34,6 @@ private:
     QRect rect_;
     ListWidget *pListWidget_;
     QGraphicsPixmapItem *pPixmapItem_;
-    QList<QGraphicsItem *> list_GraphicsItem_;
 };
 
 #endif // GRAPHICSSCENE_H

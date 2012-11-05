@@ -9,6 +9,7 @@
 #include "ListWidgetItem_Form.h"
 #include "GraphicsScene.h"
 #include "WidgetShowScene.h"
+#include "GraphicsItem.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent)
@@ -48,6 +49,11 @@ void MainWindow::initData()
     horizontalSlider->setMinimum(24);
     horizontalSlider->setMaximum(121);
     connect(horizontalSlider, SIGNAL(valueChanged(int)), this, SLOT(slotItemSizeValueChanged(int)));
+    //连接重新设置Z轴循序的
+    connect(listWidgetLayer, SIGNAL(signalResetZvalue(QString,int)), this, SLOT(slotResetZvalue(QString,int)));
+
+    //设置焦点
+    connect(listWidgetLayer, SIGNAL(signalSetFocus(QString)), this, SLOT(slotSetFcous(QString)));
 
     QString file = "./Template/";
     templateFilesName_ = getComponentsName(file);
@@ -102,11 +108,6 @@ void MainWindow::setListWidgetPointer(ListWidget *p)
     pGraphicsScene_->setListWidget(p);
 }
 
-void MainWindow::addPhotoItem(const QPixmap &pix)
-{
-    pGraphicsScene_->addPhotoItem(pix);
-}
-
 void MainWindow::saveFile(const QString path)
 {
     pGraphicsScene_->saveFile(path);
@@ -124,13 +125,31 @@ void MainWindow::slotCreateItem(const QString &path)
     QListWidgetItem *pItem = new QListWidgetItem(fileName);
 
     pItem->setIcon(QPixmap(path));
-    listWidgetLayer->addItem(pItem);
+    listWidgetLayer->insertItem(0, pItem);
 }
 
 void MainWindow::slotItemSizeValueChanged(int value)
 {
     qDebug() << value;
     listWidgetLayer->setIconSize(QSize(value, value));
+}
+
+void MainWindow::slotResetZvalue(const QString &name, int value)
+{
+    if(hash_Name_GraphicsItem_.contains(name))
+    {
+        QGraphicsItem *p = hash_Name_GraphicsItem_.value(name);
+        p->setZValue(value);
+    }
+}
+
+void MainWindow::slotSetFcous(const QString &name)
+{
+    qDebug() << name << "设置焦点";
+    if(hash_Name_GraphicsItem_.contains(name))
+    {
+        hash_Name_GraphicsItem_[name]->setFocus(Qt::MouseFocusReason);
+    }
 }
 
 void MainWindow::on_action_O_triggered()
@@ -153,8 +172,16 @@ void MainWindow::on_action_I_triggered()
     QString filePath = QFileDialog::getOpenFileName(this, tr("打开文件"), ".", "File(*.png)");
     //在这里插入图片到QGraphicsItem
     QPixmap pix(filePath);
-    this->addPhotoItem(pix);
+    GraphicsItem *p = new GraphicsItem(pix.rect(), pix);
+    pGraphicsScene_->addItem(p);
+    pGraphicsScene_->update();
     //插入图层信息
+    p->setFlag(QGraphicsItem::ItemIsMovable);
+    p->setFlag(QGraphicsItem::ItemIsSelectable);
+    p->setFlag(QGraphicsItem::ItemIsFocusable);
+
+    QString name = filePath.right(filePath.size() - filePath.lastIndexOf("/") - 1);
+    hash_Name_GraphicsItem_[name] = p;
     this->slotCreateItem(filePath);
 }
 

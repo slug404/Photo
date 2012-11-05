@@ -26,6 +26,7 @@ public slots:
 
 protected:
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
+    void keyPressEvent(QKeyEvent *event);
 
 private:
     void initSetting();
@@ -36,6 +37,7 @@ private:
     //外观描述
     QRect bgRect_;
     QPixmap bgPixmap_;
+    int offset_;
 };
 
 #endif // GRAPHICSITEM_H
