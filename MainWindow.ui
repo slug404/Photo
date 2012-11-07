@@ -173,16 +173,11 @@
     <property name="title">
      <string>工具(&amp;T)</string>
     </property>
-   </widget>
-   <widget class="QMenu" name="menu_Template">
-    <property name="title">
-     <string>模板(&amp;T)</string>
-    </property>
+    <addaction name="action_SendPhoto"/>
    </widget>
    <addaction name="menu"/>
    <addaction name="menu_Edit"/>
    <addaction name="menu_Tool"/>
-   <addaction name="menu_Template"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <attribute name="toolBarArea">
@@ -195,7 +190,7 @@
   <widget class="QStatusBar" name="statusBar"/>
   <action name="action_O">
    <property name="text">
-    <string>打开</string>
+    <string>打开模板</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+O</string>
@@ -233,6 +228,14 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+Z</string>
+   </property>
+  </action>
+  <action name="action_SendPhoto">
+   <property name="text">
+    <string>发送图片</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+P</string>
    </property>
   </action>
  </widget>

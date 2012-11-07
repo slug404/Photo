@@ -120,4 +120,5 @@ void GraphicsItem::keyPressEvent(QKeyEvent *event)
 void GraphicsItem::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 {
     originPoint_ = this->scenePos() + QPointF(this->bgRect_.width()/2, bgRect_.height()/2);
+    QGraphicsItem::mouseMoveEvent(event);
 }

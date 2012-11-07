@@ -4,6 +4,7 @@
 #include <QDir>
 #include <QGraphicsPixmapItem>
 #include <QMessageBox>
+#include <QProcess>
 #include "ListWidget.h"
 #include "ListWidgetItem.h"
 #include "ListWidgetItem_Form.h"
@@ -154,7 +155,7 @@ void MainWindow::slotSetFcous(const QString &name)
 
 void MainWindow::on_action_O_triggered()
 {
-    QStringList names = QFileDialog::getOpenFileNames(this, tr("打开文件"), ".", "File(*.png *.p)");
+    QStringList names = QFileDialog::getOpenFileNames(this, tr("打开文件"), ".", "File(*.png)");
     foreach (QString name, names)
     {
         qDebug() << "在这里加载模板图片做处理";
@@ -203,5 +204,21 @@ void MainWindow::on_action_undo_triggered()
         //p->setOldTransformation();
         p->setRotation(0);
         p->setScale(0.9);
+    }
+}
+
+void MainWindow::on_action_SendPhoto_triggered()
+{
+    qDebug() << "选择一张图片要发送图片了";
+    QStringList filePaths = QFileDialog::getOpenFileNames(this, tr("选择文件"), tr("."), tr("文件(*.jpg *.jpeg)"));
+    foreach (QString filePath, filePaths)
+    {
+        qDebug() << filePath;
+        QProcess *pCmd = new QProcess(this);
+        QString cmd = tr("python main.py -p %1 -a 517549554@qq.com").arg(filePath);
+        //cmdList <<tr("-p %1 -a 517549554@qq.com").arg(filePath );
+        qDebug() << cmd;
+
+        pCmd->start(cmd);
     }
 }
