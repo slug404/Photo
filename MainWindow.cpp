@@ -47,14 +47,14 @@ void MainWindow::initData()
     connect(pGraphicsScene_, SIGNAL(signalCreateItem(QString,QPointF)), this, SLOT(slotCreateItem(QString)));
 //    listWidgetLayer->setIconSize(QSize(64, 64));
     //滑动条大小初始化
-    horizontalSlider->setMinimum(24);
-    horizontalSlider->setMaximum(121);
-    connect(horizontalSlider, SIGNAL(valueChanged(int)), this, SLOT(slotItemSizeValueChanged(int)));
+    //horizontalSlider->setMinimum(24);
+    //horizontalSlider->setMaximum(121);
+    //connect(horizontalSlider, SIGNAL(valueChanged(int)), this, SLOT(slotItemSizeValueChanged(int)));
     //连接重新设置Z轴循序的
-    connect(listWidgetLayer, SIGNAL(signalResetZvalue(QString,int)), this, SLOT(slotResetZvalue(QString,int)));
+    //connect(listWidgetLayer, SIGNAL(signalResetZvalue(QString,int)), this, SLOT(slotResetZvalue(QString,int)));
 
     //设置焦点
-    connect(listWidgetLayer, SIGNAL(signalSetFocus(QString)), this, SLOT(slotSetFcous(QString)));
+    //connect(listWidgetLayer, SIGNAL(signalSetFocus(QString)), this, SLOT(slotSetFcous(QString)));
 
     QString file = "./Template/";
     templateFilesName_ = getComponentsName(file);
@@ -76,7 +76,7 @@ void MainWindow::initData()
 
 void MainWindow::initGui()
 {
-    connect(listWidgetTemplate, SIGNAL(signalPressListWidgetItem(QString)), this, SLOT(slotPressListWidgetItem(QString)));
+    connect(listWidgetTemplate, SIGNAL(signalPressListWidgetItem(QPixmap)), this, SLOT(slotPressListWidgetItem(QPixmap)));
 }
 
 QStringList MainWindow::getComponentsName(const QString &filePath)
@@ -114,7 +114,7 @@ void MainWindow::saveFile(const QString path)
     pGraphicsScene_->saveFile(path);
 }
 
-void MainWindow::slotPressListWidgetItem(const QString &str)
+void MainWindow::slotPressListWidgetItem(const QPixmap &str)
 {
     pGraphicsScene_->setItemName(str);
 }
@@ -126,13 +126,13 @@ void MainWindow::slotCreateItem(const QString &path)
     QListWidgetItem *pItem = new QListWidgetItem(fileName);
 
     pItem->setIcon(QPixmap(path));
-    listWidgetLayer->insertItem(0, pItem);
+    //listWidgetLayer->insertItem(0, pItem);
 }
 
 void MainWindow::slotItemSizeValueChanged(int value)
 {
     qDebug() << value;
-    listWidgetLayer->setIconSize(QSize(value, value));
+    //listWidgetLayer->setIconSize(QSize(value, value));
 }
 
 void MainWindow::slotResetZvalue(const QString &name, int value)
@@ -155,11 +155,48 @@ void MainWindow::slotSetFcous(const QString &name)
 
 void MainWindow::on_action_O_triggered()
 {
-    QStringList names = QFileDialog::getOpenFileNames(this, tr("打开文件"), ".", "File(*.png)");
-    foreach (QString name, names)
+    QString path = QFileDialog::getOpenFileName(this, tr("打开文件"), ".", "File(*.zb)");
+
+    QFile file(path);
+    if(file.open(QFile::ReadOnly))
     {
-        qDebug() << "在这里加载模板图片做处理";
+        QByteArray bytes;
+
+        bytes = file.readAll();
+
+        QDataStream in(&bytes, QIODevice::ReadOnly);
+        in.setVersion(QDataStream::Qt_4_7);
+
+        int size;
+        in >> size;
+        qDebug() << size;
+
+        for(int i = 0; i != size; ++i)
+        {
+            //在这里循环插入item
+            QPixmap pix(251, 171);
+            QByteArray imageData;
+            in >> imageData;
+            pix.loadFromData(imageData, "png");
+
+//            QLabel *p = new QLabel;
+//            p->setPixmap(pix);
+//            p->show();
+            ListWidgetItem_Form *pWidget = new ListWidgetItem_Form(QString::number(i+1), pix.scaled(251, 171), this);
+            ListWidgetItem *pItem = new ListWidgetItem(pWidget, this);
+            pItem->setSizeHint(QSize(251, 201));
+            listWidgetTemplate->addItem(pItem);
+            listWidgetTemplate->setItemWidget(pItem, pWidget);
+        }
     }
+    else
+    {
+        //提示模板读取失败
+    }
+
+
+
+
 }
 
 void MainWindow::on_action_S_triggered()
@@ -215,7 +252,7 @@ void MainWindow::on_action_SendPhoto_triggered()
     {
         qDebug() << filePath;
         QProcess *pCmd = new QProcess(this);
-        QString cmd = tr("python main.py -p %1 -a 517549554@qq.com").arg(filePath);
+        QString cmd = tr("main.exe -p %1 -a 517549554@qq.com").arg(filePath);
         //cmdList <<tr("-p %1 -a 517549554@qq.com").arg(filePath );
         qDebug() << cmd;
 

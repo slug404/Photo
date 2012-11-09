@@ -14,7 +14,7 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <layout class="QGridLayout" name="gridLayout_3">
+   <layout class="QGridLayout" name="gridLayout">
     <item row="0" column="0">
      <widget class="QSplitter" name="splitter">
       <property name="orientation">
@@ -90,58 +90,6 @@
       </widget>
      </widget>
     </item>
-    <item row="0" column="1">
-     <widget class="QTabWidget" name="tabWidget">
-      <property name="minimumSize">
-       <size>
-        <width>201</width>
-        <height>0</height>
-       </size>
-      </property>
-      <property name="maximumSize">
-       <size>
-        <width>201</width>
-        <height>16777215</height>
-       </size>
-      </property>
-      <property name="currentIndex">
-       <number>0</number>
-      </property>
-      <widget class="QWidget" name="tabLayer">
-       <attribute name="title">
-        <string>图层</string>
-       </attribute>
-       <layout class="QGridLayout" name="gridLayout">
-        <item row="0" column="0">
-         <widget class="ListWidgetLayout" name="listWidgetLayer"/>
-        </item>
-        <item row="1" column="0">
-         <widget class="QSlider" name="horizontalSlider">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </widget>
-      <widget class="QWidget" name="tabLibrary">
-       <attribute name="title">
-        <string>素材库</string>
-       </attribute>
-       <layout class="QGridLayout" name="gridLayout_4">
-        <property name="margin">
-         <number>0</number>
-        </property>
-        <property name="spacing">
-         <number>0</number>
-        </property>
-        <item row="0" column="0">
-         <widget class="QListWidget" name="listWidgetLibrary"/>
-        </item>
-       </layout>
-      </widget>
-     </widget>
-    </item>
    </layout>
   </widget>
   <widget class="QMenuBar" name="menuBar">
@@ -150,7 +98,7 @@
      <x>0</x>
      <y>0</y>
      <width>1201</width>
-     <height>20</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu">
@@ -251,11 +199,6 @@
    <extends>QWidget</extends>
    <header>widgetshowscene.h</header>
    <container>1</container>
-  </customwidget>
-  <customwidget>
-   <class>ListWidgetLayout</class>
-   <extends>QListWidget</extends>
-   <header>ListWidgetLayout.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

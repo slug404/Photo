@@ -11,6 +11,7 @@ int main(int argc, char *argv[])
     QTextCodec::setCodecForCStrings(QTextCodec::codecForName("UTF8"));
 
     MainWindow w;
+    w.setWindowTitle("台历助手");
     w.show();
     
     return a.exec();

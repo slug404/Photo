@@ -2,6 +2,10 @@
 #include "ListWidgetItem.h"
 #include "ListWidgetItem_Form.h"
 #include <QDropEvent>
+#include <QMouseEvent>
+#include <QDebug>
+#include <QMimeData>
+#include <QPainter>
 
 ListWidget::ListWidget(QWidget *parent) :
     QListWidget(parent)
@@ -14,7 +18,7 @@ ListWidget::ListWidget(QWidget *parent) :
 void ListWidget::slotItemPressed(QListWidgetItem *p)
 {
     ListWidgetItem *pItem = static_cast<ListWidgetItem *>(p);
-    emit signalPressListWidgetItem(pItem->pWidget_->getName());
+    emit signalPressListWidgetItem(pItem->pWidget_->getImage());
 }
 
 void ListWidget::initSetting()
@@ -53,3 +57,47 @@ void ListWidget::dropEvent(QDropEvent *event)
         return;
     }
 }
+
+void ListWidget::mousePressEvent(QMouseEvent *event)
+{
+    QListWidget::mouseMoveEvent(event);
+    //哈哈曲线救国
+    ListWidgetItem *pItem = static_cast<ListWidgetItem *>(this->currentItem());
+    qDebug() << pItem->pWidget_->getName();
+    QByteArray dragData;
+    QDataStream out(&dragData, QIODevice::WriteOnly);
+    QPixmap pix = pItem->pWidget_->getImage();
+    out << pix;
+
+    //将数据放入QMimeData中
+    QMimeData *pMimeData = new QMimeData;
+    pMimeData->setData("myimage/png", dragData);
+
+    //将QMimeData放入QDrag中
+    QDrag *pDrag = new QDrag(this);
+    pDrag->setMimeData(pMimeData);
+    pDrag->setPixmap(pix.scaled(QSize(100, 100)));  //移动中显示的图片
+    pDrag->setHotSpot(event->pos());    //拖动鼠标指针的位置不变
+
+    QPixmap tmp = pix;
+    QPainter painter;           //用来绘制tmp
+    painter.begin(&tmp);
+    painter.fillRect(pix.rect(), QColor(127, 127, 127, 127));
+    painter.end();
+    pItem->pWidget_->setImage(tmp);
+
+    //执行拖放
+    if(pDrag->exec(Qt::CopyAction | Qt::MoveAction, Qt::CopyAction))
+    {
+        //pItem->deleteLater();
+    }
+    else
+    {
+        pItem->pWidget_->setImage(pix);
+    }
+}
+
+//void ListWidget::dragMoveEvent(QDragMoveEvent *event)
+//{
+
+//}

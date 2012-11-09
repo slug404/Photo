@@ -5,7 +5,7 @@
 #-------------------------------------------------
 
 QT       += core gui
-
+#CONFIG += qtestlib
 TARGET = Photo
 TEMPLATE = app
 
