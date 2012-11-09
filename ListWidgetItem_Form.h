@@ -23,6 +23,7 @@ private:
 private:
     QString name_;
     QPixmap image_;
+    QPixmap imageBg_;
 };
 
 #endif // LISTWIDGETITEM_FORM_H

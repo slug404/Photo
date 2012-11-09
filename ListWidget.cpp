@@ -11,14 +11,6 @@ ListWidget::ListWidget(QWidget *parent) :
     QListWidget(parent)
 {
     this->initSetting();
-    this->initData();
-    this->initGui();
-}
-
-void ListWidget::slotItemPressed(QListWidgetItem *p)
-{
-    ListWidgetItem *pItem = static_cast<ListWidgetItem *>(p);
-    emit signalPressListWidgetItem(pItem->pWidget_->getImage());
 }
 
 void ListWidget::initSetting()
@@ -29,24 +21,15 @@ void ListWidget::initSetting()
     //设置选择模式为单选
     this->setSelectionMode(QAbstractItemView::SingleSelection);
     //启动拖放
-    this->setDragEnabled(true);
+    //this->setDragEnabled(true);
     //接受拖放
-    this->setAcceptDrops(true);
+    //this->setAcceptDrops(true);
     //设置显示将要被放置的位置
     this->setDropIndicatorShown(true);
     //设置拖放模式为移动项目, 如果不设置,默认为复制项目
     //如果设置了这个属性的话,相当的蛋疼,比如dragLeaveEvent,dragMoveEvent都有问题了
     //拖放的时候drag和drop是一起的
     //this->setDragDropMode(QAbstractItemView::DragOnly);
-}
-
-void ListWidget::initData()
-{
-    connect(this, SIGNAL(itemPressed(QListWidgetItem*)), SLOT(slotItemPressed(QListWidgetItem*)));
-}
-
-void ListWidget::initGui()
-{
 }
 
 void ListWidget::dropEvent(QDropEvent *event)
@@ -61,6 +44,7 @@ void ListWidget::dropEvent(QDropEvent *event)
 void ListWidget::mousePressEvent(QMouseEvent *event)
 {
     QListWidget::mouseMoveEvent(event);
+
     //哈哈曲线救国
     ListWidgetItem *pItem = static_cast<ListWidgetItem *>(this->currentItem());
     qDebug() << pItem->pWidget_->getName();
@@ -76,7 +60,7 @@ void ListWidget::mousePressEvent(QMouseEvent *event)
     //将QMimeData放入QDrag中
     QDrag *pDrag = new QDrag(this);
     pDrag->setMimeData(pMimeData);
-    pDrag->setPixmap(pix.scaled(QSize(100, 100)));  //移动中显示的图片
+    pDrag->setPixmap(pix.scaled(QSize(251, 201)));  //移动中显示的图片
     pDrag->setHotSpot(event->pos());    //拖动鼠标指针的位置不变
 
     QPixmap tmp = pix;
@@ -89,15 +73,10 @@ void ListWidget::mousePressEvent(QMouseEvent *event)
     //执行拖放
     if(pDrag->exec(Qt::CopyAction | Qt::MoveAction, Qt::CopyAction))
     {
-        //pItem->deleteLater();
+        pItem->pWidget_->setImage(pix);
     }
     else
     {
         pItem->pWidget_->setImage(pix);
     }
 }
-
-//void ListWidget::dragMoveEvent(QDragMoveEvent *event)
-//{
-
-//}

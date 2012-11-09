@@ -10,7 +10,7 @@ class GraphicsScene : public QGraphicsScene
 public:
     explicit GraphicsScene(QObject *parent);
     explicit GraphicsScene(const QRectF &sceneRect, QObject *parent = 0);
-    void setItemName(const QString &name);
+
     void setListWidget(ListWidget *p) {pListWidget_ = p;}
     void saveFile(const QString path);
 

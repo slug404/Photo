@@ -64,7 +64,7 @@ void MainWindow::initData()
         QPixmap pix(251, 171);
         pix.load(file+name);
 
-        ListWidgetItem_Form *pWidget = new ListWidgetItem_Form(name, pix.scaled(251, 171), this);
+        ListWidgetItem_Form *pWidget = new ListWidgetItem_Form(name, pix, this);
         ListWidgetItem *pItem = new ListWidgetItem(pWidget, this);
         pItem->setSizeHint(QSize(251, 201));
         listWidgetTemplate->addItem(pItem);
@@ -76,7 +76,6 @@ void MainWindow::initData()
 
 void MainWindow::initGui()
 {
-    connect(listWidgetTemplate, SIGNAL(signalPressListWidgetItem(QPixmap)), this, SLOT(slotPressListWidgetItem(QPixmap)));
 }
 
 QStringList MainWindow::getComponentsName(const QString &filePath)
@@ -112,11 +111,6 @@ void MainWindow::setListWidgetPointer(ListWidget *p)
 void MainWindow::saveFile(const QString path)
 {
     pGraphicsScene_->saveFile(path);
-}
-
-void MainWindow::slotPressListWidgetItem(const QPixmap &str)
-{
-    pGraphicsScene_->setItemName(str);
 }
 
 void MainWindow::slotCreateItem(const QString &path)

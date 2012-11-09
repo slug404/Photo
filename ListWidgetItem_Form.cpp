@@ -4,6 +4,7 @@ ListWidgetItem_Form::ListWidgetItem_Form(const QString &name, const QPixmap &bgI
     name_(name),image_(bgImage),QWidget(parent)
 {
     setupUi(this);
+    imageBg_ = image_.scaled(251, 171);
     this->initGui();
 }
 
@@ -16,7 +17,7 @@ void ListWidgetItem_Form::setName(const QString &name)
 void ListWidgetItem_Form::setImage(const QPixmap &image)
 {
     image_ = image;
-    labelImage->setPixmap(image_);
+    labelImage->setPixmap(imageBg_);
 }
 
 void ListWidgetItem_Form::changeEvent(QEvent *e)
@@ -34,6 +35,6 @@ void ListWidgetItem_Form::changeEvent(QEvent *e)
 
 void ListWidgetItem_Form::initGui()
 {
-    labelImage->setPixmap(image_);
+    labelImage->setPixmap(imageBg_);
     labelName->setText(name_);
 }

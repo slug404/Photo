@@ -21,12 +21,6 @@ GraphicsScene::GraphicsScene(QObject *parent):
     this->initGui();
 }
 
-void GraphicsScene::setItemName(const QString &name)
-{
-    name_ = name;
-    qDebug() << name_;
-}
-
 void GraphicsScene::saveFile(const QString path)
 {
         //保存Scene中的图片
