@@ -18,12 +18,12 @@ void WidgetShowScene::setGraphicsScene(GraphicsScene *p)
 {
     pGraphicsScene_ = p;
     pView = new GraphicsView(pGraphicsScene_, this);
-    pView->setCacheMode(QGraphicsView::CacheBackground);
-    pView->setViewportUpdateMode(QGraphicsView::BoundingRectViewportUpdate);
-    pView->showNormal();
+    //pView->setCacheMode(QGraphicsView::CacheBackground);
+    //pView->setViewportUpdateMode(QGraphicsView::BoundingRectViewportUpdate);
+    //pView->showNormal();
     pView->setFrameShape(QFrame::NoFrame);
     pView->setAcceptDrops(true);
-    pGraphicsScene_->installEventFilter(this);
+    //pView->installEventFilter(this);
 
     QGridLayout *layout = new QGridLayout;
     layout->addWidget(pView);
@@ -34,91 +34,6 @@ void WidgetShowScene::setGraphicsScene(GraphicsScene *p)
     layout->setMargin(0);
     //也不是这个
     this->setLayout(layout);
-}
-
-bool WidgetShowScene::eventFilter(QObject *target, QEvent *event)
-{
-    if(target == pView)
-    {
-        switch(event->type())
-        {
-            case QEvent::DragEnter:
-            {
-                qDebug() << "dragEnter";
-                break;
-            }
-            case QEvent::DragMove:
-            {
-                qDebug() << "drag move";
-                break;
-            }
-            case QEvent::Drop:
-            {
-                qDebug() << "drop";
-                break;
-            }
-            default:
-            {
-                event->ignore();
-            }
-        }
-    }
-    else
-    {
-        event->ignore();
-    }
-}
-
-void WidgetShowScene::dragEnterEvent(QDragEnterEvent *event)
-{
-    qDebug() << "drag enter";
-    if(event->mimeData()->hasFormat("myimage/png"))
-    {
-        event->setDropAction(Qt::CopyAction);
-        event->accept();
-    }
-    else
-    {
-        event->ignore();
-    }
-}
-
-void WidgetShowScene::dragMoveEvent(QDragMoveEvent *event)
-{
-    //qDebug() << "drag move";
-    if(event->mimeData()->hasFormat("myimage/png"))
-    {
-        event->setDropAction(Qt::CopyAction);
-        event->accept();
-    }
-    else
-    {
-        event->ignore();
-    }
-}
-
-void WidgetShowScene::dropEvent(QDropEvent *event)
-{
-    qDebug() << "drop";
-    if(event->mimeData()->hasFormat("myimage/png"))
-    {
-        qDebug() << "drop success";
-        QByteArray bytes = event->mimeData()->data("myimage/png");
-        QDataStream in(&bytes, QIODevice::ReadOnly);
-        QPixmap pix;
-
-        in >> pix;
-
-        pGraphicsScene_->addPixmap(pix);
-        pGraphicsScene_->update();
-
-        event->setDropAction(Qt::CopyAction);
-        event->accept();
-    }
-    else
-    {
-        event->ignore();
-    }
 }
 
 void WidgetShowScene::initSetting()

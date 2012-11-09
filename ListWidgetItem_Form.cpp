@@ -16,7 +16,7 @@ void ListWidgetItem_Form::setName(const QString &name)
 
 void ListWidgetItem_Form::setImage(const QPixmap &image)
 {
-    image_ = image;
+    imageBg_ = image;
     labelImage->setPixmap(imageBg_);
 }
 

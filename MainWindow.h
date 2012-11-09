@@ -21,6 +21,7 @@ private slots:
     void on_action_I_triggered();
     void on_action_Clear_triggered();
 
+    void slotSetPixmap(const QPixmap &image);
     //插入新的图层信息
     void slotCreateItem(const QString &path);
     //根据滑块调整ListWidget里面的Item的icon的size

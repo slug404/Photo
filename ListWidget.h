@@ -10,6 +10,8 @@ public:
     explicit ListWidget(QWidget *parent = 0);
     
 signals:
+    void signalSetPixmap(const QPixmap &image);
+    void signalSceneAddImage();
 
 public slots:
 
@@ -19,7 +21,8 @@ protected:
     void mousePressEvent(QMouseEvent *event);
 
 private slots:
-
+    void slotItemPress(QListWidgetItem *p);
+    void slotSceneAddImage(QListWidgetItem *p);
 private:
     void initSetting();
 

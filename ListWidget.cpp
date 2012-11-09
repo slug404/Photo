@@ -11,6 +11,8 @@ ListWidget::ListWidget(QWidget *parent) :
     QListWidget(parent)
 {
     this->initSetting();
+    connect(this, SIGNAL(itemPressed(QListWidgetItem*)), this, SLOT(slotItemPress(QListWidgetItem*)));
+    connect(this, SIGNAL(itemDoubleClicked(QListWidgetItem*)), this, SLOT(slotSceneAddImage(QListWidgetItem*)));
 }
 
 void ListWidget::initSetting()
@@ -43,15 +45,15 @@ void ListWidget::dropEvent(QDropEvent *event)
 
 void ListWidget::mousePressEvent(QMouseEvent *event)
 {
-    QListWidget::mouseMoveEvent(event);
+    QListWidget::mousePressEvent(event);
 
     //哈哈曲线救国
     ListWidgetItem *pItem = static_cast<ListWidgetItem *>(this->currentItem());
     qDebug() << pItem->pWidget_->getName();
     QByteArray dragData;
     QDataStream out(&dragData, QIODevice::WriteOnly);
-    QPixmap pix = pItem->pWidget_->getImage();
-    out << pix;
+    QPixmap pix = pItem->pWidget_->getImage().scaled(QSize(251, 201));
+    //    out << pix;
 
     //将数据放入QMimeData中
     QMimeData *pMimeData = new QMimeData;
@@ -60,7 +62,7 @@ void ListWidget::mousePressEvent(QMouseEvent *event)
     //将QMimeData放入QDrag中
     QDrag *pDrag = new QDrag(this);
     pDrag->setMimeData(pMimeData);
-    pDrag->setPixmap(pix.scaled(QSize(251, 201)));  //移动中显示的图片
+    pDrag->setPixmap(pix);  //移动中显示的图片
     pDrag->setHotSpot(event->pos());    //拖动鼠标指针的位置不变
 
     QPixmap tmp = pix;
@@ -79,4 +81,18 @@ void ListWidget::mousePressEvent(QMouseEvent *event)
     {
         pItem->pWidget_->setImage(pix);
     }
+}
+
+void ListWidget::slotItemPress(QListWidgetItem *p)
+{
+    qDebug() << "asdadlakdj";
+    ListWidgetItem *pItem = static_cast<ListWidgetItem *>(p);
+    emit signalSetPixmap(pItem->pWidget_->getImage());
+}
+
+void ListWidget::slotSceneAddImage(QListWidgetItem *p)
+{
+    ListWidgetItem *pItem = static_cast<ListWidgetItem *>(p);
+    emit signalSetPixmap(pItem->pWidget_->getImage());
+    emit signalSceneAddImage();
 }

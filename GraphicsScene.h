@@ -13,16 +13,19 @@ public:
 
     void setListWidget(ListWidget *p) {pListWidget_ = p;}
     void saveFile(const QString path);
-
+    void setImage(const QPixmap &image) { image_ = image;}
+    void addImage();
 signals:
     void signalCreateItem(const QString &name, const QPointF &pos);
 
 public slots:
     void slotCreateItem(const QString &path, const QPointF &pos);
+    void slotAddImage();
 
 protected:
     void dropEvent(QGraphicsSceneDragDropEvent *event);
     void dragMoveEvent(QGraphicsSceneDragDropEvent *event);
+    void dragEnterEvent(QGraphicsSceneDragDropEvent *event);
 
 private:
     void initSetting();
@@ -34,6 +37,7 @@ private:
     QRect rect_;
     ListWidget *pListWidget_;
     QGraphicsPixmapItem *pPixmapItem_;
+    QPixmap image_;
 };
 
 #endif // GRAPHICSSCENE_H

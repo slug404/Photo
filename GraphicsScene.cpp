@@ -2,6 +2,7 @@
 #include <QGraphicsSceneDragDropEvent>
 #include <QDebug>
 #include <QPainter>
+#include <QMimeData>
 #include "ListWidget.h"
 #include "GraphicsItem.h"
 
@@ -31,23 +32,63 @@ void GraphicsScene::saveFile(const QString path)
         image.save(path+".jpg", "JPG");
 }
 
+void GraphicsScene::addImage()
+{
+    this->addPixmap(image_);
+    this->update();
+}
+
 void GraphicsScene::dropEvent(QGraphicsSceneDragDropEvent *event)
 {
     if(event->source() == pListWidget_)
     {
-        event->accept();
-        event->setDropAction(Qt::CopyAction);
-        emit signalCreateItem(tr("./Template/")+name_, event->scenePos());
+        qDebug() << "drop";
+        if(event->mimeData()->hasFormat("myimage/png"))
+        {
+            qDebug() << "drop success";
+
+            event->setDropAction(Qt::CopyAction);
+            event->accept();
+
+            this->addImage();
+        }
+        else
+        {
+            event->ignore();
+        }
     }
     else
     {
-        QGraphicsScene::dragMoveEvent(event);
+        event->ignore();
     }
 }
 
 void GraphicsScene::dragMoveEvent(QGraphicsSceneDragDropEvent *event)
 {
-    event->accept();
+    qDebug() << "drag enter";
+    if(event->mimeData()->hasFormat("myimage/png"))
+    {
+        event->setDropAction(Qt::CopyAction);
+        event->accept();
+    }
+    else
+    {
+        event->ignore();
+    }
+}
+
+void GraphicsScene::dragEnterEvent(QGraphicsSceneDragDropEvent *event)
+{
+    qDebug() << "drag enter";
+    if(event->mimeData()->hasFormat("myimage/png"))
+    {
+        event->setDropAction(Qt::CopyAction);
+        event->accept();
+    }
+    else
+    {
+        event->ignore();
+    }
 }
 
 void GraphicsScene::initSetting()
@@ -75,6 +116,11 @@ void GraphicsScene::slotCreateItem(const QString &path, const QPointF &pos)
     pItem->setFlag(QGraphicsItem::ItemIsMovable, false);
     pItem->setFlag(QGraphicsItem::ItemIsFocusable, false);
     this->addItem(pItem);
+}
+
+void GraphicsScene::slotAddImage()
+{
+    this->addImage();
 }
 
 

@@ -18,10 +18,6 @@ signals:
 public slots:
 
 protected:
-    bool eventFilter(QObject *target, QEvent *event);
-    void dragEnterEvent(QDragEnterEvent *event);
-    void dragMoveEvent(QDragMoveEvent *event);
-    void dropEvent(QDropEvent *event);
 
 private:
     void initSetting();

@@ -43,6 +43,8 @@ void MainWindow::initData()
 {
     pGraphicsScene_ = new GraphicsScene(this);
     widgetShowScene->setGraphicsScene(pGraphicsScene_);
+    connect(listWidgetTemplate, SIGNAL(signalSetPixmap(QPixmap)), this, SLOT(slotSetPixmap(QPixmap)));
+    connect(listWidgetTemplate, SIGNAL(signalSceneAddImage()), pGraphicsScene_, SLOT(slotAddImage()));
     //signal的参数个数和slot的不匹配是有意而为,因为不需要pos参数
     connect(pGraphicsScene_, SIGNAL(signalCreateItem(QString,QPointF)), this, SLOT(slotCreateItem(QString)));
 //    listWidgetLayer->setIconSize(QSize(64, 64));
@@ -187,10 +189,6 @@ void MainWindow::on_action_O_triggered()
     {
         //提示模板读取失败
     }
-
-
-
-
 }
 
 void MainWindow::on_action_S_triggered()
@@ -224,6 +222,13 @@ void MainWindow::on_action_Clear_triggered()
     {
         pGraphicsScene_->clear();
     }
+}
+
+void MainWindow::slotSetPixmap(const QPixmap &image)
+{
+    qDebug() << "!!!!!!";
+    //pGraphicsScene_->addPixmap(image);
+    pGraphicsScene_->setImage(image);
 }
 
 void MainWindow::on_action_undo_triggered()
