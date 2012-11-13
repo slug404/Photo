@@ -50,15 +50,6 @@ void GraphicsItem::initGui()
 
 void GraphicsItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-//    QPen pen = painter->pen();
-//    qreal scale = option->levelOfDetailFromTransform(painter->worldTransform());
-//    pen.setWidthF(pen / painter);
-//    painter->setPen(pen);
-    //painter->drawPixmap(bgRect_, bgPixmap_);
-//    QBrush brush = painter->brush();
-
-//    brush.setTransform(painter->worldTransform().inverted());
-//    painter->fillRect();
     painter->drawPixmap(bgRect_, bgPixmap_);
 }
 

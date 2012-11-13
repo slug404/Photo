@@ -12,9 +12,14 @@ public:
     explicit GraphicsScene(const QRectF &sceneRect, QObject *parent = 0);
 
     void setListWidget(ListWidget *p) {pListWidget_ = p;}
-    void saveFile(const QString path);
-    void setImage(const QPixmap &image) { image_ = image;}
+    bool saveFile(const QString path);
+    void setImage(const QString &name, const QPixmap &image)
+    {
+        name_ = name;
+        image_ = image;
+    }
     void addImage();
+
 signals:
     void signalCreateItem(const QString &name, const QPointF &pos);
 

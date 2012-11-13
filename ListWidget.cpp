@@ -87,12 +87,12 @@ void ListWidget::slotItemPress(QListWidgetItem *p)
 {
     qDebug() << "asdadlakdj";
     ListWidgetItem *pItem = static_cast<ListWidgetItem *>(p);
-    emit signalSetPixmap(pItem->pWidget_->getImage());
+    emit signalSetPixmap(pItem->pWidget_->getName(), pItem->pWidget_->getImage());
 }
 
 void ListWidget::slotSceneAddImage(QListWidgetItem *p)
 {
     ListWidgetItem *pItem = static_cast<ListWidgetItem *>(p);
-    emit signalSetPixmap(pItem->pWidget_->getImage());
+    emit signalSetPixmap(pItem->pWidget_->getName(), pItem->pWidget_->getImage());
     emit signalSceneAddImage();
 }

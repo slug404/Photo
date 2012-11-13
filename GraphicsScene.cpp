@@ -3,6 +3,10 @@
 #include <QDebug>
 #include <QPainter>
 #include <QMimeData>
+#include <QBuffer>
+#include <QFile>
+#include <QMessageBox>
+#include <QLabel>
 #include "ListWidget.h"
 #include "GraphicsItem.h"
 
@@ -22,19 +26,56 @@ GraphicsScene::GraphicsScene(QObject *parent):
     this->initGui();
 }
 
-void GraphicsScene::saveFile(const QString path)
+bool GraphicsScene::saveFile(const QString path)
 {
-        //保存Scene中的图片
-        QImage image(rect_.size(), QImage::Format_RGB32);
-        QPainter painter(&image);
-        this->render(&painter);   //关键函数
-        qDebug() << path;
-        image.save(path+".jpg", "JPG");
+    //保存Scene中的图片
+    QPixmap image(rect_.size());
+    QPainter painter(&image);
+    this->render(&painter);   //关键函数
+    qDebug() << path;
+
+//    QLabel *p = new QLabel;
+//    p->setPixmap(pix);
+//    p->show();
+    QPixmap tmp = image.scaled(QSize(image.width()/3, image.height()/3));
+    tmp.save(path + ".jpg", "jpg");
+
+    QByteArray ba;
+    QBuffer buffer(&ba);
+    buffer.open(QIODevice::WriteOnly);
+    image.save(&buffer, "jpg");
+
+    QByteArray bytes;
+    QDataStream out(&bytes, QIODevice::WriteOnly);
+
+    out << 1 << ba << name_;
+    qDebug() << bytes.size();
+
+    QFile file(path + ".zb");
+    if(file.open(QIODevice::WriteOnly))
+    {
+        file.write(bytes);
+        file.close();
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
 
 void GraphicsScene::addImage()
 {
-    this->addPixmap(image_);
+    //this->addPixmap(image_);
+//    QLabel *p1 = new QLabel;
+//    p1->setPixmap(image_);
+//    p1->setWindowTitle("p1");
+//    p1->show();
+    rect_ = QRect(0, 0, image_.width(), image_.height());
+    GraphicsItem *p = new GraphicsItem(image_.rect(), image_);
+    p->setFlag(QGraphicsItem::ItemIsMovable, false);
+    p->setFlag(QGraphicsItem::ItemIsFocusable, false);
+    this->addItem(p);
     this->update();
 }
 
@@ -116,11 +157,10 @@ void GraphicsScene::slotCreateItem(const QString &path, const QPointF &pos)
     pItem->setFlag(QGraphicsItem::ItemIsMovable, false);
     pItem->setFlag(QGraphicsItem::ItemIsFocusable, false);
     this->addItem(pItem);
+    this->update();
 }
 
 void GraphicsScene::slotAddImage()
 {
     this->addImage();
 }
-
-

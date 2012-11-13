@@ -21,7 +21,7 @@ private slots:
     void on_action_I_triggered();
     void on_action_Clear_triggered();
 
-    void slotSetPixmap(const QPixmap &image);
+    void slotSetPixmap(const QString &name, const QPixmap &image);
     //插入新的图层信息
     void slotCreateItem(const QString &path);
     //根据滑块调整ListWidget里面的Item的icon的size
@@ -30,10 +30,18 @@ private slots:
     void slotResetZvalue(const QString &name, int value);
     //设置焦点, 为了接受键盘事件
     void slotSetFcous(const QString &name);
-
     void on_action_undo_triggered();
-
     void on_action_SendPhoto_triggered();
+    void on_action_forward_triggered();
+    void on_action_backward_triggered();
+    void on_pushButtonAddPhoto_clicked();
+    void on_pushButtonOpenTemplate_clicked();
+    void on_pushButtonForward_clicked();
+    void on_pushButtonAddText_clicked();
+    void on_pushButtonBackward_clicked();
+    void on_pushButtonClear_clicked();
+    void on_pushButtonBuild_clicked();
+    void on_pushButtonUndo_clicked();
 
 private:
     void initSetting();
@@ -41,7 +49,6 @@ private:
     void initGui();
     QStringList getComponentsName(const QString &filePath);
     void setListWidgetPointer(ListWidget *p);
-    void saveFile(const QString path);
 
 private:
     QString filePath_;

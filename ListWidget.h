@@ -10,7 +10,7 @@ public:
     explicit ListWidget(QWidget *parent = 0);
     
 signals:
-    void signalSetPixmap(const QPixmap &image);
+    void signalSetPixmap(const QString &name, const QPixmap &image);
     void signalSceneAddImage();
 
 public slots:

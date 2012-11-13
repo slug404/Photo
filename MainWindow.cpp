@@ -26,11 +26,11 @@ void MainWindow::changeEvent(QEvent *e)
     QMainWindow::changeEvent(e);
     switch (e->type())
     {
-    case QEvent::LanguageChange:
-        retranslateUi(this);
-        break;
-    default:
-        break;
+        case QEvent::LanguageChange:
+            retranslateUi(this);
+            break;
+        default:
+            break;
     }
 }
 
@@ -43,11 +43,11 @@ void MainWindow::initData()
 {
     pGraphicsScene_ = new GraphicsScene(this);
     widgetShowScene->setGraphicsScene(pGraphicsScene_);
-    connect(listWidgetTemplate, SIGNAL(signalSetPixmap(QPixmap)), this, SLOT(slotSetPixmap(QPixmap)));
+    connect(listWidgetTemplate, SIGNAL(signalSetPixmap(QString,QPixmap)), this, SLOT(slotSetPixmap(QString,QPixmap)));
     connect(listWidgetTemplate, SIGNAL(signalSceneAddImage()), pGraphicsScene_, SLOT(slotAddImage()));
     //signal的参数个数和slot的不匹配是有意而为,因为不需要pos参数
     connect(pGraphicsScene_, SIGNAL(signalCreateItem(QString,QPointF)), this, SLOT(slotCreateItem(QString)));
-//    listWidgetLayer->setIconSize(QSize(64, 64));
+    //    listWidgetLayer->setIconSize(QSize(64, 64));
     //滑动条大小初始化
     //horizontalSlider->setMinimum(24);
     //horizontalSlider->setMaximum(121);
@@ -110,11 +110,6 @@ void MainWindow::setListWidgetPointer(ListWidget *p)
     pGraphicsScene_->setListWidget(p);
 }
 
-void MainWindow::saveFile(const QString path)
-{
-    pGraphicsScene_->saveFile(path);
-}
-
 void MainWindow::slotCreateItem(const QString &path)
 {
     QString fileName = path.right(path.size() - path.lastIndexOf("/") - 1);
@@ -172,13 +167,14 @@ void MainWindow::on_action_O_triggered()
             //在这里循环插入item
             QPixmap pix(251, 171);
             QByteArray imageData;
-            in >> imageData;
+            QString fileName;
+            in >> imageData >> fileName;
             pix.loadFromData(imageData, "png");
 
-//            QLabel *p = new QLabel;
-//            p->setPixmap(pix);
-//            p->show();
-            ListWidgetItem_Form *pWidget = new ListWidgetItem_Form(QString::number(i+1), pix.scaled(251, 171), this);
+            //            QLabel *p = new QLabel;
+            //            p->setPixmap(pix);
+            //            p->show();
+            ListWidgetItem_Form *pWidget = new ListWidgetItem_Form(fileName, pix.scaled(251, 171), this);
             ListWidgetItem *pItem = new ListWidgetItem(pWidget, this);
             pItem->setSizeHint(QSize(251, 201));
             listWidgetTemplate->addItem(pItem);
@@ -194,7 +190,15 @@ void MainWindow::on_action_O_triggered()
 void MainWindow::on_action_S_triggered()
 {
     QString filePath = QFileDialog::getSaveFileName(this, tr("保存文件"), ".");
-    this->saveFile(filePath);
+
+    if(pGraphicsScene_->saveFile(filePath))
+    {
+        QMessageBox::information(this, trUtf8("操作成功"), trUtf8("保存成功!"));
+    }
+    else
+    {
+        QMessageBox::warning(this, trUtf8("操作失败"), trUtf8("保存失败!"));
+    }
 }
 
 void MainWindow::on_action_I_triggered()
@@ -224,11 +228,11 @@ void MainWindow::on_action_Clear_triggered()
     }
 }
 
-void MainWindow::slotSetPixmap(const QPixmap &image)
+void MainWindow::slotSetPixmap(const QString &name, const QPixmap &image)
 {
     qDebug() << "!!!!!!";
     //pGraphicsScene_->addPixmap(image);
-    pGraphicsScene_->setImage(image);
+    pGraphicsScene_->setImage(name, image);
 }
 
 void MainWindow::on_action_undo_triggered()
@@ -257,4 +261,65 @@ void MainWindow::on_action_SendPhoto_triggered()
 
         pCmd->start(cmd);
     }
+}
+
+void MainWindow::on_action_forward_triggered()
+{
+    qDebug() << "前移";
+
+    QList<QGraphicsItem *> list_graphics = pGraphicsScene_->selectedItems();
+    foreach (QGraphicsItem *p, list_graphics )
+    {
+        p->setZValue(p->zValue() + 10);
+    }
+}
+
+void MainWindow::on_action_backward_triggered()
+{
+    qDebug() << "后移";
+    QList<QGraphicsItem *> list_graphics = pGraphicsScene_->selectedItems();
+    foreach (QGraphicsItem *p, list_graphics )
+    {
+        p->setZValue(p->zValue() - 10);
+    }
+}
+
+void MainWindow::on_pushButtonAddPhoto_clicked()
+{
+    this->on_action_I_triggered();
+}
+
+void MainWindow::on_pushButtonOpenTemplate_clicked()
+{
+    this->on_action_O_triggered();
+}
+
+void MainWindow::on_pushButtonForward_clicked()
+{
+    this->on_action_forward_triggered();
+}
+
+void MainWindow::on_pushButtonAddText_clicked()
+{
+    qDebug() << "添加文字";
+}
+
+void MainWindow::on_pushButtonBackward_clicked()
+{
+    this->on_action_backward_triggered();
+}
+
+void MainWindow::on_pushButtonClear_clicked()
+{
+    this->on_action_Clear_triggered();
+}
+
+void MainWindow::on_pushButtonBuild_clicked()
+{
+    this->on_action_S_triggered();
+}
+
+void MainWindow::on_pushButtonUndo_clicked()
+{
+    this->on_action_undo_triggered();
 }
