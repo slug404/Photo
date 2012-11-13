@@ -5,12 +5,14 @@
 #include <QGraphicsPixmapItem>
 #include <QMessageBox>
 #include <QProcess>
+#include <QTransform>
 #include "ListWidget.h"
 #include "ListWidgetItem.h"
 #include "ListWidgetItem_Form.h"
 #include "GraphicsScene.h"
 #include "WidgetShowScene.h"
 #include "GraphicsItem.h"
+#include "GraphicsView.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent)
@@ -42,16 +44,27 @@ void MainWindow::initSetting()
 void MainWindow::initData()
 {
     pGraphicsScene_ = new GraphicsScene(this);
+    pGraphicsView_ = new GraphicsView;
     widgetShowScene->setGraphicsScene(pGraphicsScene_);
+    widgetShowScene->setGraphicsView(pGraphicsView_);
     connect(listWidgetTemplate, SIGNAL(signalSetPixmap(QString,QPixmap)), this, SLOT(slotSetPixmap(QString,QPixmap)));
     connect(listWidgetTemplate, SIGNAL(signalSceneAddImage()), pGraphicsScene_, SLOT(slotAddImage()));
+
     //signal的参数个数和slot的不匹配是有意而为,因为不需要pos参数
     connect(pGraphicsScene_, SIGNAL(signalCreateItem(QString,QPointF)), this, SLOT(slotCreateItem(QString)));
     //listWidgetLayer->setIconSize(QSize(64, 64));
+
     //滑动条大小初始化
-    horizontalSlider->setMinimum(24);
-    horizontalSlider->setMaximum(121);
+    //图层的
+    horizontalSlider->setMinimum(24);        //最小值24*24 像素
+    horizontalSlider->setMaximum(121);     //最大值121*121 像素
     connect(horizontalSlider, SIGNAL(valueChanged(int)), this, SLOT(slotItemSizeValueChanged(int)));
+    //编辑区缩放的
+    horizontalSliderMap->setMinimum(1);         //最小值1/100
+    horizontalSliderMap->setMaximum(100);   //最大值原始大小 100/100
+    horizontalSliderMap->setValue(100);
+    connect(horizontalSliderMap, SIGNAL(valueChanged(int)), this, SLOT(slotViewSizeValueChange(int)));
+
     //连接重新设置Z轴循序的
     connect(listWidgetLayer, SIGNAL(signalResetZvalue(QString,int)), this, SLOT(slotResetZvalue(QString,int)));
 
@@ -142,6 +155,16 @@ void MainWindow::slotSetFcous(const QString &name)
     {
         hash_Name_GraphicsItem_[name]->setFocus(Qt::MouseFocusReason);
     }
+}
+
+void MainWindow::slotViewSizeValueChange(int value)
+{
+    qDebug() << "修改视图的大小了" << value;
+    //setTransform(QTransform().scale(totalScaleFactor_ * currentScaleFactor, totalScaleFactor_ * currentScaleFactor));
+//    qDebug() << "view " << "width:"<< pGraphicsView_->width() << "height:" << pGraphicsView_->height();
+    qDebug() << "scene "<< "width:"<< pGraphicsScene_->width() << "height:" << pGraphicsScene_->height();
+    qreal i = value / 100.0;
+    pGraphicsView_->setTransform(QTransform().scale(i,  i));
 }
 
 void MainWindow::on_action_O_triggered()

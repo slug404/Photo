@@ -12,6 +12,7 @@ class WidgetShowScene : public QWidget
 public:
     explicit WidgetShowScene(QWidget *parent = 0);
     void setGraphicsScene(GraphicsScene *p);
+    void setGraphicsView(GraphicsView *p);
 
 signals:
 

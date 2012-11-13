@@ -14,6 +14,9 @@ signals:
 public slots:
 
 protected:
+
+private:
+    void initSetting();
     
 };
 
