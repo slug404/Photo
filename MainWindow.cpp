@@ -49,9 +49,9 @@ void MainWindow::initData()
     connect(pGraphicsScene_, SIGNAL(signalCreateItem(QString,QPointF)), this, SLOT(slotCreateItem(QString)));
     //listWidgetLayer->setIconSize(QSize(64, 64));
     //滑动条大小初始化
-    //horizontalSlider->setMinimum(24);
-    //horizontalSlider->setMaximum(121);
-    //connect(horizontalSlider, SIGNAL(valueChanged(int)), this, SLOT(slotItemSizeValueChanged(int)));
+    horizontalSlider->setMinimum(24);
+    horizontalSlider->setMaximum(121);
+    connect(horizontalSlider, SIGNAL(valueChanged(int)), this, SLOT(slotItemSizeValueChanged(int)));
     //连接重新设置Z轴循序的
     connect(listWidgetLayer, SIGNAL(signalResetZvalue(QString,int)), this, SLOT(slotResetZvalue(QString,int)));
 
