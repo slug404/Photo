@@ -114,7 +114,7 @@
        </size>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="tab">
        <attribute name="title">
@@ -273,6 +273,17 @@
        <attribute name="title">
         <string>图层</string>
        </attribute>
+       <layout class="QGridLayout" name="gridLayout_3">
+        <property name="margin">
+         <number>0</number>
+        </property>
+        <property name="spacing">
+         <number>0</number>
+        </property>
+        <item row="0" column="0">
+         <widget class="ListWidgetLayout" name="listWidgetLayer"/>
+        </item>
+       </layout>
       </widget>
      </widget>
     </item>
@@ -396,6 +407,11 @@
    <extends>QWidget</extends>
    <header>widgetshowscene.h</header>
    <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>ListWidgetLayout</class>
+   <extends>QListWidget</extends>
+   <header>ListWidgetLayout.h</header>
   </customwidget>
  </customwidgets>
  <resources/>
