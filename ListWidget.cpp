@@ -52,7 +52,7 @@ void ListWidget::mousePressEvent(QMouseEvent *event)
     qDebug() << pItem->pWidget_->getName();
     QByteArray dragData;
     QDataStream out(&dragData, QIODevice::WriteOnly);
-    QPixmap pix = pItem->pWidget_->getImage().scaled(QSize(251, 201));
+    QPixmap pix = pItem->pWidget_->getImage().scaled(QSize(176, 121));
     //    out << pix;
 
     //将数据放入QMimeData中

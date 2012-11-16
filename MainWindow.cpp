@@ -77,12 +77,12 @@ void MainWindow::initData()
     qSort(templateFilesName_.begin(), templateFilesName_.end());
     foreach (QString name, templateFilesName_)
     {
-        QPixmap pix(141, 151);
+        QPixmap pix(181, 161);
         pix.load(file+name);
 
         ListWidgetItem_Form *pWidget = new ListWidgetItem_Form(name, pix, this);
         ListWidgetItem *pItem = new ListWidgetItem(pWidget, this);
-        pItem->setSizeHint(QSize(141, 151));
+        pItem->setSizeHint(QSize(181, 161));
         listWidgetTemplate->addItem(pItem);
         listWidgetTemplate->setItemWidget(pItem, pWidget);
     }
@@ -201,7 +201,7 @@ void MainWindow::on_action_O_triggered()
             //            p->show();
             ListWidgetItem_Form *pWidget = new ListWidgetItem_Form(fileName, pix, this);
             ListWidgetItem *pItem = new ListWidgetItem(pWidget, this);
-            pItem->setSizeHint(QSize(141, 151));
+            pItem->setSizeHint(QSize(176, 151));
             listWidgetTemplate->addItem(pItem);
             listWidgetTemplate->setItemWidget(pItem, pWidget);
         }
