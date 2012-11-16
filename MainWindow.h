@@ -49,6 +49,9 @@ private slots:
     //更改视图的大小
     void slotViewSizeValueChange(int value);
 
+    void on_pushButtonSend_clicked();
+    void slotAdjustSize(const QSize &size);
+
 private:
     void initSetting();
     void initData();

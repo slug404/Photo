@@ -17,6 +17,17 @@ public:
 protected:
     void changeEvent(QEvent *e);
 
+    qreal getOpacity() const
+    {
+        return opacity_;
+    }
+
+    void setOpacity()
+    {
+
+    }
+    qreal opacity_;
+
 private:
     void initGui();
 

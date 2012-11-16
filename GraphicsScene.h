@@ -22,6 +22,7 @@ public:
 
 signals:
     void signalCreateItem(const QString &name, const QPointF &pos);
+    void signalAdjustSize(const QSize &size);
 
 public slots:
     void slotCreateItem(const QString &path, const QPointF &pos);

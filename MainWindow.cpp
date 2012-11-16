@@ -49,6 +49,7 @@ void MainWindow::initData()
     widgetShowScene->setGraphicsView(pGraphicsView_);
     connect(listWidgetTemplate, SIGNAL(signalSetPixmap(QString,QPixmap)), this, SLOT(slotSetPixmap(QString,QPixmap)));
     connect(listWidgetTemplate, SIGNAL(signalSceneAddImage()), pGraphicsScene_, SLOT(slotAddImage()));
+    connect(pGraphicsScene_, SIGNAL(signalAdjustSize(QSize)), this, SLOT(slotAdjustSize(QSize)));
 
     //signal的参数个数和slot的不匹配是有意而为,因为不需要pos参数
     connect(pGraphicsScene_, SIGNAL(signalCreateItem(QString,QPointF)), this, SLOT(slotCreateItem(QString)));
@@ -76,12 +77,12 @@ void MainWindow::initData()
     qSort(templateFilesName_.begin(), templateFilesName_.end());
     foreach (QString name, templateFilesName_)
     {
-        QPixmap pix(251, 171);
+        QPixmap pix(141, 151);
         pix.load(file+name);
 
         ListWidgetItem_Form *pWidget = new ListWidgetItem_Form(name, pix, this);
         ListWidgetItem *pItem = new ListWidgetItem(pWidget, this);
-        pItem->setSizeHint(QSize(251, 201));
+        pItem->setSizeHint(QSize(141, 151));
         listWidgetTemplate->addItem(pItem);
         listWidgetTemplate->setItemWidget(pItem, pWidget);
     }
@@ -164,6 +165,7 @@ void MainWindow::slotViewSizeValueChange(int value)
 //    qDebug() << "view " << "width:"<< pGraphicsView_->width() << "height:" << pGraphicsView_->height();
     qDebug() << "scene "<< "width:"<< pGraphicsScene_->width() << "height:" << pGraphicsScene_->height();
     qreal i = value / 100.0;
+
     pGraphicsView_->setTransform(QTransform().scale(i,  i));
 }
 
@@ -179,7 +181,7 @@ void MainWindow::on_action_O_triggered()
         bytes = file.readAll();
 
         QDataStream in(&bytes, QIODevice::ReadOnly);
-        in.setVersion(QDataStream::Qt_4_7);
+        in.setVersion(QDataStream::Qt_4_8);
 
         int size;
         in >> size;
@@ -188,7 +190,7 @@ void MainWindow::on_action_O_triggered()
         for(int i = 0; i != size; ++i)
         {
             //在这里循环插入item
-            QPixmap pix(251, 171);
+            QPixmap pix;
             QByteArray imageData;
             QString fileName;
             in >> imageData >> fileName;
@@ -197,9 +199,9 @@ void MainWindow::on_action_O_triggered()
             //            QLabel *p = new QLabel;
             //            p->setPixmap(pix);
             //            p->show();
-            ListWidgetItem_Form *pWidget = new ListWidgetItem_Form(fileName, pix.scaled(251, 171), this);
+            ListWidgetItem_Form *pWidget = new ListWidgetItem_Form(fileName, pix, this);
             ListWidgetItem *pItem = new ListWidgetItem(pWidget, this);
-            pItem->setSizeHint(QSize(251, 201));
+            pItem->setSizeHint(QSize(141, 151));
             listWidgetTemplate->addItem(pItem);
             listWidgetTemplate->setItemWidget(pItem, pWidget);
         }
@@ -207,6 +209,7 @@ void MainWindow::on_action_O_triggered()
     else
     {
         //提示模板读取失败
+        QMessageBox::warning(this, tr("警告"), tr("操作失败!"));
     }
 }
 
@@ -345,4 +348,22 @@ void MainWindow::on_pushButtonBuild_clicked()
 void MainWindow::on_pushButtonUndo_clicked()
 {
     this->on_action_undo_triggered();
+}
+
+void MainWindow::on_pushButtonSend_clicked()
+{
+    this->on_action_SendPhoto_triggered();
+}
+
+void MainWindow::slotAdjustSize(const QSize &size)
+{
+    qDebug() << size;
+    double tmpW = size.width();
+    double tmpH = size.height();
+    qDebug() << widgetShowScene->width() / tmpW;
+    qDebug() << widgetShowScene->height() / tmpH;
+    qDebug() << widgetShowScene->width() << widgetShowScene->height();
+    qDebug() <<  size.width() << size.height();
+    //qDebug() << w << h;
+    pGraphicsView_->setTransform(QTransform().scale(widgetShowScene->width() / tmpW - 0.02,  widgetShowScene->height() / tmpH - 0.02));
 }

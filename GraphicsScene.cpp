@@ -72,11 +72,14 @@ void GraphicsScene::addImage()
 //    p1->setWindowTitle("p1");
 //    p1->show();
     rect_ = QRect(0, 0, image_.width(), image_.height());
+
     GraphicsItem *p = new GraphicsItem(image_.rect(), image_);
     p->setFlag(QGraphicsItem::ItemIsMovable, false);
     p->setFlag(QGraphicsItem::ItemIsFocusable, false);
+
     this->addItem(p);
     this->update();
+    emit signalAdjustSize(image_.size());
 }
 
 void GraphicsScene::dropEvent(QGraphicsSceneDragDropEvent *event)
@@ -158,6 +161,7 @@ void GraphicsScene::slotCreateItem(const QString &path, const QPointF &pos)
     pItem->setFlag(QGraphicsItem::ItemIsFocusable, false);
     this->addItem(pItem);
     this->update();
+    emit signalAdjustSize(pix.size());
 }
 
 void GraphicsScene::slotAddImage()
