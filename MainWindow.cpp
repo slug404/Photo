@@ -365,5 +365,8 @@ void MainWindow::slotAdjustSize(const QSize &size)
     qDebug() << widgetShowScene->width() << widgetShowScene->height();
     qDebug() <<  size.width() << size.height();
     //qDebug() << w << h;
-    pGraphicsView_->setTransform(QTransform().scale(widgetShowScene->width() / tmpW - 0.02,  widgetShowScene->height() / tmpH - 0.02));
+    //pGraphicsView_->setTransform(QTransform().scale(widgetShowScene->width() / tmpW - 0.02,  widgetShowScene->height() / tmpH - 0.02));
+    double tmp = qMin(widgetShowScene->width() / tmpW, widgetShowScene->height() / tmpH);
+    qDebug() << tmp <<"~~~~~~~";
+    horizontalSliderMap->setValue(tmp*100);
 }

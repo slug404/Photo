@@ -21,88 +21,131 @@
     <property name="spacing">
      <number>0</number>
     </property>
-    <item row="0" column="0">
+    <item row="0" column="0" rowspan="2">
      <widget class="QWidget" name="widgetLeft" native="true">
       <property name="minimumSize">
        <size>
-        <width>176</width>
+        <width>181</width>
         <height>0</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>161</width>
+        <width>181</width>
         <height>16777215</height>
        </size>
       </property>
-      <layout class="QGridLayout" name="gridLayout_2">
-       <property name="margin">
-        <number>0</number>
+      <widget class="QLabel" name="labelTemplate">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>181</width>
+         <height>21</height>
+        </rect>
        </property>
-       <property name="spacing">
-        <number>0</number>
+       <property name="minimumSize">
+        <size>
+         <width>181</width>
+         <height>21</height>
+        </size>
        </property>
-       <item row="0" column="0">
-        <widget class="QLabel" name="labelTemplate">
-         <property name="minimumSize">
-          <size>
-           <width>176</width>
-           <height>21</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>161</width>
-           <height>21</height>
-          </size>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">font: 11pt &quot;Microsoft YaHei UI&quot;;</string>
-         </property>
-         <property name="text">
-          <string>模    板</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignCenter</set>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="0">
-        <widget class="ListWidget" name="listWidgetTemplate">
-         <property name="minimumSize">
-          <size>
-           <width>176</width>
-           <height>0</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>161</width>
-           <height>16777215</height>
-          </size>
-         </property>
-        </widget>
-       </item>
-      </layout>
+       <property name="maximumSize">
+        <size>
+         <width>181</width>
+         <height>21</height>
+        </size>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">font: 11pt &quot;Microsoft YaHei UI&quot;;</string>
+       </property>
+       <property name="text">
+        <string>模    板</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+      <widget class="ListWidget" name="listWidgetTemplate">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>21</y>
+         <width>181</width>
+         <height>591</height>
+        </rect>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>181</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>181</width>
+         <height>16777215</height>
+        </size>
+       </property>
+      </widget>
      </widget>
     </item>
     <item row="0" column="1">
-     <widget class="WidgetShowScene" name="widgetShowScene" native="true">
+     <widget class="QWidget" name="widget" native="true">
       <property name="minimumSize">
        <size>
-        <width>815</width>
-        <height>0</height>
+        <width>811</width>
+        <height>31</height>
        </size>
       </property>
-      <property name="acceptDrops">
-       <bool>true</bool>
+      <property name="maximumSize">
+       <size>
+        <width>16777215</width>
+        <height>31</height>
+       </size>
       </property>
-      <property name="styleSheet">
-       <string notr="true"/>
-      </property>
+      <widget class="QLabel" name="label">
+       <property name="geometry">
+        <rect>
+         <x>3</x>
+         <y>1</y>
+         <width>111</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>调整页面大小   小</string>
+       </property>
+      </widget>
+      <widget class="QSlider" name="horizontalSliderMap">
+       <property name="geometry">
+        <rect>
+         <x>110</x>
+         <y>0</y>
+         <width>171</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_2">
+       <property name="geometry">
+        <rect>
+         <x>286</x>
+         <y>0</y>
+         <width>31</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>大</string>
+       </property>
+      </widget>
      </widget>
     </item>
-    <item row="0" column="2">
+    <item row="0" column="2" rowspan="2">
      <widget class="QTabWidget" name="tabWidget">
       <property name="minimumSize">
        <size>
@@ -180,19 +223,6 @@
            </property>
            <property name="text">
             <string>导航:</string>
-           </property>
-          </widget>
-          <widget class="QSlider" name="horizontalSliderMap">
-           <property name="geometry">
-            <rect>
-             <x>0</x>
-             <y>190</y>
-             <width>196</width>
-             <height>21</height>
-            </rect>
-           </property>
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
            </property>
           </widget>
          </widget>
@@ -332,6 +362,22 @@
         </item>
        </layout>
       </widget>
+     </widget>
+    </item>
+    <item row="1" column="1">
+     <widget class="WidgetShowScene" name="widgetShowScene" native="true">
+      <property name="minimumSize">
+       <size>
+        <width>811</width>
+        <height>0</height>
+       </size>
+      </property>
+      <property name="acceptDrops">
+       <bool>true</bool>
+      </property>
+      <property name="styleSheet">
+       <string notr="true"/>
+      </property>
      </widget>
     </item>
    </layout>
