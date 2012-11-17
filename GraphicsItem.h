@@ -40,7 +40,12 @@ private:
     void initGui();
 
 private slots:
-    void slotResize(const QPointF & currentPos, const QPointF &startPos);
+    //大小
+    void slotResizeUp(const QPointF & currentPos, const QPointF &startPos);
+    void slotResizeDown(const QPointF & currentPos, const QPointF &startPos);
+    void slotResizeLeft(const QPointF & currentPos, const QPointF &startPos);
+    void slotResizeRight(const QPointF & currentPos, const QPointF &startPos);
+    //旋转
     void slotRotate1(const QPointF & currentPos, const QPointF &startPos);
     void slotRotate2(const QPointF & currentPos, const QPointF &startPos);
     void slotRotate3(const QPointF & currentPos, const QPointF &startPos);

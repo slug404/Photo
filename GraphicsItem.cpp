@@ -60,10 +60,10 @@ void GraphicsItem::initData()
     connect(pAnchor_2_0_, SIGNAL(signalDragging(QPointF,QPointF)), this, SLOT(slotRotate3(QPointF,QPointF)));
     connect(pAnchor_2_2_, SIGNAL(signalDragging(QPointF,QPointF)), this, SLOT(slotRotate4(QPointF,QPointF)));
     //resize的锚点
-    connect(pAnchor_0_1_, SIGNAL(signalDragging(QPointF,QPointF)), this, SLOT(slotResize(QPointF,QPointF)));
-    connect(pAnchor_1_0_, SIGNAL(signalDragging(QPointF,QPointF)), this, SLOT(slotResize(QPointF,QPointF)));
-    connect(pAnchor_1_2_, SIGNAL(signalDragging(QPointF,QPointF)), this, SLOT(slotResize(QPointF,QPointF)));
-    connect(pAnchor_2_1_, SIGNAL(signalDragging(QPointF,QPointF)), this, SLOT(slotResize(QPointF,QPointF)));
+    connect(pAnchor_0_1_, SIGNAL(signalDragging(QPointF,QPointF)), this, SLOT(slotResizeUp(QPointF,QPointF)));
+    connect(pAnchor_1_0_, SIGNAL(signalDragging(QPointF,QPointF)), this, SLOT(slotResizeUp(QPointF,QPointF)));
+    connect(pAnchor_1_2_, SIGNAL(signalDragging(QPointF,QPointF)), this, SLOT(slotResizeUp(QPointF,QPointF)));
+    connect(pAnchor_2_1_, SIGNAL(signalDragging(QPointF,QPointF)), this, SLOT(slotResizeUp(QPointF,QPointF)));
 
     //设置好位置
     pAnchor_0_0_->setPos(0-16, 0-16);
@@ -86,7 +86,7 @@ void GraphicsItem::initGui()
 {
 }
 
-void GraphicsItem::slotResize(const QPointF &currentPos, const QPointF &startPos)
+void GraphicsItem::slotResizeUp(const QPointF &currentPos, const QPointF &startPos)
 {
     QPoint newPos = mapFromScene(currentPos).toPoint();
     QPoint oldPos = mapFromScene(startPos).toPoint();
@@ -100,8 +100,32 @@ void GraphicsItem::slotResize(const QPointF &currentPos, const QPointF &startPos
     this->setTransform(QTransform().scale(newSize.width(), newSize.height()));
 }
 
+void GraphicsItem::slotResizeDown(const QPointF &currentPos, const QPointF &startPos)
+{
+}
+
+void GraphicsItem::slotResizeLeft(const QPointF &currentPos, const QPointF &startPos)
+{
+}
+
+void GraphicsItem::slotResizeRight(const QPointF &currentPos, const QPointF &startPos)
+{
+}
+
 void GraphicsItem::slotRotate1(const QPointF &currentPos, const QPointF &startPos)
 {
+    QPoint newPos = mapFromScene(currentPos).toPoint();
+    QPoint oldPos = mapFromScene(startPos).toPoint();
+
+    if(newPos == oldPos)
+    {
+        return;
+    }
+    qreal refAngle = atan2(originPoint_.y(), originPoint_.x());
+    qreal newAngle = atan2(originPoint_.y() - newPos.y(), newPos.x() - originPoint_.x());
+
+    this->setTransformOriginPoint(originPoint_ );
+    this->setRotation(this->rotation() + 57.29577951308232 * (refAngle-newAngle));
 }
 
 void GraphicsItem::slotRotate2(const QPointF &currentPos, const QPointF &startPos)
@@ -123,10 +147,37 @@ void GraphicsItem::slotRotate2(const QPointF &currentPos, const QPointF &startPo
 
 void GraphicsItem::slotRotate3(const QPointF &currentPos, const QPointF &startPos)
 {
+    QPoint newPos = mapFromScene(currentPos).toPoint();
+    QPoint oldPos = mapFromScene(startPos).toPoint();
+
+    if(newPos == oldPos)
+    {
+        return;
+    }
+    qreal refAngle = atan2(originPoint_.y(), originPoint_.x());
+    qreal newAngle = atan2(newPos.y()-originPoint_.y(), originPoint_.x() - newPos.x());
+
+    this->setTransformOriginPoint(originPoint_ );
+    this->setRotation(this->rotation() + 57.29577951308232 * (refAngle - newAngle));
 }
 
 void GraphicsItem::slotRotate4(const QPointF &currentPos, const QPointF &startPos)
 {
+    QPoint newPos = mapFromScene(currentPos).toPoint();
+    QPoint oldPos = mapFromScene(startPos).toPoint();
+
+    if(newPos == oldPos)
+    {
+        return;
+    }
+    qreal refAngle = atan2(originPoint_.y(), originPoint_.x());
+    qreal newAngle = atan2(newPos.y() - originPoint_.y(), newPos.x() - originPoint_.x());
+
+    this->setTransformOriginPoint(originPoint_ );
+    this->setRotation(this->rotation() + 57.29577951308232 * (newAngle - refAngle));
+//    qDebug() << refAngle;
+//    qDebug() << newAngle;
+//    qDebug() << 57.29577951308232 * (newAngle - refAngle);
 }
 
 void GraphicsItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
