@@ -25,18 +25,12 @@ signals:
     void signalAdjustSize(const QSize &size);
 
 public slots:
-    void slotCreateItem(const QString &path, const QPointF &pos);
     void slotAddImage();
 
 protected:
     void dropEvent(QGraphicsSceneDragDropEvent *event);
     void dragMoveEvent(QGraphicsSceneDragDropEvent *event);
     void dragEnterEvent(QGraphicsSceneDragDropEvent *event);
-
-private:
-    void initSetting();
-    void initData();
-    void initGui();
 
 private:
     QString name_;

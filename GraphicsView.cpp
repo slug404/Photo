@@ -12,15 +12,9 @@ GraphicsView::GraphicsView(QGraphicsScene *scene, QWidget *parent) :
 
 void GraphicsView::initSetting()
 {
-   // viewport()->setAttribute(Qt::WA_AcceptTouchEvents);
     //开启抗锯齿
     setRenderHints(QPainter::Antialiasing | QPainter::TextAntialiasing | QPainter::SmoothPixmapTransform);
     //开启背景缓存, 传说可以提升效率
     this->setCacheMode(QGraphicsView::CacheBackground);
-//    this->setDragMode(QGraphicsView::RubberBandDrag);
-//    this->setOptimizationFlags(QGraphicsView::DontSavePainterState);
-//    this->setViewportUpdateMode(QGraphicsView::SmartViewportUpdate);
-//    this->setTransformationAnchor(QGraphicsView::AnchorUnderMouse);
-   // setDragMode(ScrollHandDrag);
 }
 

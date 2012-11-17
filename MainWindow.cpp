@@ -239,6 +239,7 @@ void MainWindow::on_action_I_triggered()
     p->setFlag(QGraphicsItem::ItemIsMovable);
     p->setFlag(QGraphicsItem::ItemIsSelectable);
     p->setFlag(QGraphicsItem::ItemIsFocusable);
+    p->setAcceptHoverEvents(true);
 
     QString name = filePath.right(filePath.size() - filePath.lastIndexOf("/") - 1);
     hash_Name_GraphicsItem_[name] = p;

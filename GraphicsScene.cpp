@@ -13,17 +13,11 @@
 GraphicsScene::GraphicsScene(const QRectF &sceneRect, QObject *parent) :
     name_(""), QGraphicsScene(sceneRect, parent)
 {
-    this->initSetting();
-    this->initData();
-    this->initGui();
 }
 
 GraphicsScene::GraphicsScene(QObject *parent):
     QGraphicsScene(parent)
 {
-    this->initSetting();
-    this->initData();
-    this->initGui();
 }
 
 bool GraphicsScene::saveFile(const QString path)
@@ -66,18 +60,12 @@ bool GraphicsScene::saveFile(const QString path)
 
 void GraphicsScene::addImage()
 {
-    //this->addPixmap(image_);
-//    QLabel *p1 = new QLabel;
-//    p1->setPixmap(image_);
-//    p1->setWindowTitle("p1");
-//    p1->show();
     rect_ = QRect(0, 0, image_.width(), image_.height());
 
     GraphicsItem *p = new GraphicsItem(image_.rect(), image_);
-    p->setFlag(QGraphicsItem::ItemIsMovable, false);
-    p->setFlag(QGraphicsItem::ItemIsFocusable, false);
-    p->setAcceptHoverEvents(false);
-
+//    p->setFlag(QGraphicsItem::ItemIsMovable, false);
+//    p->setFlag(QGraphicsItem::ItemIsFocusable, false);
+//    p->setAcceptHoverEvents(false);
     this->addItem(p);
     this->update();
     emit signalAdjustSize(image_.size());
@@ -134,37 +122,6 @@ void GraphicsScene::dragEnterEvent(QGraphicsSceneDragDropEvent *event)
     {
         event->ignore();
     }
-}
-
-void GraphicsScene::initSetting()
-{
-}
-
-void GraphicsScene::initData()
-{
-    connect(this, SIGNAL(signalCreateItem(QString,QPointF)), this, SLOT(slotCreateItem(QString,QPointF)));
-}
-
-void GraphicsScene::initGui()
-{
-}
-
-void GraphicsScene::slotCreateItem(const QString &path, const QPointF &pos)
-{
-    //加载item
-    QPixmap pix(path);
-    int w = pix.width();
-    int h = pix.height();
-    rect_ = QRect(0, 0, w, h);
-    GraphicsItem *pItem = new GraphicsItem(rect_ , pix, this);
-    //qDebug() << "是这里么";
-    pItem->setFlag(QGraphicsItem::ItemIsMovable, false);
-    pItem->setFlag(QGraphicsItem::ItemIsFocusable, false);
-    pItem->setAcceptHoverEvents(false);
-
-    this->addItem(pItem);
-    this->update();
-    emit signalAdjustSize(pix.size());
 }
 
 void GraphicsScene::slotAddImage()

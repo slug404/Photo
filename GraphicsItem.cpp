@@ -35,7 +35,7 @@ void GraphicsItem::initSetting()
     setFlag(QGraphicsItem::ItemIsFocusable, true);
     setFlag(QGraphicsItem::ItemIsSelectable, true);
     setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
-    this->setAcceptHoverEvents(true);
+    //this->setAcceptHoverEvents(true);
 }
 void GraphicsItem::initData()
 {
