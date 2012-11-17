@@ -18,6 +18,7 @@ struct AnchorItemPrivate
 
 AnchorItem::AnchorItem(Type type, QGraphicsItem * parent)
     : QGraphicsItem(parent)
+    , type_(type)
     , pData_(new AnchorItemPrivate())
 {
     this->initSetting();
@@ -61,7 +62,40 @@ void AnchorItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
 
 void AnchorItem::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 {
-
+    qDebug() << "锚点的 mouse move";
+    //nice互不干扰 相当的好啊
+    //在这里应该对类型进行一个判断, 以便于通知GraphicsItem进行矩阵变换
+    switch(type_)
+    {
+        case AnchorItem::LEFT:
+        {
+            QPoint pos = (event->scenePos() - this->scenePos()).toPoint();
+            qDebug() << pos.rx();
+            break;
+        }
+        case AnchorItem::RIGHT:
+        {
+            QPoint pos = (event->scenePos() - this->scenePos()).toPoint();
+            qDebug() << pos.rx();
+            break;
+        }
+        case AnchorItem::UP:
+        {
+            break;
+        }
+        case AnchorItem::DOWN:
+        {
+            break;
+        }
+        case AnchorItem::ROTATE:
+        {
+            break;
+        }
+        default :
+        {
+            //...
+        }
+    }
 }
 
 

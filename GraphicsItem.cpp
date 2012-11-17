@@ -45,12 +45,12 @@ void GraphicsItem::initData()
 
     //锚点
     pAnchor_0_0_ = new AnchorItem(AnchorItem::ROTATE, this);
-    pAnchor_0_1_ = new AnchorItem(AnchorItem::UP_DOWN, this);
+    pAnchor_0_1_ = new AnchorItem(AnchorItem::UP, this);
     pAnchor_0_2_ = new AnchorItem(AnchorItem::ROTATE, this);
-    pAnchor_1_0_ = new AnchorItem(AnchorItem::LEFT_RIGHT, this);
-    pAnchor_1_2_ = new AnchorItem(AnchorItem::LEFT_RIGHT, this);
+    pAnchor_1_0_ = new AnchorItem(AnchorItem::LEFT, this);
+    pAnchor_1_2_ = new AnchorItem(AnchorItem::RIGHT, this);
     pAnchor_2_0_ = new AnchorItem(AnchorItem::ROTATE, this);
-    pAnchor_2_1_ = new AnchorItem(AnchorItem::UP_DOWN, this);
+    pAnchor_2_1_ = new AnchorItem(AnchorItem::DOWN, this);
     pAnchor_2_2_ = new AnchorItem(AnchorItem::ROTATE, this);
 
     //设置好位置

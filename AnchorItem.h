@@ -9,7 +9,7 @@ class AnchorItem : public QObject, public QGraphicsItem
 {
     Q_OBJECT
 public:
-    enum Type{UP_DOWN, LEFT_RIGHT, ROTATE};
+    enum Type{UP, DOWN, LEFT, RIGHT, ROTATE};
     explicit AnchorItem(Type type, QGraphicsItem * parent);
     QRectF boundingRect() const;
 
@@ -20,6 +20,9 @@ public:
 
 signals:
     void signalDragging(const QPointF & point);
+    void signalChangeHorizontal();
+    void signalChangeVertical();
+    void signalRotate();
 
 public slots:
 
