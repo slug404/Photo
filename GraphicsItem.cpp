@@ -7,6 +7,7 @@
 #include <QGraphicsSceneMouseEvent>
 #include <QTransform>
 #include <math.h>
+#include <qmath.h>
 #include "AnchorItem.h"
 
 GraphicsItem::GraphicsItem(const QRect &rect, const QPixmap &bgImage, QObject *parent) :
@@ -61,9 +62,9 @@ void GraphicsItem::initData()
     connect(pAnchor_2_2_, SIGNAL(signalDragging(QPointF,QPointF)), this, SLOT(slotRotate4(QPointF,QPointF)));
     //resize的锚点
     connect(pAnchor_0_1_, SIGNAL(signalDragging(QPointF,QPointF)), this, SLOT(slotResizeUp(QPointF,QPointF)));
-    connect(pAnchor_1_0_, SIGNAL(signalDragging(QPointF,QPointF)), this, SLOT(slotResizeUp(QPointF,QPointF)));
-    connect(pAnchor_1_2_, SIGNAL(signalDragging(QPointF,QPointF)), this, SLOT(slotResizeUp(QPointF,QPointF)));
-    connect(pAnchor_2_1_, SIGNAL(signalDragging(QPointF,QPointF)), this, SLOT(slotResizeUp(QPointF,QPointF)));
+    connect(pAnchor_1_0_, SIGNAL(signalDragging(QPointF,QPointF)), this, SLOT(slotResizeLeft(QPointF,QPointF)));
+    connect(pAnchor_1_2_, SIGNAL(signalDragging(QPointF,QPointF)), this, SLOT(slotResizeRight(QPointF,QPointF)));
+    connect(pAnchor_2_1_, SIGNAL(signalDragging(QPointF,QPointF)), this, SLOT(slotResizeDown(QPointF,QPointF)));
 
     //设置好位置
     pAnchor_0_0_->setPos(0-16, 0-16);
@@ -96,20 +97,59 @@ void GraphicsItem::slotResizeUp(const QPointF &currentPos, const QPointF &startP
         return;
     }
 
-    QSize newSize(bgRect_.size().width() * newPos.x() / oldPos.x(), bgRect_.height() * newPos.y() / oldPos.y());
-    this->setTransform(QTransform().scale(newSize.width(), newSize.height()));
+    qreal height = (originPoint_.y() - newPos.y() + bgRect_.height()/2) / bgRect_.height();
+    qDebug() << height;
+
+    QTransform matrixTmp = this->transform();
+    this->setTransform(matrixTmp.scale(1, height));
 }
 
 void GraphicsItem::slotResizeDown(const QPointF &currentPos, const QPointF &startPos)
 {
+    QPoint newPos = mapFromScene(currentPos).toPoint();
+    QPoint oldPos = mapFromScene(startPos).toPoint();
+
+    if(newPos == oldPos)
+    {
+        return;
+    }
+
+    qreal height = (newPos.y() - originPoint_.y() + bgRect_.height()/2) / bgRect_.height();
+    qDebug() << height;
+    QTransform matrixTmp = this->transform();
+    this->setTransform(matrixTmp.scale(1, height));
 }
 
 void GraphicsItem::slotResizeLeft(const QPointF &currentPos, const QPointF &startPos)
 {
+    QPoint newPos = mapFromScene(currentPos).toPoint();
+    QPoint oldPos = mapFromScene(startPos).toPoint();
+
+    if(newPos == oldPos)
+    {
+        return;
+    }
+
+    qreal width = (originPoint_.x()-newPos.x() + bgRect_.width() / 2) / bgRect_.width();
+    qDebug() << width;
+    QTransform matrixTmp = this->transform();
+    this->setTransform(matrixTmp.scale(width, 1));
 }
 
 void GraphicsItem::slotResizeRight(const QPointF &currentPos, const QPointF &startPos)
 {
+    QPoint newPos = mapFromScene(currentPos).toPoint();
+    QPoint oldPos = mapFromScene(startPos).toPoint();
+
+    if(newPos == oldPos)
+    {
+        return;
+    }
+
+    qreal width = (newPos.x() - originPoint_.x() + bgRect_.width() / 2) / bgRect_.width();
+    qDebug() << width;
+    QTransform matrixTmp = this->transform();
+    this->setTransform(matrixTmp.scale(width, 1));
 }
 
 void GraphicsItem::slotRotate1(const QPointF &currentPos, const QPointF &startPos)
