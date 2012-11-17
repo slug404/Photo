@@ -58,6 +58,7 @@ void AnchorItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
     pData_->startPos_ = event->scenePos();
     qDebug() << "锚点响应了";
+    event->accept();
 }
 
 void AnchorItem::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
@@ -65,43 +66,21 @@ void AnchorItem::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
     qDebug() << "锚点的 mouse move";
     //nice互不干扰 相当的好啊
     //在这里应该对类型进行一个判断, 以便于通知GraphicsItem进行矩阵变换
-    switch(type_)
+    if(pData_->startPos_.isNull())
     {
-        case AnchorItem::LEFT:
-        {
-            QPoint pos = (event->scenePos() - this->scenePos()).toPoint();
-            qDebug() << pos.rx();
-            break;
-        }
-        case AnchorItem::RIGHT:
-        {
-            QPoint pos = (event->scenePos() - this->scenePos()).toPoint();
-            qDebug() << pos.rx();
-            break;
-        }
-        case AnchorItem::UP:
-        {
-            break;
-        }
-        case AnchorItem::DOWN:
-        {
-            break;
-        }
-        case AnchorItem::ROTATE:
-        {
-            break;
-        }
-        default :
-        {
-            //...
-        }
+        return;
     }
+
+    emit signalDragging(event->scenePos(), this->scenePos());
+    event->accept();
+    update();
 }
 
 
 void AnchorItem::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
-
+    pData_->startPos_ = QPointF();
+    update();
 }
 
 void AnchorItem::initSetting()

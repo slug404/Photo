@@ -39,6 +39,10 @@ private:
     void initData();
     void initGui();
 
+private slots:
+    void slotResize(const QPointF & currentPos, const QPointF &startPos);
+    void slotRotate(const QPointF & currentPos, const QPointF &startPos);
+
 private:
     //外观描述
     QRect bgRect_;

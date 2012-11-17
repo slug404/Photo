@@ -5,6 +5,8 @@
 #include <QGraphicsScene>
 #include <QStyleOptionGraphicsItem>
 #include <QGraphicsSceneMouseEvent>
+#include <QTransform>
+#include <math.h>
 #include "AnchorItem.h"
 
 GraphicsItem::GraphicsItem(const QRect &rect, const QPixmap &bgImage, QObject *parent) :
@@ -53,6 +55,8 @@ void GraphicsItem::initData()
     pAnchor_2_1_ = new AnchorItem(AnchorItem::DOWN, this);
     pAnchor_2_2_ = new AnchorItem(AnchorItem::ROTATE, this);
 
+    connect(pAnchor_0_0_, SIGNAL(signalDragging(QPointF,QPointF)), this, SLOT(slotRotate(QPointF,QPointF)));
+
     //设置好位置
     pAnchor_0_0_->setPos(0-16, 0-16);
     pAnchor_0_1_->setPos((bgRect_.width()-16) / 2, 0-16);
@@ -69,6 +73,40 @@ void GraphicsItem::initData()
 
 void GraphicsItem::initGui()
 {
+}
+
+void GraphicsItem::slotResize(const QPointF &currentPos, const QPointF &startPos)
+{
+    QPoint newPos = mapFromScene(currentPos).toPoint();
+    QPoint oldPos = mapFromScene(startPos).toPoint();
+
+    if(newPos == oldPos)
+    {
+        return;
+    }
+
+    QSize newSize(bgRect_.size().width() * newPos.x() / oldPos.x(), bgRect_.height() * newPos.y() / oldPos.y());
+    this->setTransform(QTransform().scale(newSize.width(), newSize.height()));
+}
+
+void GraphicsItem::slotRotate(const QPointF &currentPos, const QPointF &startPos)
+{
+    QPoint newPos = mapFromScene(currentPos).toPoint();
+    QPoint oldPos = mapFromScene(startPos).toPoint();
+
+    if(newPos == oldPos)
+    {
+        return;
+    }
+
+    //qreal refAngle = atan2(oldPos.y(), oldPos.x());
+    qreal refAngle = atan2(originPoint_.y(), originPoint_.x());
+    qreal newAngle = atan2(originPoint_.y() - newPos.y(), originPoint_.x() - newPos.x());
+    this->setTransformOriginPoint(originPoint_ );
+//    this->rotate(57.29577951308232 * (newAngle - refAngle));
+    this->setRotation(this->rotation() + 57.29577951308232 * (newAngle - refAngle));
+//    this->setTransform(QTransform().translate(originPoint_.x(), originPoint_.y()).rotate(57.29577951308232 * (newAngle - refAngle)));
+
 }
 
 void GraphicsItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)

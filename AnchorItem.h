@@ -19,10 +19,10 @@ public:
     int getHeight() const;
 
 signals:
-    void signalDragging(const QPointF & point);
-    void signalChangeHorizontal();
-    void signalChangeVertical();
-    void signalRotate();
+    void signalDragging(const QPointF & currentPos, const QPointF &startPos);
+//    void signalChangeHorizontal();
+//    void signalChangeVertical();
+//    void signalRotate();
 
 public slots:
 
