@@ -132,11 +132,6 @@ void GraphicsItem::keyPressEvent(QKeyEvent *event)
     }
 }
 
-void GraphicsItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
-{
-    qDebug() << "mousePressEvent QGraphicsItem";
-}
-
 void GraphicsItem::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 {
     originPoint_ = this->scenePos() + QPointF(this->bgRect_.width()/2, bgRect_.height()/2);
@@ -163,7 +158,3 @@ void GraphicsItem::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
     }
 }
 
-void GraphicsItem::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
-{
-    qDebug() << "hover move";
-}

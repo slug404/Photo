@@ -56,6 +56,7 @@ void AnchorItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option
 void AnchorItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
     pData_->startPos_ = event->scenePos();
+    qDebug() << "锚点响应了";
 }
 
 void AnchorItem::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
