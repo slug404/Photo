@@ -21,7 +21,8 @@ SOURCES += main.cpp\
     WidgetShowScene.cpp \
     ListWidgetLayout.cpp \
     eresizefocus.cpp \
-    eobject.cpp
+    eobject.cpp \
+    AnchorItem.cpp
 
 HEADERS  += MainWindow.h \
     ListWidgetItem_Form.h \
@@ -33,7 +34,8 @@ HEADERS  += MainWindow.h \
     WidgetShowScene.h \
     ListWidgetLayout.h \
     eresizefocus.h \
-    eobject.h
+    eobject.h \
+    AnchorItem.h
 
 FORMS    += MainWindow.ui \
     ListWidgetItem_Form.ui

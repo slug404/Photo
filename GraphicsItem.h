@@ -2,7 +2,7 @@
 #define GRAPHICSITEM_H
 
 #include <QGraphicsItem>
-
+class AnchorItem;
 class GraphicsItem : public QObject, public QGraphicsItem
 {
     Q_OBJECT
@@ -28,7 +28,13 @@ public slots:
 protected:
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
     void keyPressEvent(QKeyEvent *event);
+
+    void mousePressEvent(QGraphicsSceneMouseEvent *event);
     void mouseMoveEvent(QGraphicsSceneMouseEvent *event);
+
+    void hoverEnterEvent(QGraphicsSceneHoverEvent *event);
+    void hoverLeaveEvent(QGraphicsSceneHoverEvent *event);
+    void hoverMoveEvent(QGraphicsSceneHoverEvent *event);
 
 private:
     void initSetting();
@@ -45,6 +51,17 @@ private:
     qreal sum_;
     QTransform oldTransform_;
     QPointF originPoint_;
+
+    //各个锚点
+    AnchorItem *pAnchor_0_0_;
+    AnchorItem *pAnchor_0_1_;
+    AnchorItem *pAnchor_0_2_;
+    AnchorItem *pAnchor_1_0_;
+    AnchorItem *pAnchor_1_2_;
+    AnchorItem *pAnchor_2_0_;
+    AnchorItem *pAnchor_2_1_;
+    AnchorItem *pAnchor_2_2_;
+    QList<AnchorItem *> list_anchorItems_;
 };
 
 #endif // GRAPHICSITEM_H

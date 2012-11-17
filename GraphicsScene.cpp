@@ -76,6 +76,7 @@ void GraphicsScene::addImage()
     GraphicsItem *p = new GraphicsItem(image_.rect(), image_);
     p->setFlag(QGraphicsItem::ItemIsMovable, false);
     p->setFlag(QGraphicsItem::ItemIsFocusable, false);
+    p->setAcceptHoverEvents(false);
 
     this->addItem(p);
     this->update();
@@ -159,6 +160,8 @@ void GraphicsScene::slotCreateItem(const QString &path, const QPointF &pos)
     //qDebug() << "是这里么";
     pItem->setFlag(QGraphicsItem::ItemIsMovable, false);
     pItem->setFlag(QGraphicsItem::ItemIsFocusable, false);
+    pItem->setAcceptHoverEvents(false);
+
     this->addItem(pItem);
     this->update();
     emit signalAdjustSize(pix.size());
