@@ -41,7 +41,10 @@ private:
 
 private slots:
     void slotResize(const QPointF & currentPos, const QPointF &startPos);
-    void slotRotate(const QPointF & currentPos, const QPointF &startPos);
+    void slotRotate1(const QPointF & currentPos, const QPointF &startPos);
+    void slotRotate2(const QPointF & currentPos, const QPointF &startPos);
+    void slotRotate3(const QPointF & currentPos, const QPointF &startPos);
+    void slotRotate4(const QPointF & currentPos, const QPointF &startPos);
 
 private:
     //外观描述

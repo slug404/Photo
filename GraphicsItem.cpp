@@ -54,7 +54,16 @@ void GraphicsItem::initData()
     pAnchor_2_1_ = new AnchorItem(AnchorItem::DOWN, this);
     pAnchor_2_2_ = new AnchorItem(AnchorItem::ROTATE, this);
 
-    connect(pAnchor_0_0_, SIGNAL(signalDragging(QPointF,QPointF)), this, SLOT(slotRotate(QPointF,QPointF)));
+    //rotate的锚点
+    connect(pAnchor_0_0_, SIGNAL(signalDragging(QPointF,QPointF)), this, SLOT(slotRotate2(QPointF,QPointF)));
+    connect(pAnchor_0_2_, SIGNAL(signalDragging(QPointF,QPointF)), this, SLOT(slotRotate1(QPointF,QPointF)));
+    connect(pAnchor_2_0_, SIGNAL(signalDragging(QPointF,QPointF)), this, SLOT(slotRotate3(QPointF,QPointF)));
+    connect(pAnchor_2_2_, SIGNAL(signalDragging(QPointF,QPointF)), this, SLOT(slotRotate4(QPointF,QPointF)));
+    //resize的锚点
+    connect(pAnchor_0_1_, SIGNAL(signalDragging(QPointF,QPointF)), this, SLOT(slotResize(QPointF,QPointF)));
+    connect(pAnchor_1_0_, SIGNAL(signalDragging(QPointF,QPointF)), this, SLOT(slotResize(QPointF,QPointF)));
+    connect(pAnchor_1_2_, SIGNAL(signalDragging(QPointF,QPointF)), this, SLOT(slotResize(QPointF,QPointF)));
+    connect(pAnchor_2_1_, SIGNAL(signalDragging(QPointF,QPointF)), this, SLOT(slotResize(QPointF,QPointF)));
 
     //设置好位置
     pAnchor_0_0_->setPos(0-16, 0-16);
@@ -70,7 +79,6 @@ void GraphicsItem::initData()
                          << pAnchor_1_2_ << pAnchor_2_0_ << pAnchor_2_1_ << pAnchor_2_2_;
 
     //计算中心的位置
-    //originPoint_ = this->scenePos() + QPointF(this->bgRect_.width()/2, bgRect_.height()/2);
     originPoint_ = QPointF(bgRect_.width()/2, bgRect_.height()/2);
 }
 
@@ -92,7 +100,11 @@ void GraphicsItem::slotResize(const QPointF &currentPos, const QPointF &startPos
     this->setTransform(QTransform().scale(newSize.width(), newSize.height()));
 }
 
-void GraphicsItem::slotRotate(const QPointF &currentPos, const QPointF &startPos)
+void GraphicsItem::slotRotate1(const QPointF &currentPos, const QPointF &startPos)
+{
+}
+
+void GraphicsItem::slotRotate2(const QPointF &currentPos, const QPointF &startPos)
 {
     QPoint newPos = mapFromScene(currentPos).toPoint();
     QPoint oldPos = mapFromScene(startPos).toPoint();
@@ -101,15 +113,20 @@ void GraphicsItem::slotRotate(const QPointF &currentPos, const QPointF &startPos
     {
         return;
     }
-
-    //qreal refAngle = atan2(oldPos.y(), oldPos.x());
     qreal refAngle = atan2(originPoint_.y(), originPoint_.x());
     qreal newAngle = atan2(originPoint_.y() - newPos.y(), originPoint_.x() - newPos.x());
-    this->setTransformOriginPoint(originPoint_ );
-//    this->rotate(57.29577951308232 * (newAngle - refAngle));
-    this->setRotation(this->rotation() + 57.29577951308232 * (newAngle - refAngle));
-//    this->setTransform(QTransform().translate(originPoint_.x(), originPoint_.y()).rotate(57.29577951308232 * (newAngle - refAngle)));
 
+    this->setTransformOriginPoint(originPoint_ );
+
+    this->setRotation(this->rotation() + 57.29577951308232 * (newAngle - refAngle));
+}
+
+void GraphicsItem::slotRotate3(const QPointF &currentPos, const QPointF &startPos)
+{
+}
+
+void GraphicsItem::slotRotate4(const QPointF &currentPos, const QPointF &startPos)
+{
 }
 
 void GraphicsItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
@@ -175,9 +192,6 @@ void GraphicsItem::keyPressEvent(QKeyEvent *event)
 
 void GraphicsItem::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 {
-    //originPoint_ = this->scenePos() + QPointF(this->bgRect_.width()/2, bgRect_.height()/2);
-//    QPointF centerPos = pAnchor_2_2_->pos() - pAnchor_0_0_->pos();
-//    originPoint_ = QPointF(pAnchor_0_0_->x() + centerPos.x(), pAnchor_0_0_->y() + centerPos.y());
     originPoint_ = QPointF(bgRect_.width()/2, bgRect_.height()/2);
     QGraphicsItem::mouseMoveEvent(event);
 }
