@@ -43,7 +43,6 @@ void GraphicsItem::initData()
     rotate_ = 10;
     sum_ = 0;
     oldTransform_ = this->transform();
-    originPoint_ = this->scenePos() + QPointF(this->bgRect_.width()/2, bgRect_.height()/2);
 
     //锚点
     pAnchor_0_0_ = new AnchorItem(AnchorItem::ROTATE, this);
@@ -69,6 +68,10 @@ void GraphicsItem::initData()
 
     list_anchorItems_ << pAnchor_0_0_ << pAnchor_0_1_ << pAnchor_0_2_ << pAnchor_1_0_
                          << pAnchor_1_2_ << pAnchor_2_0_ << pAnchor_2_1_ << pAnchor_2_2_;
+
+    //计算中心的位置
+    //originPoint_ = this->scenePos() + QPointF(this->bgRect_.width()/2, bgRect_.height()/2);
+    originPoint_ = QPointF(bgRect_.width()/2, bgRect_.height()/2);
 }
 
 void GraphicsItem::initGui()
@@ -172,7 +175,10 @@ void GraphicsItem::keyPressEvent(QKeyEvent *event)
 
 void GraphicsItem::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 {
-    originPoint_ = this->scenePos() + QPointF(this->bgRect_.width()/2, bgRect_.height()/2);
+    //originPoint_ = this->scenePos() + QPointF(this->bgRect_.width()/2, bgRect_.height()/2);
+//    QPointF centerPos = pAnchor_2_2_->pos() - pAnchor_0_0_->pos();
+//    originPoint_ = QPointF(pAnchor_0_0_->x() + centerPos.x(), pAnchor_0_0_->y() + centerPos.y());
+    originPoint_ = QPointF(bgRect_.width()/2, bgRect_.height()/2);
     QGraphicsItem::mouseMoveEvent(event);
 }
 
