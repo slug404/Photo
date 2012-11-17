@@ -18,7 +18,7 @@ GraphicsItem::GraphicsItem(const QRect &rect, const QPixmap &bgImage, QObject *p
 QRectF GraphicsItem::boundingRect() const
 {
     qreal penWidth = 1;
-    return QRectF(0 - penWidth/2, 0-penWidth/2, bgRect_.width()+penWidth, bgRect_.height()+penWidth);
+    return QRectF(0 - penWidth/2 - 16, 0-penWidth/2 - 16, bgRect_.width()+penWidth + 32, bgRect_.height()+penWidth+ 32);
 }
 
 void GraphicsItem::setOldTransformation()
