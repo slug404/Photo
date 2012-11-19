@@ -1,7 +1,7 @@
 #include "MoveCommand.h"
 #include <QGraphicsScene>
 #include <QPointF>
-#include "GraphicsItem.h"
+#include "GraphicFramework/GraphicsItem.h"
 MoveCommand::MoveCommand(GraphicsItem *p, const QPointF &oldPos, QUndoCommand *parent)
     :QUndoCommand(parent)
     , pGraphicsItem_(p)

@@ -11,7 +11,7 @@ int main(int argc, char *argv[])
     QTextCodec::setCodecForCStrings(QTextCodec::codecForName("UTF8"));
 
     MainWindow w;
-    w.setWindowTitle("个性日历  www.yin99.com");
+    w.setWindowTitle("个性日历 for slug404@foxmail.com");
     w.setWindowIcon(QIcon(QString("./images/logo.png")));
     w.show();
     

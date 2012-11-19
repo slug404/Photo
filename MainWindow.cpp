@@ -14,13 +14,13 @@
 #include "ListWidget.h"
 #include "ListWidgetItem.h"
 #include "ListWidgetItem_Form.h"
-#include "GraphicsScene.h"
+#include "GraphicFramework/GraphicsScene.h"
 #include "WidgetShowScene.h"
-#include "GraphicsItem.h"
-#include "GraphicsView.h"
-#include "MoveCommand.h"
-#include "DeleteCommand.h"
-#include "AddCommand.h"
+#include "GraphicFramework/GraphicsItem.h"
+#include "GraphicFramework/GraphicsView.h"
+#include "undoFramework/MoveCommand.h"
+#include "undoFramework/DeleteCommand.h"
+#include "undoFramework/AddCommand.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent)
@@ -312,7 +312,7 @@ void MainWindow::on_action_SendPhoto_triggered()
     {
         qDebug() << filePath;
         QProcess *pCmd = new QProcess(this);
-        QString cmd = tr("main.exe -p %1 -a 517549554@qq.com").arg(filePath);
+        QString cmd = tr("./email/main.exe -p %1 -a 517549554@qq.com").arg(filePath);
         //cmdList <<tr("-p %1 -a 517549554@qq.com").arg(filePath );
         qDebug() << cmd;
 

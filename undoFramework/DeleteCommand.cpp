@@ -1,7 +1,7 @@
 #include "DeleteCommand.h"
 #include <QGraphicsScene>
-#include "GraphicsItem.h"
-#include "GraphicsScene.h"
+#include "GraphicFramework/GraphicsItem.h"
+#include "GraphicFramework/GraphicsScene.h"
 
 DeleteCommand::DeleteCommand(GraphicsScene *p, QUndoCommand *parent)
     : QUndoCommand(parent)

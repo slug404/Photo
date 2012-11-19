@@ -457,6 +457,9 @@
    <property name="text">
     <string>生成JPG</string>
    </property>
+   <property name="shortcut">
+    <string>Ctrl+B</string>
+   </property>
   </action>
   <action name="action_Clear">
    <property name="text">

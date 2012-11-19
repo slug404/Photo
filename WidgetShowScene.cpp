@@ -5,10 +5,9 @@
 #include <QDropEvent>
 #include <QGraphicsView>
 #include <QResizeEvent>
-#include "GraphicsScene.h"
-#include "GraphicsView.h"
-#include "GraphicsItem.h"
-#include <QLabel>
+#include "GraphicFramework/GraphicsScene.h"
+#include "GraphicFramework/GraphicsView.h"
+#include "GraphicFramework/GraphicsItem.h"
 
 WidgetShowScene::WidgetShowScene(QWidget *parent) :
     QWidget(parent)

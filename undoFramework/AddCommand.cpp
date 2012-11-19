@@ -1,7 +1,7 @@
 #include "AddCommand.h"
 #include <QGraphicsScene>
-#include "GraphicsItem.h"
-#include "GraphicsScene.h"
+#include "GraphicFramework/GraphicsItem.h"
+#include "GraphicFramework/GraphicsScene.h"
 AddCommand::AddCommand(GraphicsItem *pItem,  GraphicsScene *pScene,  const QPixmap &pix, QUndoCommand *parent)
     :QUndoCommand(parent)
     , pGraphicsItem_(pItem)

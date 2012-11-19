@@ -14,29 +14,29 @@ SOURCES += main.cpp\
     ListWidgetItem_Form.cpp \
     ListWidgetItem.cpp \
     ListWidget.cpp \
-    GraphicsView.cpp \
-    GraphicsScene.cpp \
-    GraphicsItem.cpp \
     WidgetShowScene.cpp \
     ListWidgetLayout.cpp \
-    AnchorItem.cpp \
-    MoveCommand.cpp \
-    DeleteCommand.cpp \
-    AddCommand.cpp
+    GraphicFramework/GraphicsView.cpp \
+    GraphicFramework/GraphicsScene.cpp \
+    GraphicFramework/GraphicsItem.cpp \
+    GraphicFramework/AnchorItem.cpp \
+    undoFramework/MoveCommand.cpp \
+    undoFramework/DeleteCommand.cpp \
+    undoFramework/AddCommand.cpp
 
 HEADERS  += MainWindow.h \
     ListWidgetItem_Form.h \
     ListWidgetItem.h \
     ListWidget.h \
-    GraphicsView.h \
-    GraphicsScene.h \
-    GraphicsItem.h \
     WidgetShowScene.h \
     ListWidgetLayout.h \
-    AnchorItem.h \
-    MoveCommand.h \
-    DeleteCommand.h \
-    AddCommand.h
+    GraphicFramework/GraphicsView.h \
+    GraphicFramework/GraphicsScene.h \
+    GraphicFramework/GraphicsItem.h \
+    GraphicFramework/AnchorItem.h \
+    undoFramework/MoveCommand.h \
+    undoFramework/DeleteCommand.h \
+    undoFramework/AddCommand.h
 
 FORMS    += MainWindow.ui \
     ListWidgetItem_Form.ui
