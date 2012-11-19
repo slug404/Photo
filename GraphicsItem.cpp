@@ -18,6 +18,11 @@ GraphicsItem::GraphicsItem(const QRect &rect, const QPixmap &bgImage, QObject *p
     initGui();
 }
 
+void GraphicsItem::addMouseMoveEvent(QGraphicsSceneMouseEvent *event)
+{
+    this->mouseMoveEvent(event);
+}
+
 QRectF GraphicsItem::boundingRect() const
 {
     qreal penWidth = 1;
@@ -31,11 +36,10 @@ void GraphicsItem::setOldTransformation()
 
 void GraphicsItem::initSetting()
 {
-    setFlag(QGraphicsItem::ItemIsMovable, true);
     setFlag(QGraphicsItem::ItemIsFocusable, true);
     setFlag(QGraphicsItem::ItemIsSelectable, true);
-    setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);
-    //this->setAcceptHoverEvents(true);
+    setFlag(QGraphicsItem::ItemIsMovable, true);
+    this->setAcceptHoverEvents(true);
 }
 void GraphicsItem::initData()
 {
@@ -101,7 +105,7 @@ void GraphicsItem::slotResizeUp(const QPointF &currentPos, const QPointF &startP
     qDebug() << height;
 
     QTransform matrixTmp = this->transform();
-    this->setTransform(matrixTmp.scale(1, height));
+    this->setTransform(matrixTmp.scale(height, height));
 }
 
 void GraphicsItem::slotResizeDown(const QPointF &currentPos, const QPointF &startPos)
@@ -117,7 +121,7 @@ void GraphicsItem::slotResizeDown(const QPointF &currentPos, const QPointF &star
     qreal height = (newPos.y() - originPoint_.y() + bgRect_.height()/2) / bgRect_.height();
     qDebug() << height;
     QTransform matrixTmp = this->transform();
-    this->setTransform(matrixTmp.scale(1, height));
+    this->setTransform(matrixTmp.scale(height, height));
 }
 
 void GraphicsItem::slotResizeLeft(const QPointF &currentPos, const QPointF &startPos)
@@ -133,7 +137,7 @@ void GraphicsItem::slotResizeLeft(const QPointF &currentPos, const QPointF &star
     qreal width = (originPoint_.x()-newPos.x() + bgRect_.width() / 2) / bgRect_.width();
     qDebug() << width;
     QTransform matrixTmp = this->transform();
-    this->setTransform(matrixTmp.scale(width, 1));
+    this->setTransform(matrixTmp.scale(width, width));
 }
 
 void GraphicsItem::slotResizeRight(const QPointF &currentPos, const QPointF &startPos)
@@ -149,7 +153,7 @@ void GraphicsItem::slotResizeRight(const QPointF &currentPos, const QPointF &sta
     qreal width = (newPos.x() - originPoint_.x() + bgRect_.width() / 2) / bgRect_.width();
     qDebug() << width;
     QTransform matrixTmp = this->transform();
-    this->setTransform(matrixTmp.scale(width, 1));
+    this->setTransform(matrixTmp.scale(width, width));
 }
 
 void GraphicsItem::slotRotate1(const QPointF &currentPos, const QPointF &startPos)
@@ -281,10 +285,15 @@ void GraphicsItem::keyPressEvent(QKeyEvent *event)
     }
 }
 
-void GraphicsItem::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
+void GraphicsItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
-    originPoint_ = QPointF(bgRect_.width()/2, bgRect_.height()/2);
-    QGraphicsItem::mouseMoveEvent(event);
+    qDebug() << "我按下了啊";
+    if(this->data(Qt::UserRole).toString() == tr("bg"))
+    {
+        event->ignore();
+    }
+
+    QGraphicsItem::mousePressEvent(event);
 }
 
 void GraphicsItem::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
@@ -295,6 +304,7 @@ void GraphicsItem::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
     {
         p->show();
     }
+    event->accept();
 }
 
 void GraphicsItem::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)

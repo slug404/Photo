@@ -35,7 +35,7 @@ private slots:
     void on_pushButtonClear_clicked();
     void on_pushButtonBuild_clicked();
     void on_pushButtonUndo_clicked();
-
+    void on_pushButtonSend_clicked();
     //自定义槽
     void slotSetPixmap(const QString &name, const QPixmap &image);
     //插入新的图层信息
@@ -48,9 +48,8 @@ private slots:
     void slotSetFcous(const QString &name);
     //更改视图的大小
     void slotViewSizeValueChange(int value);
-
-    void on_pushButtonSend_clicked();
     void slotAdjustSize(const QSize &size);
+    void slotRemoveItem();
 
 private:
     void initSetting();

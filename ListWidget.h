@@ -17,7 +17,6 @@ public slots:
 
 protected:
     void dropEvent(QDropEvent *event);
-    //void dragMoveEvent(QDragMoveEvent *event);
     void mousePressEvent(QMouseEvent *event);
 
 private slots:

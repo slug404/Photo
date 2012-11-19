@@ -2,7 +2,7 @@
 #define LISTWIDGETITEM_FORM_H
 
 #include "ui_ListWidgetItem_Form.h"
-
+#include <QPropertyAnimation>
 class ListWidgetItem_Form : public QWidget, private Ui::ListWidgetItem_Form
 {
     Q_OBJECT
@@ -16,17 +16,6 @@ public:
 
 protected:
     void changeEvent(QEvent *e);
-
-    qreal getOpacity() const
-    {
-        return opacity_;
-    }
-
-    void setOpacity()
-    {
-
-    }
-    qreal opacity_;
 
 private:
     void initGui();

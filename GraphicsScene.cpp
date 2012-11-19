@@ -28,9 +28,6 @@ bool GraphicsScene::saveFile(const QString path)
     this->render(&painter);   //关键函数
     qDebug() << path;
 
-//    QLabel *p = new QLabel;
-//    p->setPixmap(pix);
-//    p->show();
     QPixmap tmp = image.scaled(QSize(image.width()/3, image.height()/3));
     tmp.save(path + ".jpg", "jpg");
 
@@ -63,9 +60,11 @@ void GraphicsScene::addImage()
     rect_ = QRect(0, 0, image_.width(), image_.height());
 
     GraphicsItem *p = new GraphicsItem(image_.rect(), image_);
-//    p->setFlag(QGraphicsItem::ItemIsMovable, false);
-//    p->setFlag(QGraphicsItem::ItemIsFocusable, false);
-//    p->setAcceptHoverEvents(false);
+
+    //这到底是怎么了?
+    p->setAcceptHoverEvents(false);
+    p->setFlag(QGraphicsItem::ItemIsMovable, false);
+    p->setData(Qt::UserRole, tr("bg"));
     this->addItem(p);
     this->update();
     emit signalAdjustSize(image_.size());
@@ -80,9 +79,17 @@ void GraphicsScene::dropEvent(QGraphicsSceneDragDropEvent *event)
         {
             qDebug() << "drop success";
 
+            //清理上一张的内容
+            foreach (QGraphicsItem *p, this->items())
+            {
+                GraphicsItem *pItem = static_cast<GraphicsItem *>(p);
+                this->removeItem(pItem);
+                pItem->deleteLater();
+            }
+            emit signalRemoveItem();
+
             event->setDropAction(Qt::CopyAction);
             event->accept();
-
             this->addImage();
         }
         else

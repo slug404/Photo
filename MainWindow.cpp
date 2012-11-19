@@ -50,6 +50,7 @@ void MainWindow::initData()
     connect(listWidgetTemplate, SIGNAL(signalSetPixmap(QString,QPixmap)), this, SLOT(slotSetPixmap(QString,QPixmap)));
     connect(listWidgetTemplate, SIGNAL(signalSceneAddImage()), pGraphicsScene_, SLOT(slotAddImage()));
     connect(pGraphicsScene_, SIGNAL(signalAdjustSize(QSize)), this, SLOT(slotAdjustSize(QSize)));
+    connect(pGraphicsScene_, SIGNAL(signalRemoveItem()), this, SLOT(slotRemoveItem()));
 
     //signal的参数个数和slot的不匹配是有意而为,因为不需要pos参数
     connect(pGraphicsScene_, SIGNAL(signalCreateItem(QString,QPointF)), this, SLOT(slotCreateItem(QString)));
@@ -229,16 +230,15 @@ void MainWindow::on_action_S_triggered()
 
 void MainWindow::on_action_I_triggered()
 {
-    QString filePath = QFileDialog::getOpenFileName(this, tr("打开文件"), ".", "File(*.png)");
+    QString filePath = QFileDialog::getOpenFileName(this, tr("打开文件"), ".", "File(*.jpg *.jpeg)");
     //在这里插入图片到QGraphicsItem
     QPixmap pix(filePath);
     GraphicsItem *p = new GraphicsItem(pix.rect(), pix);
+    p->setData(Qt::UserRole, tr("photo"));
+
     pGraphicsScene_->addItem(p);
     pGraphicsScene_->update();
     //插入图层信息
-    p->setFlag(QGraphicsItem::ItemIsMovable);
-    p->setFlag(QGraphicsItem::ItemIsSelectable);
-    p->setFlag(QGraphicsItem::ItemIsFocusable);
     p->setAcceptHoverEvents(true);
 
     QString name = filePath.right(filePath.size() - filePath.lastIndexOf("/") - 1);
@@ -277,7 +277,7 @@ void MainWindow::on_action_undo_triggered()
 void MainWindow::on_action_SendPhoto_triggered()
 {
     qDebug() << "选择一张图片要发送图片了";
-    QStringList filePaths = QFileDialog::getOpenFileNames(this, tr("选择文件"), tr("."), tr("文件(*.jpg *.jpeg)"));
+    QStringList filePaths = QFileDialog::getOpenFileNames(this, tr("选择文件"), tr("."), tr("文件(*.zb)"));
     foreach (QString filePath, filePaths)
     {
         qDebug() << filePath;
@@ -370,4 +370,9 @@ void MainWindow::slotAdjustSize(const QSize &size)
     double tmp = qMin(widgetShowScene->width() / tmpW, widgetShowScene->height() / tmpH);
     qDebug() << tmp <<"~~~~~~~";
     horizontalSliderMap->setValue(tmp*100);
+}
+
+void MainWindow::slotRemoveItem()
+{
+    listWidgetLayer->clear();
 }

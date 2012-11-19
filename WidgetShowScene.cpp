@@ -4,6 +4,7 @@
 #include <QDragEnterEvent>
 #include <QDropEvent>
 #include <QGraphicsView>
+#include <QResizeEvent>
 #include "GraphicsScene.h"
 #include "GraphicsView.h"
 #include "GraphicsItem.h"

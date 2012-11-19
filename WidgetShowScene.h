@@ -14,12 +14,6 @@ public:
     void setGraphicsScene(GraphicsScene *p);
     void setGraphicsView(GraphicsView *p);
 
-signals:
-
-public slots:
-
-protected:
-
 private:
     void initSetting();
 

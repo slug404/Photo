@@ -20,9 +20,6 @@ public:
 
 signals:
     void signalDragging(const QPointF & currentPos, const QPointF &startPos);
-//    void signalChangeHorizontal();
-//    void signalChangeVertical();
-//    void signalRotate();
 
 public slots:
 

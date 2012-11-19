@@ -8,6 +8,7 @@ class GraphicsItem : public QObject, public QGraphicsItem
     Q_OBJECT
 public:
     explicit GraphicsItem(const QRect &rect, const QPixmap &bgImage, QObject *parent = 0);
+    void addMouseMoveEvent(QGraphicsSceneMouseEvent *event);
     enum
     {
         Type = UserType + 1
@@ -22,6 +23,8 @@ public:
     void setOldTransformation();
     
 signals:
+    void signalHoverEnterItem(GraphicsItem *p);
+    void signalHoverLeaveItem(GraphicsItem *p);
     
 public slots:
 
@@ -29,8 +32,7 @@ protected:
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
     void keyPressEvent(QKeyEvent *event);
 
-    void mouseMoveEvent(QGraphicsSceneMouseEvent *event);
-
+    void mousePressEvent(QGraphicsSceneMouseEvent *event);
     void hoverEnterEvent(QGraphicsSceneHoverEvent *event);
     void hoverLeaveEvent(QGraphicsSceneHoverEvent *event);
 
@@ -61,6 +63,7 @@ private:
     qreal sum_;
     QTransform oldTransform_;
     QPointF originPoint_;
+    QPointF offsetPos_;
 
     //各个锚点
     AnchorItem *pAnchor_0_0_;

@@ -3,6 +3,7 @@
 
 #include <QGraphicsScene>
 class ListWidget;
+class GraphicsItem;
 
 class GraphicsScene : public QGraphicsScene
 {
@@ -23,6 +24,7 @@ public:
 signals:
     void signalCreateItem(const QString &name, const QPointF &pos);
     void signalAdjustSize(const QSize &size);
+    void signalRemoveItem();
 
 public slots:
     void slotAddImage();
@@ -31,6 +33,8 @@ protected:
     void dropEvent(QGraphicsSceneDragDropEvent *event);
     void dragMoveEvent(QGraphicsSceneDragDropEvent *event);
     void dragEnterEvent(QGraphicsSceneDragDropEvent *event);
+
+private slots:
 
 private:
     QString name_;
