@@ -9,7 +9,6 @@ QT       += core gui
 TARGET = Photo
 TEMPLATE = app
 
-
 SOURCES += main.cpp\
         MainWindow.cpp \
     ListWidgetItem_Form.cpp \
@@ -41,3 +40,7 @@ HEADERS  += MainWindow.h \
 
 FORMS    += MainWindow.ui \
     ListWidgetItem_Form.ui
+
+RESOURCES += \
+    src.qrc
+RC_FILE = AppIcon.rc

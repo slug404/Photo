@@ -12,6 +12,7 @@ int main(int argc, char *argv[])
 
     MainWindow w;
     w.setWindowTitle("个性日历  www.yin99.com");
+    w.setWindowIcon(QIcon(QString("./images/logo.png")));
     w.show();
     
     return a.exec();
