@@ -20,8 +20,6 @@ private slots:
     void on_action_O_triggered();
     void on_action_S_triggered();
     void on_action_I_triggered();
-    void on_action_Clear_triggered();
-    void on_action_undo_triggered();
     void on_action_SendPhoto_triggered();
     void on_action_forward_triggered();
     void on_action_backward_triggered();
@@ -30,12 +28,9 @@ private slots:
     void on_pushButtonAddPhoto_clicked();
     void on_pushButtonOpenTemplate_clicked();
     void on_pushButtonForward_clicked();
-    void on_pushButtonAddText_clicked();
     void on_pushButtonBackward_clicked();
-    void on_pushButtonClear_clicked();
     void on_pushButtonBuild_clicked();
     void on_pushButtonUndo_clicked();
-    void on_pushButtonSend_clicked();
     //自定义槽
     void slotSetPixmap(const QString &name, const QPixmap &image);
     //插入新的图层信息
@@ -50,6 +45,10 @@ private slots:
     void slotViewSizeValueChange(int value);
     void slotAdjustSize(const QSize &size);
     void slotRemoveItem();
+
+    void on_pushButtonRedu_clicked();
+
+    void on_pushButtonDelete_clicked();
 
 private:
     void initSetting();

@@ -6,6 +6,7 @@
 #include <QMessageBox>
 #include <QProcess>
 #include <QTransform>
+#include <QFileInfo>
 #include "ListWidget.h"
 #include "ListWidgetItem.h"
 #include "ListWidgetItem_Form.h"
@@ -233,6 +234,20 @@ void MainWindow::on_action_I_triggered()
     QString filePath = QFileDialog::getOpenFileName(this, tr("打开文件"), ".", "File(*.jpg *.jpeg)");
     //在这里插入图片到QGraphicsItem
     QPixmap pix(filePath);
+    QFileInfo fileInfor(filePath);
+    qDebug() << fileInfor.size();
+    if(pix.width() <= 200 || pix.height() <= 600)
+    {
+        QMessageBox::warning(this, tr("标题"), tr("插入的照片不能小于1200*1600像素"));
+        return;
+    }
+
+    if(fileInfor.size() <= 1024 * 1)
+    {
+        QMessageBox::warning(this, tr("标题"), tr("插入的照片不能小于1MB"));
+        return;
+    }
+
     GraphicsItem *p = new GraphicsItem(pix.rect(), pix);
     p->setData(Qt::UserRole, tr("photo"));
 
@@ -246,32 +261,11 @@ void MainWindow::on_action_I_triggered()
     this->slotCreateItem(filePath);
 }
 
-void MainWindow::on_action_Clear_triggered()
-{
-    int ok = QMessageBox::warning(this, tr("警告"),tr("真的要清理画布? 按OK确认清理,按Cancel取消操作"), QMessageBox::Ok, QMessageBox::Cancel);
-    if(ok == QMessageBox::Ok)
-    {
-        pGraphicsScene_->clear();
-    }
-}
-
 void MainWindow::slotSetPixmap(const QString &name, const QPixmap &image)
 {
     qDebug() << "!!!!!!";
     //pGraphicsScene_->addPixmap(image);
     pGraphicsScene_->setImage(name, image);
-}
-
-void MainWindow::on_action_undo_triggered()
-{
-    QHash<QString, QGraphicsItem *>::iterator iter;
-    for(iter = hash_Name_GraphicsItem_.begin(); iter != hash_Name_GraphicsItem_.end(); ++iter)
-    {
-        GraphicsItem *p = (GraphicsItem *)iter.value();
-        //p->setOldTransformation();
-        p->setRotation(0);
-        p->setScale(0.9);
-    }
 }
 
 void MainWindow::on_action_SendPhoto_triggered()
@@ -326,19 +320,9 @@ void MainWindow::on_pushButtonForward_clicked()
     this->on_action_forward_triggered();
 }
 
-void MainWindow::on_pushButtonAddText_clicked()
-{
-    qDebug() << "添加文字";
-}
-
 void MainWindow::on_pushButtonBackward_clicked()
 {
     this->on_action_backward_triggered();
-}
-
-void MainWindow::on_pushButtonClear_clicked()
-{
-    this->on_action_Clear_triggered();
 }
 
 void MainWindow::on_pushButtonBuild_clicked()
@@ -348,12 +332,6 @@ void MainWindow::on_pushButtonBuild_clicked()
 
 void MainWindow::on_pushButtonUndo_clicked()
 {
-    this->on_action_undo_triggered();
-}
-
-void MainWindow::on_pushButtonSend_clicked()
-{
-    this->on_action_SendPhoto_triggered();
 }
 
 void MainWindow::slotAdjustSize(const QSize &size)
@@ -375,4 +353,15 @@ void MainWindow::slotAdjustSize(const QSize &size)
 void MainWindow::slotRemoveItem()
 {
     listWidgetLayer->clear();
+}
+
+void MainWindow::on_pushButtonRedu_clicked()
+{
+
+}
+
+void MainWindow::on_pushButtonDelete_clicked()
+{
+    qDebug() << "删除所选图片";
+    pGraphicsScene_->deleteSelectItem();
 }

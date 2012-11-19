@@ -278,7 +278,7 @@
               </size>
              </property>
              <property name="text">
-              <string>撤 销</string>
+              <string>上一步</string>
              </property>
             </widget>
            </item>
@@ -296,7 +296,7 @@
             </widget>
            </item>
            <item row="2" column="1">
-            <widget class="QPushButton" name="pushButtonClear">
+            <widget class="QPushButton" name="pushButtonRedu">
              <property name="minimumSize">
               <size>
                <width>71</width>
@@ -304,7 +304,7 @@
               </size>
              </property>
              <property name="text">
-              <string>清 空</string>
+              <string>下一步</string>
              </property>
             </widget>
            </item>
@@ -317,12 +317,12 @@
               </size>
              </property>
              <property name="text">
-              <string>生 成</string>
+              <string>保存文件</string>
              </property>
             </widget>
            </item>
            <item row="3" column="0">
-            <widget class="QPushButton" name="pushButtonSend">
+            <widget class="QPushButton" name="pushButtonDelete">
              <property name="minimumSize">
               <size>
                <width>0</width>
@@ -330,7 +330,7 @@
               </size>
              </property>
              <property name="text">
-              <string>发 送</string>
+              <string>删除图片</string>
              </property>
             </widget>
            </item>
@@ -404,7 +404,6 @@
     <property name="title">
      <string>编辑(&amp;E)</string>
     </property>
-    <addaction name="action_Clear"/>
     <addaction name="action_forward"/>
     <addaction name="action_backward"/>
    </widget>
@@ -459,14 +458,6 @@
   <action name="action_Clear">
    <property name="text">
     <string>清理画布</string>
-   </property>
-  </action>
-  <action name="action_undo">
-   <property name="text">
-    <string>撤销</string>
-   </property>
-   <property name="shortcut">
-    <string>Ctrl+Z</string>
    </property>
   </action>
   <action name="action_SendPhoto">

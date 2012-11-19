@@ -70,6 +70,16 @@ void GraphicsScene::addImage()
     emit signalAdjustSize(image_.size());
 }
 
+void GraphicsScene::deleteSelectItem()
+{
+    foreach (QGraphicsItem *p, selectedItems())
+    {
+        GraphicsItem *pItem = static_cast<GraphicsItem *>(p);
+        this->removeItem(pItem);
+        pItem->deleteLater();
+    }
+}
+
 void GraphicsScene::dropEvent(QGraphicsSceneDragDropEvent *event)
 {
     if(event->source() == pListWidget_)

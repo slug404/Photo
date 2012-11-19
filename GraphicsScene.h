@@ -20,6 +20,7 @@ public:
         image_ = image;
     }
     void addImage();
+    void deleteSelectItem();
 
 signals:
     void signalCreateItem(const QString &name, const QPointF &pos);
