@@ -2,13 +2,11 @@
 #include <QGraphicsScene>
 #include "GraphicsItem.h"
 #include "GraphicsScene.h"
-AddCommand::AddCommand(GraphicsScene *p,  const QPixmap &pix, QUndoCommand *parent)
+AddCommand::AddCommand(GraphicsItem *pItem,  GraphicsScene *pScene,  const QPixmap &pix, QUndoCommand *parent)
     :QUndoCommand(parent)
-    , pGraphicsScene_(p)
+    , pGraphicsItem_(pItem)
+    , pGraphicsScene_(pScene)
 {
-    pGraphicsItem_ = new GraphicsItem(pix.rect(), pix);
-    pGraphicsItem_->setData(Qt::UserRole, QObject::tr("photo"));
-    pGraphicsItem_->setAcceptHoverEvents(true);
     pGraphicsScene_->addItem(pGraphicsItem_);
     initPos_ = QPointF(0, 0);
     pGraphicsScene_->update();

@@ -23,8 +23,7 @@ public:
     void setOldTransformation();
     
 signals:
-    void signalHoverEnterItem(GraphicsItem *p);
-    void signalHoverLeaveItem(GraphicsItem *p);
+    void signalNewPoint(GraphicsItem *p, const QPointF &newPos);
     
 public slots:
 
@@ -33,6 +32,7 @@ protected:
     void keyPressEvent(QKeyEvent *event);
 
     void mousePressEvent(QGraphicsSceneMouseEvent *event);
+    void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
     void hoverEnterEvent(QGraphicsSceneHoverEvent *event);
     void hoverLeaveEvent(QGraphicsSceneHoverEvent *event);
 
@@ -63,7 +63,7 @@ private:
     qreal sum_;
     QTransform oldTransform_;
     QPointF originPoint_;
-    QPointF offsetPos_;
+    QPointF oldPos_;
 
     //各个锚点
     AnchorItem *pAnchor_0_0_;

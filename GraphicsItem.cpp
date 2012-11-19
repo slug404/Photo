@@ -293,12 +293,24 @@ void GraphicsItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
         event->ignore();
     }
 
+    oldPos_ = this->pos();
+
     QGraphicsItem::mousePressEvent(event);
+}
+
+void GraphicsItem::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
+{
+    if(this->data(Qt::UserRole).toString() == tr("bg"))
+    {
+        event->ignore();
+    }
+
+    emit signalNewPoint(this, oldPos_);
+    QGraphicsItem::mouseReleaseEvent(event);
 }
 
 void GraphicsItem::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 {
-    qDebug() << "hover enter!!";
     //开始显示锚点
     foreach (QGraphicsItem *p, list_anchorItems_)
     {

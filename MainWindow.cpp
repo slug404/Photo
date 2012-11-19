@@ -146,8 +146,16 @@ void MainWindow::createUndoView()
 {
     pUndoView_ = new QUndoView(pUndoStack_);
     pUndoView_->setWindowTitle(tr("Command List"));
-    pUndoView_->show();
-    pUndoView_->setAttribute(Qt::WA_QuitOnClose, false);
+    //widgetHistory->
+    QGridLayout *layout = new QGridLayout;
+    layout->addWidget(pUndoView_);
+    layout->setSpacing(0);
+    layout->setHorizontalSpacing(0);
+    layout->setVerticalSpacing(0);
+    //这一句看来是有用的
+    layout->setMargin(0);
+    //也不是这个
+    widgetHistory->setLayout(layout);
 }
 
 void MainWindow::slotCreateItem(const QString &path)
@@ -271,13 +279,17 @@ void MainWindow::on_action_I_triggered()
         QMessageBox::warning(this, tr("标题"), tr("插入的照片不能小于1MB"));
         return;
     }
+    GraphicsItem *p = new GraphicsItem(pix.rect(), pix);
+    p->setData(Qt::UserRole, QObject::tr("photo"));
+    connect(p, SIGNAL(signalNewPoint(GraphicsItem*,QPointF)), SLOT(slotMoveItem(GraphicsItem*,QPointF)));
+    p->setAcceptHoverEvents(true);
 
-    AddCommand *pAddCommand = new AddCommand(pGraphicsScene_, pix);
+    AddCommand *pAddCommand = new AddCommand(p, pGraphicsScene_, pix);
     pUndoStack_->push(pAddCommand);
 
     //插入图层信息  这里也要放进undo framework里面去
     QString name = filePath.right(filePath.size() - filePath.lastIndexOf("/") - 1);
-    //hash_Name_GraphicsItem_[name] = p;
+    hash_Name_GraphicsItem_[name] = p;
     this->slotCreateItem(filePath);
 }
 
@@ -373,6 +385,12 @@ void MainWindow::slotAdjustSize(const QSize &size)
 void MainWindow::slotRemoveItem()
 {
     listWidgetLayer->clear();
+}
+
+void MainWindow::slotMoveItem(GraphicsItem *p, const QPointF &oldPos)
+{
+    MoveCommand *pMoveCommand = new MoveCommand(p, oldPos);
+    pUndoStack_->push(pMoveCommand);
 }
 
 void MainWindow::on_pushButtonRedu_clicked()

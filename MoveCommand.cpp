@@ -38,7 +38,7 @@ bool MoveCommand::mergeWith(const QUndoCommand *other)
     newPos_ = pItem->pos();
     setText(QObject::tr("移动 %1")
             .arg(createCommandString(pGraphicsItem_, newPos_)));
-    return true;
+    return false;   //如是true就会合并移动命令
 }
 
 QString MoveCommand::createCommandString(GraphicsItem *item, const QPointF &point)

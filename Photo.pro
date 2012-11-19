@@ -20,8 +20,6 @@ SOURCES += main.cpp\
     GraphicsItem.cpp \
     WidgetShowScene.cpp \
     ListWidgetLayout.cpp \
-    eresizefocus.cpp \
-    eobject.cpp \
     AnchorItem.cpp \
     MoveCommand.cpp \
     DeleteCommand.cpp \
@@ -36,8 +34,6 @@ HEADERS  += MainWindow.h \
     GraphicsItem.h \
     WidgetShowScene.h \
     ListWidgetLayout.h \
-    eresizefocus.h \
-    eobject.h \
     AnchorItem.h \
     MoveCommand.h \
     DeleteCommand.h \

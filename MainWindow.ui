@@ -181,7 +181,7 @@
             <height>211</height>
            </size>
           </property>
-          <widget class="QWidget" name="widgetMap" native="true">
+          <widget class="QWidget" name="widgetHistory" native="true">
            <property name="geometry">
             <rect>
              <x>-4</x>
@@ -222,7 +222,7 @@
             </size>
            </property>
            <property name="text">
-            <string>导航:</string>
+            <string>历史记录:</string>
            </property>
           </widget>
          </widget>

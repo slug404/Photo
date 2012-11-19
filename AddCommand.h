@@ -10,7 +10,7 @@ class GraphicsScene;
 class AddCommand : public QUndoCommand
 {
 public:
-    explicit AddCommand(GraphicsScene *p, const QPixmap &pix, QUndoCommand *parent = 0);
+    explicit AddCommand(GraphicsItem *pItem, GraphicsScene *pScene, const QPixmap &pix, QUndoCommand *parent = 0);
     ~AddCommand();
 
     void undo();

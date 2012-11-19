@@ -3,6 +3,7 @@
 
 #include "ui_MainWindow.h"
 class GraphicsScene;
+class GraphicsItem;
 class QGraphicsItem;
 class QUndoStack;
 class QUndoView;
@@ -51,6 +52,7 @@ private slots:
     void slotViewSizeValueChange(int value);
     void slotAdjustSize(const QSize &size);
     void slotRemoveItem();
+    void slotMoveItem(GraphicsItem *p, const QPointF &oldPos);
 
 private:
     void initSetting();

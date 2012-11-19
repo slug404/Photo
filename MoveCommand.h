@@ -16,6 +16,7 @@ public:
     void redo();
     bool mergeWith(const QUndoCommand *other);
     int id() const { return Id; }
+
 private:
     QString createCommandString(GraphicsItem *item, const QPointF &point);
 
