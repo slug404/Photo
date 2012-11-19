@@ -54,6 +54,10 @@ private slots:
     void slotRemoveItem();
     void slotMoveItem(GraphicsItem *p, const QPointF &oldPos);
 
+    void on_action_Undo_triggered();
+
+    void on_action__triggered();
+
 private:
     void initSetting();
     void initData();

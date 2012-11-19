@@ -101,11 +101,14 @@ void MainWindow::initData()
     //init undo framework
     pUndoStack_ = new QUndoStack(this);
     this->createUndoView();
-    undoAction = pUndoStack_->createUndoAction(this, tr("&Undo"));
-    undoAction->setShortcuts(QKeySequence::Undo);
+//    undoAction = pUndoStack_->createUndoAction(this, tr("&Undo"));
+//    undoAction->setShortcuts(QKeySequence::Undo);
 
-    redoAction = pUndoStack_->createRedoAction(this, tr("&Redo"));
-    redoAction->setShortcuts(QKeySequence::Redo);
+//    redoAction = pUndoStack_->createRedoAction(this, tr("&Redo"));
+//    redoAction->setShortcuts(QKeySequence::Redo);
+
+//    menuBar->addAction(undoAction);
+//    menuBar->addAction(redoAction);
 }
 
 void MainWindow::initGui()
@@ -144,6 +147,7 @@ void MainWindow::setListWidgetPointer(ListWidget *p)
 
 void MainWindow::createUndoView()
 {
+    //以后右上角做成一个地图浏览器, 然后历史记录做成一个可停靠的悬浮窗口.
     pUndoView_ = new QUndoView(pUndoStack_);
     pUndoView_->setWindowTitle(tr("Command List"));
     //widgetHistory->
@@ -364,6 +368,7 @@ void MainWindow::on_pushButtonBuild_clicked()
 
 void MainWindow::on_pushButtonUndo_clicked()
 {
+    this->on_action_Undo_triggered();
 }
 
 void MainWindow::slotAdjustSize(const QSize &size)
@@ -395,13 +400,28 @@ void MainWindow::slotMoveItem(GraphicsItem *p, const QPointF &oldPos)
 
 void MainWindow::on_pushButtonRedu_clicked()
 {
-
+    this->on_action__triggered();
 }
 
 void MainWindow::on_pushButtonDelete_clicked()
 {
     qDebug() << "删除所选图片";
+    if(pGraphicsScene_->items().isEmpty())
+    {
+        return;
+    }
+
     DeleteCommand *pDeleteCommand = new DeleteCommand(pGraphicsScene_);
     pUndoStack_->push(pDeleteCommand);
     //pGraphicsScene_->deleteSelectItem();
+}
+
+void MainWindow::on_action_Undo_triggered()
+{
+    pUndoStack_->undo();
+}
+
+void MainWindow::on_action__triggered()
+{
+    pUndoStack_->redo();
 }

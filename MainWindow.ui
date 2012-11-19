@@ -406,6 +406,9 @@
     </property>
     <addaction name="action_forward"/>
     <addaction name="action_backward"/>
+    <addaction name="separator"/>
+    <addaction name="action_Undo"/>
+    <addaction name="action_"/>
    </widget>
    <widget class="QMenu" name="menu_Tool">
     <property name="title">
@@ -476,6 +479,22 @@
   <action name="action_backward">
    <property name="text">
     <string>后移</string>
+   </property>
+  </action>
+  <action name="action_Undo">
+   <property name="text">
+    <string>撤销</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Z</string>
+   </property>
+  </action>
+  <action name="action_">
+   <property name="text">
+    <string>重做</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+R</string>
    </property>
   </action>
  </widget>
