@@ -4,6 +4,8 @@
 #include "ui_MainWindow.h"
 class GraphicsScene;
 class QGraphicsItem;
+class QUndoStack;
+class QUndoView;
 
 class MainWindow : public QMainWindow, private Ui::MainWindow
 {
@@ -30,7 +32,11 @@ private slots:
     void on_pushButtonForward_clicked();
     void on_pushButtonBackward_clicked();
     void on_pushButtonBuild_clicked();
+    void on_pushButtonDelete_clicked();
+    //撤销, 重做
     void on_pushButtonUndo_clicked();
+    void on_pushButtonRedu_clicked();
+
     //自定义槽
     void slotSetPixmap(const QString &name, const QPixmap &image);
     //插入新的图层信息
@@ -46,16 +52,13 @@ private slots:
     void slotAdjustSize(const QSize &size);
     void slotRemoveItem();
 
-    void on_pushButtonRedu_clicked();
-
-    void on_pushButtonDelete_clicked();
-
 private:
     void initSetting();
     void initData();
     void initGui();
     QStringList getComponentsName(const QString &filePath);
     void setListWidgetPointer(ListWidget *p);
+    void createUndoView();
 
 private:
     QString filePath_;
@@ -63,6 +66,12 @@ private:
     GraphicsScene *pGraphicsScene_;
     GraphicsView *pGraphicsView_;
     QHash<QString, QGraphicsItem *> hash_Name_GraphicsItem_;
+
+    //undo framework
+    QUndoStack *pUndoStack_;
+    QUndoView *pUndoView_;
+    QAction *undoAction;
+    QAction *redoAction;
 };
 
 #endif // MAINWINDOW_H

@@ -22,7 +22,10 @@ SOURCES += main.cpp\
     ListWidgetLayout.cpp \
     eresizefocus.cpp \
     eobject.cpp \
-    AnchorItem.cpp
+    AnchorItem.cpp \
+    MoveCommand.cpp \
+    DeleteCommand.cpp \
+    AddCommand.cpp
 
 HEADERS  += MainWindow.h \
     ListWidgetItem_Form.h \
@@ -35,7 +38,10 @@ HEADERS  += MainWindow.h \
     ListWidgetLayout.h \
     eresizefocus.h \
     eobject.h \
-    AnchorItem.h
+    AnchorItem.h \
+    MoveCommand.h \
+    DeleteCommand.h \
+    AddCommand.h
 
 FORMS    += MainWindow.ui \
     ListWidgetItem_Form.ui

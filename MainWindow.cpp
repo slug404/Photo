@@ -7,6 +7,10 @@
 #include <QProcess>
 #include <QTransform>
 #include <QFileInfo>
+#include <QUndoCommand>
+#include <QUndoStack>
+#include <QUndoView>
+
 #include "ListWidget.h"
 #include "ListWidgetItem.h"
 #include "ListWidgetItem_Form.h"
@@ -14,6 +18,9 @@
 #include "WidgetShowScene.h"
 #include "GraphicsItem.h"
 #include "GraphicsView.h"
+#include "MoveCommand.h"
+#include "DeleteCommand.h"
+#include "AddCommand.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent)
@@ -90,6 +97,15 @@ void MainWindow::initData()
     }
 
     this->setListWidgetPointer(listWidgetTemplate);
+
+    //init undo framework
+    pUndoStack_ = new QUndoStack(this);
+    this->createUndoView();
+    undoAction = pUndoStack_->createUndoAction(this, tr("&Undo"));
+    undoAction->setShortcuts(QKeySequence::Undo);
+
+    redoAction = pUndoStack_->createRedoAction(this, tr("&Redo"));
+    redoAction->setShortcuts(QKeySequence::Redo);
 }
 
 void MainWindow::initGui()
@@ -124,6 +140,14 @@ QStringList MainWindow::getComponentsName(const QString &filePath)
 void MainWindow::setListWidgetPointer(ListWidget *p)
 {
     pGraphicsScene_->setListWidget(p);
+}
+
+void MainWindow::createUndoView()
+{
+    pUndoView_ = new QUndoView(pUndoStack_);
+    pUndoView_->setWindowTitle(tr("Command List"));
+    pUndoView_->show();
+    pUndoView_->setAttribute(Qt::WA_QuitOnClose, false);
 }
 
 void MainWindow::slotCreateItem(const QString &path)
@@ -248,16 +272,12 @@ void MainWindow::on_action_I_triggered()
         return;
     }
 
-    GraphicsItem *p = new GraphicsItem(pix.rect(), pix);
-    p->setData(Qt::UserRole, tr("photo"));
+    AddCommand *pAddCommand = new AddCommand(pGraphicsScene_, pix);
+    pUndoStack_->push(pAddCommand);
 
-    pGraphicsScene_->addItem(p);
-    pGraphicsScene_->update();
-    //插入图层信息
-    p->setAcceptHoverEvents(true);
-
+    //插入图层信息  这里也要放进undo framework里面去
     QString name = filePath.right(filePath.size() - filePath.lastIndexOf("/") - 1);
-    hash_Name_GraphicsItem_[name] = p;
+    //hash_Name_GraphicsItem_[name] = p;
     this->slotCreateItem(filePath);
 }
 
@@ -363,5 +383,7 @@ void MainWindow::on_pushButtonRedu_clicked()
 void MainWindow::on_pushButtonDelete_clicked()
 {
     qDebug() << "删除所选图片";
-    pGraphicsScene_->deleteSelectItem();
+    DeleteCommand *pDeleteCommand = new DeleteCommand(pGraphicsScene_);
+    pUndoStack_->push(pDeleteCommand);
+    //pGraphicsScene_->deleteSelectItem();
 }
