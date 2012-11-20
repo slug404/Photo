@@ -60,7 +60,7 @@ void GraphicsScene::addImage()
     rect_ = QRect(0, 0, image_.width(), image_.height());
 
     GraphicsItem *p = new GraphicsItem(image_.rect(), image_);
-
+    this->setSceneRect(image_.rect());
     //这到底是怎么了?
     p->setAcceptHoverEvents(false);
     p->setFlag(QGraphicsItem::ItemIsMovable, false);

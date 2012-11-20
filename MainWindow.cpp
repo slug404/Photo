@@ -284,6 +284,7 @@ void MainWindow::on_action_I_triggered()
         return;
     }
     GraphicsItem *p = new GraphicsItem(pix.rect(), pix);
+    //pGraphicsScene_->setSceneRect(pix.rect());
     p->setData(Qt::UserRole, QObject::tr("photo"));
     connect(p, SIGNAL(signalNewPoint(GraphicsItem*,QPointF)), SLOT(slotMoveItem(GraphicsItem*,QPointF)));
     p->setAcceptHoverEvents(true);
