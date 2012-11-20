@@ -10,8 +10,10 @@
 #include "ListWidget.h"
 #include "GraphicsItem.h"
 
-GraphicsScene::GraphicsScene(const QRectF &sceneRect, QObject *parent) :
-    name_(""), QGraphicsScene(sceneRect, parent)
+GraphicsScene::GraphicsScene(const QRectF &sceneRect, QObject *parent)
+    :QGraphicsScene(sceneRect, parent)
+    , name_("")
+    , index_(0)
 {
 }
 
@@ -31,28 +33,9 @@ bool GraphicsScene::saveFile(const QString path)
     QPixmap tmp = image.scaled(QSize(image.width()/3, image.height()/3));
     tmp.save(path + ".jpg", "jpg");
 
-    QByteArray ba;
-    QBuffer buffer(&ba);
-    buffer.open(QIODevice::WriteOnly);
-    image.save(&buffer, "jpg");
+    (*pVectorImage_)[index_] = image.toImage();
 
-    QByteArray bytes;
-    QDataStream out(&bytes, QIODevice::WriteOnly);
-
-    out << 1 << ba << name_;
-    qDebug() << bytes.size();
-
-    QFile file(path + ".zb");
-    if(file.open(QIODevice::WriteOnly))
-    {
-        file.write(bytes);
-        file.close();
-        return true;
-    }
-    else
-    {
-        return false;
-    }
+    return true;
 }
 
 void GraphicsScene::addImage()

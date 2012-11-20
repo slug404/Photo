@@ -16,6 +16,6 @@ void GraphicsView::initSetting()
     setRenderHints(QPainter::Antialiasing | QPainter::TextAntialiasing | QPainter::SmoothPixmapTransform);
     //开启背景缓存, 传说可以提升效率
     this->setCacheMode(QGraphicsView::CacheBackground);
-    this->setMouseTracking(true);
+    //this->setMouseTracking(true);
 }
 

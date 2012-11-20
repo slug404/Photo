@@ -2,6 +2,7 @@
 #define GRAPHICSSCENE_H
 
 #include <QGraphicsScene>
+#include <QVector>
 class ListWidget;
 class GraphicsItem;
 
@@ -12,11 +13,13 @@ public:
     explicit GraphicsScene(QObject *parent);
     explicit GraphicsScene(const QRectF &sceneRect, QObject *parent = 0);
 
+    void setVectorImage(QVector<QImage> *p){ pVectorImage_ = p;}
     void setListWidget(ListWidget *p) {pListWidget_ = p;}
     bool saveFile(const QString path);
-    void setImage(const QString &name, const QPixmap &image)
+    void setImage(const QString &name, int index, const QPixmap &image)
     {
         name_ = name;
+        index_ = index;
         image_ = image;
     }
     void addImage();
@@ -43,6 +46,8 @@ private:
     ListWidget *pListWidget_;
     QGraphicsPixmapItem *pPixmapItem_;
     QPixmap image_;
+    int index_;
+    QVector<QImage> *pVectorImage_;
 };
 
 #endif // GRAPHICSSCENE_H

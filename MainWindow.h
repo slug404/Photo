@@ -14,7 +14,7 @@ class MainWindow : public QMainWindow, private Ui::MainWindow
     
 public:
     explicit MainWindow(QWidget *parent = 0);
-    
+
 protected:
     void changeEvent(QEvent *e);
 
@@ -41,7 +41,7 @@ private slots:
     void on_pushButtonRedu_clicked();
 
     //自定义槽
-    void slotSetPixmap(const QString &name, const QPixmap &image);
+    void slotSetPixmap(const QString &name, int index, const QPixmap &image);
     //插入新的图层信息
     void slotCreateItem(const QString &path);
     //根据滑块调整ListWidget里面的Item的icon的size
@@ -55,6 +55,8 @@ private slots:
     void slotAdjustSize(const QSize &size);
     void slotRemoveItem();
     void slotMoveItem(GraphicsItem *p, const QPointF &oldPos);
+
+    void on_pushButtonSaveAll_clicked();
 
 private:
     void initSetting();
@@ -76,6 +78,8 @@ private:
     QUndoView *pUndoView_;
     QAction *undoAction;
     QAction *redoAction;
+
+    QVector<QImage> vector_image_;
 };
 
 #endif // MAINWINDOW_H

@@ -55,7 +55,7 @@ void MainWindow::initData()
     pGraphicsView_ = new GraphicsView;
     widgetShowScene->setGraphicsScene(pGraphicsScene_);
     widgetShowScene->setGraphicsView(pGraphicsView_);
-    connect(listWidgetTemplate, SIGNAL(signalSetPixmap(QString,QPixmap)), this, SLOT(slotSetPixmap(QString,QPixmap)));
+    connect(listWidgetTemplate, SIGNAL(signalSetPixmap(QString,int,QPixmap)), this, SLOT(slotSetPixmap(QString,int,QPixmap)));
     connect(listWidgetTemplate, SIGNAL(signalSceneAddImage()), pGraphicsScene_, SLOT(slotAddImage()));
     connect(pGraphicsScene_, SIGNAL(signalAdjustSize(QSize)), this, SLOT(slotAdjustSize(QSize)));
     connect(pGraphicsScene_, SIGNAL(signalRemoveItem()), this, SLOT(slotRemoveItem()));
@@ -81,34 +81,31 @@ void MainWindow::initData()
     //设置焦点
     connect(listWidgetLayer, SIGNAL(signalSetFocus(QString)), this, SLOT(slotSetFcous(QString)));
 
-    QString file = "./Template/";
-    templateFilesName_ = getComponentsName(file);
-    qSort(templateFilesName_.begin(), templateFilesName_.end());
-    foreach (QString name, templateFilesName_)
-    {
-        QPixmap pix(181, 161);
-        pix.load(file+name);
+//    QString file = "./Template/";
+//    templateFilesName_ = getComponentsName(file);
+//    qSort(templateFilesName_.begin(), templateFilesName_.end());
 
-        ListWidgetItem_Form *pWidget = new ListWidgetItem_Form(name, pix, this);
-        ListWidgetItem *pItem = new ListWidgetItem(pWidget, this);
-        pItem->setSizeHint(QSize(181, 161));
-        listWidgetTemplate->addItem(pItem);
-        listWidgetTemplate->setItemWidget(pItem, pWidget);
-    }
+//    int index = 0;
+//    foreach (QString name, templateFilesName_)
+//    {
+//        QPixmap pix(181, 161);
+//        pix.load(file+name);
+
+//        ListWidgetItem_Form *pWidget = new ListWidgetItem_Form(name, pix, this);
+//        ListWidgetItem *pItem = new ListWidgetItem(pWidget, this);
+//        pItem->setData(Qt::UserRole, index++);
+//        pItem->setSizeHint(QSize(181, 161));
+//        listWidgetTemplate->addItem(pItem);
+//        listWidgetTemplate->setItemWidget(pItem, pWidget);
+//    }
 
     this->setListWidgetPointer(listWidgetTemplate);
 
     //init undo framework
     pUndoStack_ = new QUndoStack(this);
     this->createUndoView();
-//    undoAction = pUndoStack_->createUndoAction(this, tr("&Undo"));
-//    undoAction->setShortcuts(QKeySequence::Undo);
 
-//    redoAction = pUndoStack_->createRedoAction(this, tr("&Redo"));
-//    redoAction->setShortcuts(QKeySequence::Redo);
-
-//    menuBar->addAction(undoAction);
-//    menuBar->addAction(redoAction);
+    pGraphicsScene_->setVectorImage(&vector_image_);
 }
 
 void MainWindow::initGui()
@@ -234,9 +231,8 @@ void MainWindow::on_action_O_triggered()
             in >> imageData >> fileName;
             pix.loadFromData(imageData, "png");
 
-            //            QLabel *p = new QLabel;
-            //            p->setPixmap(pix);
-            //            p->show();
+            vector_image_[i] = pix.toImage();
+
             ListWidgetItem_Form *pWidget = new ListWidgetItem_Form(fileName, pix, this);
             ListWidgetItem *pItem = new ListWidgetItem(pWidget, this);
             pItem->setSizeHint(QSize(176, 151));
@@ -298,11 +294,11 @@ void MainWindow::on_action_I_triggered()
     this->slotCreateItem(filePath);
 }
 
-void MainWindow::slotSetPixmap(const QString &name, const QPixmap &image)
+void MainWindow::slotSetPixmap(const QString &name, int index, const QPixmap &image)
 {
     qDebug() << "!!!!!!";
     //pGraphicsScene_->addPixmap(image);
-    pGraphicsScene_->setImage(name, image);
+    pGraphicsScene_->setImage(name, index, image);
 }
 
 void MainWindow::on_action_SendPhoto_triggered()
@@ -426,4 +422,9 @@ void MainWindow::on_action_Undo_triggered()
 void MainWindow::on_action__triggered()
 {
     pUndoStack_->redo();
+}
+
+void MainWindow::on_pushButtonSaveAll_clicked()
+{
+
 }
