@@ -96,7 +96,8 @@ void GraphicsScene::dropEvent(QGraphicsSceneDragDropEvent *event)
                 this->removeItem(pItem);
                 pItem->deleteLater();
             }
-            emit signalRemoveItem();
+            //通知图层列表清空图层
+            emit signalRemoveItem();    
 
             event->setDropAction(Qt::CopyAction);
             event->accept();

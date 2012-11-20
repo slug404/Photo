@@ -391,6 +391,7 @@ void MainWindow::slotAdjustSize(const QSize &size)
 void MainWindow::slotRemoveItem()
 {
     listWidgetLayer->clear();
+    pUndoStack_->clear();       //果然是这个
 }
 
 void MainWindow::slotMoveItem(GraphicsItem *p, const QPointF &oldPos)

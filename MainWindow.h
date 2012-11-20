@@ -26,6 +26,8 @@ private slots:
     void on_action_SendPhoto_triggered();
     void on_action_forward_triggered();
     void on_action_backward_triggered();
+    void on_action_Undo_triggered();
+    void on_action__triggered();
 
     //pushbutton按键操作
     void on_pushButtonAddPhoto_clicked();
@@ -53,10 +55,6 @@ private slots:
     void slotAdjustSize(const QSize &size);
     void slotRemoveItem();
     void slotMoveItem(GraphicsItem *p, const QPointF &oldPos);
-
-    void on_action_Undo_triggered();
-
-    void on_action__triggered();
 
 private:
     void initSetting();
