@@ -3,13 +3,11 @@
 #include "GraphicFramework/GraphicsItem.h"
 #include "GraphicFramework/GraphicsScene.h"
 
-DeleteCommand::DeleteCommand(GraphicsScene *p, QUndoCommand *parent)
+DeleteCommand::DeleteCommand(GraphicsItem *pItem, GraphicsScene *pScene, QUndoCommand *parent)
     : QUndoCommand(parent)
-    , pGraphicsScene_(p)
+    , pGraphicsItem_(pItem)
+    , pGraphicsScene_(pScene)
 {
-    QList<QGraphicsItem *> list = pGraphicsScene_->selectedItems();
-    list.first()->setSelected(false);
-    pGraphicsItem_ = static_cast<GraphicsItem *>(list.first());
     setText(QObject::tr("删除 %1")
             .arg(createCommandString(pGraphicsItem_, pGraphicsItem_->pos())));
 }

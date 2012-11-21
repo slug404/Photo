@@ -43,6 +43,7 @@ void GraphicsItem::initSetting()
 }
 void GraphicsItem::initData()
 {
+    srcWidth_ = bgRect_.width();
     offset_ = 5;
     size_ = 4/5;
     rotate_ = 10;
@@ -106,6 +107,7 @@ void GraphicsItem::slotResizeUp(const QPointF &currentPos, const QPointF &startP
 
     QTransform matrixTmp = this->transform();
     this->setTransform(matrixTmp.scale(height, height));
+    srcWidth_ = height;
 }
 
 void GraphicsItem::slotResizeDown(const QPointF &currentPos, const QPointF &startPos)
@@ -122,6 +124,7 @@ void GraphicsItem::slotResizeDown(const QPointF &currentPos, const QPointF &star
     qDebug() << height;
     QTransform matrixTmp = this->transform();
     this->setTransform(matrixTmp.scale(height, height));
+    srcWidth_ = height;
 }
 
 void GraphicsItem::slotResizeLeft(const QPointF &currentPos, const QPointF &startPos)
@@ -138,6 +141,7 @@ void GraphicsItem::slotResizeLeft(const QPointF &currentPos, const QPointF &star
     qDebug() << width;
     QTransform matrixTmp = this->transform();
     this->setTransform(matrixTmp.scale(width, width));
+    srcWidth_ = width;
 }
 
 void GraphicsItem::slotResizeRight(const QPointF &currentPos, const QPointF &startPos)
@@ -154,6 +158,7 @@ void GraphicsItem::slotResizeRight(const QPointF &currentPos, const QPointF &sta
     qDebug() << width;
     QTransform matrixTmp = this->transform();
     this->setTransform(matrixTmp.scale(width, width));
+    srcWidth_ = width;
 }
 
 void GraphicsItem::slotRotate1(const QPointF &currentPos, const QPointF &startPos)

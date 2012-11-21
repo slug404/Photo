@@ -25,124 +25,81 @@
      <widget class="QWidget" name="widgetLeft" native="true">
       <property name="minimumSize">
        <size>
-        <width>181</width>
+        <width>141</width>
         <height>0</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>181</width>
+        <width>141</width>
         <height>16777215</height>
        </size>
       </property>
-      <widget class="QLabel" name="labelTemplate">
-       <property name="geometry">
-        <rect>
-         <x>0</x>
-         <y>0</y>
-         <width>181</width>
-         <height>21</height>
-        </rect>
+      <layout class="QGridLayout" name="gridLayout_4">
+       <property name="margin">
+        <number>0</number>
        </property>
-       <property name="minimumSize">
-        <size>
-         <width>181</width>
-         <height>21</height>
-        </size>
+       <property name="spacing">
+        <number>0</number>
        </property>
-       <property name="maximumSize">
-        <size>
-         <width>181</width>
-         <height>21</height>
-        </size>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">font: 11pt &quot;Microsoft YaHei UI&quot;;</string>
-       </property>
-       <property name="text">
-        <string>模    板</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-      <widget class="ListWidget" name="listWidgetTemplate">
-       <property name="geometry">
-        <rect>
-         <x>0</x>
-         <y>21</y>
-         <width>181</width>
-         <height>591</height>
-        </rect>
-       </property>
-       <property name="minimumSize">
-        <size>
-         <width>181</width>
-         <height>0</height>
-        </size>
-       </property>
-       <property name="maximumSize">
-        <size>
-         <width>181</width>
-         <height>16777215</height>
-        </size>
-       </property>
-      </widget>
-     </widget>
-    </item>
-    <item row="0" column="1">
-     <widget class="QWidget" name="widget" native="true">
-      <property name="minimumSize">
-       <size>
-        <width>811</width>
-        <height>31</height>
-       </size>
-      </property>
-      <property name="maximumSize">
-       <size>
-        <width>16777215</width>
-        <height>31</height>
-       </size>
-      </property>
-      <widget class="QLabel" name="label">
-       <property name="geometry">
-        <rect>
-         <x>3</x>
-         <y>1</y>
-         <width>111</width>
-         <height>31</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>调整页面大小   小</string>
-       </property>
-      </widget>
-      <widget class="QSlider" name="horizontalSliderMap">
-       <property name="geometry">
-        <rect>
-         <x>110</x>
-         <y>0</y>
-         <width>171</width>
-         <height>31</height>
-        </rect>
-       </property>
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-      </widget>
-      <widget class="QLabel" name="label_2">
-       <property name="geometry">
-        <rect>
-         <x>286</x>
-         <y>0</y>
-         <width>31</width>
-         <height>31</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>大</string>
-       </property>
-      </widget>
+       <item row="1" column="0">
+        <widget class="QLabel" name="labelTemplate">
+         <property name="minimumSize">
+          <size>
+           <width>141</width>
+           <height>21</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>141</width>
+           <height>21</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">font: 11pt &quot;Microsoft YaHei UI&quot;;</string>
+         </property>
+         <property name="text">
+          <string>模    板</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0">
+        <widget class="ListWidget" name="listWidgetTemplate">
+         <property name="minimumSize">
+          <size>
+           <width>141</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>141</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="autoScrollMargin">
+          <number>10</number>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="0">
+        <widget class="QSlider" name="horizontalSliderMap">
+         <property name="maximumSize">
+          <size>
+           <width>0</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+        </widget>
+       </item>
+      </layout>
      </widget>
     </item>
     <item row="0" column="2" rowspan="2">
@@ -421,11 +378,11 @@
       </widget>
      </widget>
     </item>
-    <item row="1" column="1">
+    <item row="0" column="1" rowspan="2">
      <widget class="WidgetShowScene" name="widgetShowScene" native="true">
       <property name="minimumSize">
        <size>
-        <width>811</width>
+        <width>859</width>
         <height>0</height>
        </size>
       </property>
@@ -455,7 +412,9 @@
     <addaction name="separator"/>
     <addaction name="action_O"/>
     <addaction name="action_I"/>
+    <addaction name="separator"/>
     <addaction name="action_S"/>
+    <addaction name="action_SaveAll"/>
    </widget>
    <widget class="QMenu" name="menu_Edit">
     <property name="title">
@@ -496,7 +455,7 @@
   </action>
   <action name="action_S">
    <property name="text">
-    <string>保存</string>
+    <string>保存当前文件</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+S</string>
@@ -555,6 +514,14 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+R</string>
+   </property>
+  </action>
+  <action name="action_SaveAll">
+   <property name="text">
+    <string>保存所有文件</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Shift+S</string>
    </property>
   </action>
  </widget>

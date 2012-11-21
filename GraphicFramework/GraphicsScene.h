@@ -3,6 +3,7 @@
 
 #include <QGraphicsScene>
 #include <QVector>
+#include <QMap>
 class ListWidget;
 class GraphicsItem;
 
@@ -15,15 +16,13 @@ public:
 
     void setVectorImage(QVector<QImage> *p){ pVectorImage_ = p;}
     void setListWidget(ListWidget *p) {pListWidget_ = p;}
-    bool saveFile(const QString path);
-    void setImage(const QString &name, int index, const QPixmap &image)
-    {
-        name_ = name;
-        index_ = index;
-        image_ = image;
-    }
+    bool saveFile();
+    void setImage(const QString &name, int index, const QPixmap &image);
     void addImage();
     void deleteSelectItem();
+    void loadTmpSaveFile(int index);
+    QMap<int, int> map_index_isSave_;
+    QList<GraphicsItem *> list_pixmap_;
 
 signals:
     void signalCreateItem(const QString &name, const QPointF &pos);
@@ -42,12 +41,12 @@ private slots:
 
 private:
     QString name_;
-    QRect rect_;
     ListWidget *pListWidget_;
     QGraphicsPixmapItem *pPixmapItem_;
     QPixmap image_;
     int index_;
     QVector<QImage> *pVectorImage_;
+    QRect rect_;
 };
 
 #endif // GRAPHICSSCENE_H

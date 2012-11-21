@@ -21,6 +21,9 @@ public:
     //返回可用矩形区域
     QRectF boundingRect() const;
     void setOldTransformation();
+    QPixmap getImage() {return bgPixmap_;}
+
+    qreal zoom;
     
 signals:
     void signalNewPoint(GraphicsItem *p, const QPointF &newPos);
@@ -64,6 +67,8 @@ private:
     QTransform oldTransform_;
     QPointF originPoint_;
     QPointF oldPos_;
+
+    qreal srcWidth_;
 
     //各个锚点
     AnchorItem *pAnchor_0_0_;

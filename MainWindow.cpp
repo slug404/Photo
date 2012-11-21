@@ -10,7 +10,7 @@
 #include <QUndoCommand>
 #include <QUndoStack>
 #include <QUndoView>
-
+#include <QBuffer>
 #include "ListWidget.h"
 #include "ListWidgetItem.h"
 #include "ListWidgetItem_Form.h"
@@ -80,24 +80,6 @@ void MainWindow::initData()
 
     //设置焦点
     connect(listWidgetLayer, SIGNAL(signalSetFocus(QString)), this, SLOT(slotSetFcous(QString)));
-
-//    QString file = "./Template/";
-//    templateFilesName_ = getComponentsName(file);
-//    qSort(templateFilesName_.begin(), templateFilesName_.end());
-
-//    int index = 0;
-//    foreach (QString name, templateFilesName_)
-//    {
-//        QPixmap pix(181, 161);
-//        pix.load(file+name);
-
-//        ListWidgetItem_Form *pWidget = new ListWidgetItem_Form(name, pix, this);
-//        ListWidgetItem *pItem = new ListWidgetItem(pWidget, this);
-//        pItem->setData(Qt::UserRole, index++);
-//        pItem->setSizeHint(QSize(181, 161));
-//        listWidgetTemplate->addItem(pItem);
-//        listWidgetTemplate->setItemWidget(pItem, pWidget);
-//    }
 
     this->setListWidgetPointer(listWidgetTemplate);
 
@@ -197,7 +179,7 @@ void MainWindow::slotViewSizeValueChange(int value)
 {
     qDebug() << "修改视图的大小了" << value;
     //setTransform(QTransform().scale(totalScaleFactor_ * currentScaleFactor, totalScaleFactor_ * currentScaleFactor));
-//    qDebug() << "view " << "width:"<< pGraphicsView_->width() << "height:" << pGraphicsView_->height();
+    //    qDebug() << "view " << "width:"<< pGraphicsView_->width() << "height:" << pGraphicsView_->height();
     qDebug() << "scene "<< "width:"<< pGraphicsScene_->width() << "height:" << pGraphicsScene_->height();
     qreal i = value / 100.0;
 
@@ -231,11 +213,12 @@ void MainWindow::on_action_O_triggered()
             in >> imageData >> fileName;
             pix.loadFromData(imageData, "png");
 
-            vector_image_[i] = pix.toImage();
+            vector_image_.append(pix.toImage());
 
             ListWidgetItem_Form *pWidget = new ListWidgetItem_Form(fileName, pix, this);
             ListWidgetItem *pItem = new ListWidgetItem(pWidget, this);
-            pItem->setSizeHint(QSize(176, 151));
+            pItem->setData(Qt::UserRole, i);
+            pItem->setSizeHint(QSize(118, 92));
             listWidgetTemplate->addItem(pItem);
             listWidgetTemplate->setItemWidget(pItem, pWidget);
         }
@@ -249,9 +232,7 @@ void MainWindow::on_action_O_triggered()
 
 void MainWindow::on_action_S_triggered()
 {
-    QString filePath = QFileDialog::getSaveFileName(this, tr("保存文件"), ".");
-
-    if(pGraphicsScene_->saveFile(filePath))
+    if(pGraphicsScene_->saveFile())
     {
         QMessageBox::information(this, trUtf8("操作成功"), trUtf8("保存成功!"));
     }
@@ -279,12 +260,12 @@ void MainWindow::on_action_I_triggered()
         QMessageBox::warning(this, tr("标题"), tr("插入的照片不能小于1MB"));
         return;
     }
+
     GraphicsItem *p = new GraphicsItem(pix.rect(), pix);
-    //pGraphicsScene_->setSceneRect(pix.rect());
     p->setData(Qt::UserRole, QObject::tr("photo"));
     connect(p, SIGNAL(signalNewPoint(GraphicsItem*,QPointF)), SLOT(slotMoveItem(GraphicsItem*,QPointF)));
-    p->setAcceptHoverEvents(true);
-
+    //p->setAcceptHoverEvents(true);
+    pGraphicsScene_->list_pixmap_.append(p);
     AddCommand *pAddCommand = new AddCommand(p, pGraphicsScene_, pix);
     pUndoStack_->push(pAddCommand);
 
@@ -378,10 +359,10 @@ void MainWindow::slotAdjustSize(const QSize &size)
     qDebug() << widgetShowScene->width() << widgetShowScene->height();
     qDebug() <<  size.width() << size.height();
     //qDebug() << w << h;
-    //pGraphicsView_->setTransform(QTransform().scale(widgetShowScene->width() / tmpW - 0.02,  widgetShowScene->height() / tmpH - 0.02));
-    double tmp = qMin(widgetShowScene->width() / tmpW, widgetShowScene->height() / tmpH);
-    qDebug() << tmp <<"~~~~~~~";
-    horizontalSliderMap->setValue(tmp*100);
+    pGraphicsView_->setTransform(QTransform().scale(widgetShowScene->width() / tmpW,  widgetShowScene->height() / tmpH));
+    //double tmp = qMin(widgetShowScene->width() / tmpW, widgetShowScene->height() / tmpH);
+    //qDebug() << tmp <<"~~~~~~~";
+    //horizontalSliderMap->setValue(tmp*100);
 }
 
 void MainWindow::slotRemoveItem()
@@ -408,8 +389,15 @@ void MainWindow::on_pushButtonDelete_clicked()
     {
         return;
     }
-
-    DeleteCommand *pDeleteCommand = new DeleteCommand(pGraphicsScene_);
+    QList<QGraphicsItem *> list = pGraphicsScene_->selectedItems();
+    if(list.isEmpty())
+    {
+        qDebug() << "没有选中的图片不能删除";
+        return;
+    }
+    list.first()->setSelected(false);
+    GraphicsItem *p= static_cast<GraphicsItem *>(list.first());
+    DeleteCommand *pDeleteCommand = new DeleteCommand(p, pGraphicsScene_);
     pUndoStack_->push(pDeleteCommand);
     //pGraphicsScene_->deleteSelectItem();
 }
@@ -426,5 +414,37 @@ void MainWindow::on_action__triggered()
 
 void MainWindow::on_pushButtonSaveAll_clicked()
 {
+    on_action_SaveAll_triggered();
+}
 
+void MainWindow::on_action_SaveAll_triggered()
+{
+    QString path = QFileDialog::getSaveFileName(this, tr("保存"), ".");
+    if(path.isEmpty())
+    {
+        return;
+    }
+    QByteArray bytes;
+    QDataStream out(&bytes, QIODevice::WriteOnly);
+    qDebug() <<vector_image_.size();;
+    out << vector_image_.size();
+    for(int i = 0; i != vector_image_.size(); ++i)
+    {
+        QByteArray ba;
+        QBuffer buffer(&ba);
+        buffer.open(QIODevice::WriteOnly);
+        vector_image_.at(i).save(&buffer, "jpg");
+        out << ba << QString::number(i);
+    }
+
+    QFile file(path + ".zb");
+    if(file.open(QFile::WriteOnly))
+    {
+        file.write(bytes);
+        QMessageBox::information(this, tr("成功!"), tr("操作成功!"));
+    }
+    else
+    {
+        QMessageBox::warning(this, tr("失败!"), tr("操作失败!"));
+    }
 }

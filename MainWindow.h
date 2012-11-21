@@ -58,6 +58,8 @@ private slots:
 
     void on_pushButtonSaveAll_clicked();
 
+    void on_action_SaveAll_triggered();
+
 private:
     void initSetting();
     void initData();

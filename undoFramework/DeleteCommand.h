@@ -9,7 +9,7 @@ class GraphicsScene;
 class DeleteCommand : public QUndoCommand
 {
 public:
-    explicit DeleteCommand(GraphicsScene *p, QUndoCommand *parent = 0);
+    explicit DeleteCommand(GraphicsItem *pItem, GraphicsScene *pScene, QUndoCommand *parent = 0);
     void undo();
     void redo();
 

@@ -31,16 +31,19 @@ void WidgetShowScene::setGraphicsView(GraphicsView *p)
     pView = p;
     pView->setScene(pGraphicsScene_);
     pView->setFrameShape(QFrame::NoFrame);
+    //pView->setFixedSize(pGraphicsScene_->rect_.size());
+    //pView->setVerticalScrollBar();
     pView->setAcceptDrops(true);
     //pView->installEventFilter(this);
 
     QGridLayout *layout = new QGridLayout;
-    layout->addWidget(pView);
     layout->setSpacing(0);
+    layout->setContentsMargins(0, 0, 0, 0);
     layout->setHorizontalSpacing(0);
     layout->setVerticalSpacing(0);
     //这一句看来是有用的
-    layout->setMargin(0);
-    //也不是这个
+    //layout->setMargin(0);
     this->setLayout(layout);
+    layout->addWidget(pView);
+    //也不是这个
 }
