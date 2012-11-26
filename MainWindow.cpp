@@ -204,6 +204,15 @@ void MainWindow::on_action_O_triggered()
         in >> size;
         qDebug() << size;
 
+        int num = listWidgetTemplate->count();
+        for(int i = 0; i != num; ++i)
+        {
+            qDebug() << i;
+            ListWidgetItem *p = static_cast<ListWidgetItem *>(listWidgetTemplate->takeItem(i));
+            if(p)
+                delete p;
+        }
+
         for(int i = 0; i != size; ++i)
         {
             //在这里循环插入item
