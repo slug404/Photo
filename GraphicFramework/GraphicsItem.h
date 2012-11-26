@@ -66,6 +66,8 @@ private:
     qreal sum_;
     QTransform oldTransform_;
     QPointF originPoint_;
+    QPointF oldOriginPoint_;
+
     QPointF oldPos_;
 
     qreal srcWidth_;

@@ -227,9 +227,10 @@ void MainWindow::on_action_O_triggered()
             ListWidgetItem_Form *pWidget = new ListWidgetItem_Form(fileName, pix, this);
             ListWidgetItem *pItem = new ListWidgetItem(pWidget, this);
             pItem->setData(Qt::UserRole, i);
-            pItem->setSizeHint(QSize(118, 92));
+            pItem->setSizeHint(QSize(134, 111));
             listWidgetTemplate->addItem(pItem);
             listWidgetTemplate->setItemWidget(pItem, pWidget);
+
         }
     }
     else
@@ -457,4 +458,9 @@ void MainWindow::on_action_SaveAll_triggered()
     {
         QMessageBox::warning(this, tr("失败!"), tr("操作失败!"));
     }
+}
+
+void MainWindow::on_pushButtonSendFile_clicked()
+{
+    on_action_SendPhoto_triggered();
 }

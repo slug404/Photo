@@ -86,6 +86,7 @@ void GraphicsItem::initData()
 
     //计算中心的位置
     originPoint_ = QPointF(bgRect_.width()/2, bgRect_.height()/2);
+    oldOriginPoint_ = originPoint_;
 }
 
 void GraphicsItem::initGui()
@@ -106,7 +107,11 @@ void GraphicsItem::slotResizeUp(const QPointF &currentPos, const QPointF &startP
     qDebug() << height;
 
     QTransform matrixTmp = this->transform();
-    this->setTransform(matrixTmp.scale(height, height));
+    if(height > 1.1)
+    {
+        height -= 0.05;
+    }
+    //this->setTransform(matrixTmp.scale(height, height));
     srcWidth_ = height;
 }
 
@@ -122,6 +127,10 @@ void GraphicsItem::slotResizeDown(const QPointF &currentPos, const QPointF &star
 
     qreal height = (newPos.y() - originPoint_.y() + bgRect_.height()/2) / bgRect_.height();
     qDebug() << height;
+    if(height > 1.1)
+    {
+        height -= 0.05;
+    }
     QTransform matrixTmp = this->transform();
     this->setTransform(matrixTmp.scale(height, height));
     srcWidth_ = height;
@@ -137,10 +146,19 @@ void GraphicsItem::slotResizeLeft(const QPointF &currentPos, const QPointF &star
         return;
     }
 
-    qreal width = (originPoint_.x()-newPos.x() + bgRect_.width() / 2) / bgRect_.width();
+    int offset = this->x() - newPos.x();
+    qreal width = (bgRect_.width() + offset) / bgRect_.width();
     qDebug() << width;
+//    if(width > 1.0)
+//    {
+//        width = 1.00391 ;
+//    }
+//    else if(width < 1.0)
+//    {
+//        width = 0.996094 ;
+//    }
     QTransform matrixTmp = this->transform();
-    this->setTransform(matrixTmp.scale(width, width));
+    //this->setTransform(matrixTmp.scale(width, width));
     srcWidth_ = width;
 }
 
@@ -153,9 +171,10 @@ void GraphicsItem::slotResizeRight(const QPointF &currentPos, const QPointF &sta
     {
         return;
     }
-
-    qreal width = (newPos.x() - originPoint_.x() + bgRect_.width() / 2) / bgRect_.width();
+    //oldOriginPoint_;
+    qreal width = (newPos.x() - oldOriginPoint_.x() - (originPoint_.x()-oldOriginPoint_.x()) + bgRect_.width() / 2) / bgRect_.width();
     qDebug() << width;
+
     QTransform matrixTmp = this->transform();
     this->setTransform(matrixTmp.scale(width, width));
     srcWidth_ = width;
