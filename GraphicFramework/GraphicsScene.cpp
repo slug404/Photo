@@ -43,15 +43,11 @@ bool GraphicsScene::saveFile()
     out << list_pixmap_.size();
     for(int i = 0; i != list_pixmap_.size(); ++i)
     {
-        QByteArray ba;
-        QBuffer buffer(&ba);
-        buffer.open(QIODevice::WriteOnly);
-        list_pixmap_.at(i)->getImage().save(&buffer, "jpg");
-        out << ba << list_pixmap_.at(i)->scenePos()
-            << list_pixmap_.at(i)->zValue() << list_pixmap_.at(i)->zoom
+        out << list_pixmap_.at(i)->getImage() << list_pixmap_.at(i)->scenePos()
+            << list_pixmap_.at(i)->zValue() << list_pixmap_.at(i)->transform()
             << list_pixmap_.at(i)->rotation();
         qDebug() << list_pixmap_.at(i)->scenePos()
-                 << list_pixmap_.at(i)->zValue() <<  list_pixmap_.at(i)->zoom
+                 << list_pixmap_.at(i)->zValue() <<  list_pixmap_.at(i)->transform()
                  << list_pixmap_.at(i)->rotation();
     }
 
@@ -78,17 +74,23 @@ void GraphicsScene::loadTmpSaveFile(int index)
         for(int i = 0; i != num; ++i)
         {
             QPointF pos;
-            int zValue;
+            qreal zValue;
             qreal ss;
             qreal ro;
-            QByteArray ba;
-            in >> ba >> pos >> zValue >> ss >> ro;
-            qDebug() << pos << zValue << ss << ro;
             QPixmap pix;
-            pix.loadFromData(ba, "jpg");
-            QLabel *p = new QLabel;
-            p->setPixmap(pix);
-            p->show();
+            QTransform matx;
+            in >> pix >> pos >> zValue >> matx >> ro;
+            qDebug() << pos << zValue << matx << ro;
+
+            GraphicsItem *p = new GraphicsItem(pix.rect(), pix);
+            p->setData(Qt::UserRole, QObject::tr("photo"));
+            this->list_pixmap_.append(p);
+            p->setPos(pos);
+            p->setZValue(zValue);
+            p->setTransform(matx);
+            p->setRotation(ro);
+            this->addItem(p);
+            this->update();
         }
     }
     else
@@ -107,7 +109,18 @@ void GraphicsScene::setImage(const QString &name, int index, const QPixmap &imag
 
 void GraphicsScene::addImage()
 {
+    //清理上一张的内容
+    foreach (QGraphicsItem *p, this->items())
+    {
+        //GraphicsItem *pItem = static_cast<GraphicsItem *>(p);
+        this->removeItem(p);
+        //pItem->deleteLater();
+    }
+    //qDeleteAll(this->items());
+    //通知图层列表清空图层
+    emit signalRemoveItem();
     list_pixmap_.clear();
+
     rect_ = QRect(0, 0, image_.width(), image_.height());
     //this->setSceneRect(image_.rect());
     QGraphicsPixmapItem *p = this->addPixmap(image_);
@@ -145,17 +158,6 @@ void GraphicsScene::dropEvent(QGraphicsSceneDragDropEvent *event)
         if(event->mimeData()->hasFormat("myimage/png"))
         {
             qDebug() << "drop success";
-
-            //清理上一张的内容
-            foreach (QGraphicsItem *p, this->items())
-            {
-                //GraphicsItem *pItem = static_cast<GraphicsItem *>(p);
-                this->removeItem(p);
-                //pItem->deleteLater();
-            }
-            //qDeleteAll(this->items());
-            //通知图层列表清空图层
-            emit signalRemoveItem();
 
             event->setDropAction(Qt::CopyAction);
             event->accept();
@@ -202,14 +204,5 @@ void GraphicsScene::dragEnterEvent(QGraphicsSceneDragDropEvent *event)
 
 void GraphicsScene::slotAddImage()
 {
-    foreach (QGraphicsItem *p, this->items())
-    {
-        //GraphicsItem *pItem = static_cast<GraphicsItem *>(p);
-        this->removeItem(p);
-        //pItem->deleteLater();
-    }
-    //qDeleteAll(this->items());
-    //通知图层列表清空图层
-    emit signalRemoveItem();
     this->addImage();
 }

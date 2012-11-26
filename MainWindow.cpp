@@ -263,9 +263,10 @@ void MainWindow::on_action_I_triggered()
 
     GraphicsItem *p = new GraphicsItem(pix.rect(), pix);
     p->setData(Qt::UserRole, QObject::tr("photo"));
-    connect(p, SIGNAL(signalNewPoint(GraphicsItem*,QPointF)), SLOT(slotMoveItem(GraphicsItem*,QPointF)));
-    //p->setAcceptHoverEvents(true);
     pGraphicsScene_->list_pixmap_.append(p);
+    connect(p, SIGNAL(signalNewPoint(GraphicsItem*,QPointF)), this, SLOT(slotMoveItem(GraphicsItem*,QPointF)));
+    //p->setAcceptHoverEvents(true);
+
     AddCommand *pAddCommand = new AddCommand(p, pGraphicsScene_, pix);
     pUndoStack_->push(pAddCommand);
 
