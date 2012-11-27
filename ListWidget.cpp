@@ -52,7 +52,7 @@ void ListWidget::mousePressEvent(QMouseEvent *event)
     qDebug() << pItem->pWidget_->getName();
     QByteArray dragData;
     QDataStream out(&dragData, QIODevice::WriteOnly);
-    QPixmap pix = pItem->pWidget_->getImage().scaled(QSize(181, 121));
+    QPixmap pix = pItem->pWidget_->getBgImage();
     //    out << pix;
 
     //将数据放入QMimeData中
@@ -70,7 +70,7 @@ void ListWidget::mousePressEvent(QMouseEvent *event)
     painter.begin(&tmp);
     painter.fillRect(pix.rect(), QColor(127, 127, 127, 187));
     painter.end();
-    pItem->pWidget_->setImage(tmp);
+    pItem->pWidget_->setPixmap(tmp);
 
     //执行拖放
     if(pDrag->exec(Qt::CopyAction | Qt::MoveAction, Qt::CopyAction))
@@ -97,9 +97,16 @@ void ListWidget::slotSceneAddImage(QListWidgetItem *p)
     emit signalSceneAddImage();
 }
 
-void ListWidget::slotChangeBg(int index, const QPixmap &pix)
+void ListWidget::slotChangeBgBySave(int index, const QPixmap &pix)
 {
-    qDebug() <<"更改背景" << index;
+    qDebug() <<"保存的时候更改背景" << index;
     ListWidgetItem *p = static_cast<ListWidgetItem *>(this->item(index));
-    p->pWidget_->setImage(p->pWidget_->getImage().scaled(QSize(181, 121)));
+    p->pWidget_->setImage(pix);
+}
+
+void ListWidget::slotChangeBgByReset(int index)
+{
+    qDebug() <<"从新拖拽的时候更改背景" << index;
+    ListWidgetItem *p = static_cast<ListWidgetItem *>(this->item(index));
+    p->pWidget_->setImage(p->pWidget_->getBgImage());
 }

@@ -14,7 +14,8 @@ signals:
     void signalSceneAddImage();
 
 public slots:
-    void slotChangeBg(int index, const QPixmap &pix);
+    void slotChangeBgBySave(int index, const QPixmap &pix);
+    void slotChangeBgByReset(int index);
 
 protected:
     void dropEvent(QDropEvent *event);

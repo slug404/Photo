@@ -36,6 +36,7 @@ bool GraphicsScene::saveFile()
 
     QPixmap tmp = image.scaled(QSize(image.width()/3, image.height()/3));
     tmp.save(tr("./") +QString::number(index_) + ".jpg", "jpg");
+    emit signalChangeBgBySave(index_, image.scaled(QSize(181, 121)));
 
     (*pVectorImage_)[index_] = image.toImage();
 
@@ -108,12 +109,13 @@ void GraphicsScene::setImage(const QString &name, int index, const QPixmap &imag
     name_ = name;
     if(editCount++)
     {
-        emit signalChangeBg(index_, image.scaled(QSize(150, 101)));
+        emit signalChangeBgByReset(index_);
     }
     else
     {
-        emit signalChangeBg(index, image.scaled(QSize(150, 101)));
+        emit signalChangeBgByReset(index);
     }
+
     index_ = index;
     image_ = image;
     qDebug() <<index_;
@@ -133,6 +135,7 @@ void GraphicsScene::addImage()
     emit signalRemoveItem();
     list_pixmap_.clear();
 
+    //从新加入
     rect_ = QRect(0, 0, image_.width(), image_.height());
     //this->setSceneRect(image_.rect());
     QGraphicsPixmapItem *p = this->addPixmap(image_);

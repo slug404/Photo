@@ -164,8 +164,8 @@ void WidgetMain::initData()
     connect(listWidgetTemplate, SIGNAL(signalSceneAddImage()), pGraphicsScene_, SLOT(slotAddImage()));
     connect(pGraphicsScene_, SIGNAL(signalAdjustSize(QSize)), this, SLOT(slotAdjustSize(QSize)));
     connect(pGraphicsScene_, SIGNAL(signalRemoveItem()), this, SLOT(slotRemoveItem()));
-    connect(pGraphicsScene_, SIGNAL(signalChangeBg(int,QPixmap)), listWidgetTemplate, SLOT(slotChangeBg(int,QPixmap)));
-
+    connect(pGraphicsScene_, SIGNAL(signalChangeBgBySave(int,QPixmap)), listWidgetTemplate, SLOT(slotChangeBgBySave(int,QPixmap)));
+    connect(pGraphicsScene_, SIGNAL(signalChangeBgByReset(int)), listWidgetTemplate, SLOT(slotChangeBgByReset(int)));
     //signal的参数个数和slot的不匹配是有意而为,因为不需要pos参数
     connect(pGraphicsScene_, SIGNAL(signalCreateItem(QString,QPointF)), this, SLOT(slotCreateItem(QString)));
     //listWidgetLayer->setIconSize(QSize(64, 64));

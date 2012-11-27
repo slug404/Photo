@@ -28,7 +28,8 @@ signals:
     void signalCreateItem(const QString &name, const QPointF &pos);
     void signalAdjustSize(const QSize &size);
     void signalRemoveItem();
-    void signalChangeBg(int index, const QPixmap &pix);
+    void signalChangeBgBySave(int index, const QPixmap &pix);
+    void signalChangeBgByReset(int index);
 
 public slots:
     void slotAddImage();
