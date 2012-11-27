@@ -139,7 +139,6 @@ void WidgetMain::on_pushButtonOpenTemplate_clicked()
             pItem->setSizeHint(QSize(200, 121));
             listWidgetTemplate->addItem(pItem);
             listWidgetTemplate->setItemWidget(pItem, pWidget);
-
         }
     }
     else
@@ -147,6 +146,7 @@ void WidgetMain::on_pushButtonOpenTemplate_clicked()
         //提示模板读取失败
         QMessageBox::warning(this, tr("警告"), tr("操作失败!"));
     }
+    file.close();
 }
 
 void WidgetMain::initSetting()
@@ -404,8 +404,8 @@ void WidgetMain::on_pushButtonMinSize_clicked()
 
 void WidgetMain::on_pushButtonClose_clicked()
 {
-    pUndoView_->deleteLater();
-    pUndoStack_->deleteLater();
+    pUndoStack_->clear();
+    pUndoView_->close();
     this->close();
 }
 
