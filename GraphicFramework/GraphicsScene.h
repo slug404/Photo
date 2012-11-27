@@ -28,6 +28,7 @@ signals:
     void signalCreateItem(const QString &name, const QPointF &pos);
     void signalAdjustSize(const QSize &size);
     void signalRemoveItem();
+    void signalChangeBg(int index, const QPixmap &pix);
 
 public slots:
     void slotAddImage();
@@ -47,6 +48,8 @@ private:
     int index_;
     QVector<QImage> *pVectorImage_;
     QRect rect_;
+
+    int editCount;
 };
 
 #endif // GRAPHICSSCENE_H

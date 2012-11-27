@@ -14,11 +14,15 @@ GraphicsScene::GraphicsScene(const QRectF &sceneRect, QObject *parent)
     :QGraphicsScene(sceneRect, parent)
     , name_("")
     , index_(0)
+    , editCount(0)
 {
 }
 
 GraphicsScene::GraphicsScene(QObject *parent):
     QGraphicsScene(parent)
+  , name_("")
+  , index_(0)
+  , editCount(0)
 {
 }
 
@@ -102,6 +106,14 @@ void GraphicsScene::loadTmpSaveFile(int index)
 void GraphicsScene::setImage(const QString &name, int index, const QPixmap &image)
 {
     name_ = name;
+    if(editCount++)
+    {
+        emit signalChangeBg(index_, image.scaled(QSize(150, 101)));
+    }
+    else
+    {
+        emit signalChangeBg(index, image.scaled(QSize(150, 101)));
+    }
     index_ = index;
     image_ = image;
     qDebug() <<index_;

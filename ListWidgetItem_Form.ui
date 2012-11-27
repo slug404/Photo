@@ -6,20 +6,23 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>140</width>
-    <height>111</height>
+    <width>181</width>
+    <height>141</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Form</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true"/>
   </property>
   <widget class="QLabel" name="labelImage">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>140</width>
-     <height>91</height>
+     <width>181</width>
+     <height>121</height>
     </rect>
    </property>
    <property name="text">
@@ -30,8 +33,8 @@
    <property name="geometry">
     <rect>
      <x>0</x>
-     <y>90</y>
-     <width>140</width>
+     <y>120</y>
+     <width>181</width>
      <height>21</height>
     </rect>
    </property>

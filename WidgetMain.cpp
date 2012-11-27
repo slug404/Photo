@@ -120,6 +120,7 @@ void WidgetMain::on_pushButtonOpenTemplate_clicked()
                 delete p;
         }
 
+        //listWidgetTemplate->setLayoutMode();
         for(int i = 0; i != size; ++i)
         {
             //在这里循环插入item
@@ -134,7 +135,7 @@ void WidgetMain::on_pushButtonOpenTemplate_clicked()
             ListWidgetItem_Form *pWidget = new ListWidgetItem_Form(fileName, pix, this);
             ListWidgetItem *pItem = new ListWidgetItem(pWidget, this);
             pItem->setData(Qt::UserRole, i);
-            pItem->setSizeHint(QSize(134, 111));
+            pItem->setSizeHint(QSize(200, 121));
             listWidgetTemplate->addItem(pItem);
             listWidgetTemplate->setItemWidget(pItem, pWidget);
 
@@ -163,6 +164,7 @@ void WidgetMain::initData()
     connect(listWidgetTemplate, SIGNAL(signalSceneAddImage()), pGraphicsScene_, SLOT(slotAddImage()));
     connect(pGraphicsScene_, SIGNAL(signalAdjustSize(QSize)), this, SLOT(slotAdjustSize(QSize)));
     connect(pGraphicsScene_, SIGNAL(signalRemoveItem()), this, SLOT(slotRemoveItem()));
+    connect(pGraphicsScene_, SIGNAL(signalChangeBg(int,QPixmap)), listWidgetTemplate, SLOT(slotChangeBg(int,QPixmap)));
 
     //signal的参数个数和slot的不匹配是有意而为,因为不需要pos参数
     connect(pGraphicsScene_, SIGNAL(signalCreateItem(QString,QPointF)), this, SLOT(slotCreateItem(QString)));
