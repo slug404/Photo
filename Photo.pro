@@ -22,7 +22,8 @@ SOURCES += main.cpp\
     GraphicFramework/AnchorItem.cpp \
     undoFramework/MoveCommand.cpp \
     undoFramework/DeleteCommand.cpp \
-    undoFramework/AddCommand.cpp
+    undoFramework/AddCommand.cpp \
+    WidgetMain.cpp
 
 HEADERS  += MainWindow.h \
     ListWidgetItem_Form.h \
@@ -36,10 +37,12 @@ HEADERS  += MainWindow.h \
     GraphicFramework/AnchorItem.h \
     undoFramework/MoveCommand.h \
     undoFramework/DeleteCommand.h \
-    undoFramework/AddCommand.h
+    undoFramework/AddCommand.h \
+    WidgetMain.h
 
 FORMS    += MainWindow.ui \
-    ListWidgetItem_Form.ui
+    ListWidgetItem_Form.ui \
+    WidgetMain.ui
 
 RESOURCES += \
     src.qrc

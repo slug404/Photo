@@ -1,0 +1,512 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>WidgetMain</class>
+ <widget class="QWidget" name="WidgetMain">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1283</width>
+    <height>642</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <property name="margin">
+    <number>0</number>
+   </property>
+   <property name="spacing">
+    <number>0</number>
+   </property>
+   <item row="0" column="0" colspan="3">
+    <widget class="QWidget" name="widgetTitle" native="true">
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>31</height>
+      </size>
+     </property>
+     <widget class="QPushButton" name="pushButton">
+      <property name="geometry">
+       <rect>
+        <x>1255</x>
+        <y>0</y>
+        <width>25</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton
+{
+	border-image: url(:/images/close.png);
+}
+QPushButton:hover
+{
+	border-image: url(:/images/close_OVER.png);
+}
+QPushButton:pressed
+{
+	border-image: url(:/images/close.png);
+}</string>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_2">
+      <property name="geometry">
+       <rect>
+        <x>1230</x>
+        <y>0</y>
+        <width>25</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton
+{
+	border-image: url(:/images/minimize.png);
+}
+QPushButton:hover
+{
+	border-image: url(:/images/minimize_OVER.png);
+}
+QPushButton:pressed
+{
+	border-image: url(:/images/minimize.png);
+}</string>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+    </widget>
+   </item>
+   <item row="1" column="0">
+    <widget class="QWidget" name="widgetLeft" native="true">
+     <property name="minimumSize">
+      <size>
+       <width>201</width>
+       <height>0</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>201</width>
+       <height>16777215</height>
+      </size>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_3">
+      <property name="margin">
+       <number>0</number>
+      </property>
+      <property name="spacing">
+       <number>0</number>
+      </property>
+      <item row="0" column="0">
+       <widget class="QLabel" name="labelTemplate">
+        <property name="minimumSize">
+         <size>
+          <width>201</width>
+          <height>21</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>201</width>
+          <height>21</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">font: 11pt &quot;Microsoft YaHei UI&quot;;</string>
+        </property>
+        <property name="text">
+         <string>模    板</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="ListWidget" name="listWidgetTemplate">
+        <property name="minimumSize">
+         <size>
+          <width>201</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>201</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <property name="autoScrollMargin">
+         <number>10</number>
+        </property>
+       </widget>
+      </item>
+     </layout>
+     <widget class="QSlider" name="horizontalSliderMap">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>0</width>
+        <height>0</height>
+       </rect>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>0</width>
+        <height>0</height>
+       </size>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+     </widget>
+    </widget>
+   </item>
+   <item row="1" column="1">
+    <widget class="WidgetShowScene" name="widgetShowScene" native="true">
+     <property name="minimumSize">
+      <size>
+       <width>881</width>
+       <height>611</height>
+      </size>
+     </property>
+     <property name="acceptDrops">
+      <bool>true</bool>
+     </property>
+     <property name="styleSheet">
+      <string notr="true"/>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="2">
+    <widget class="QTabWidget" name="tabWidget">
+     <property name="minimumSize">
+      <size>
+       <width>201</width>
+       <height>0</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>201</width>
+       <height>16777215</height>
+      </size>
+     </property>
+     <property name="currentIndex">
+      <number>0</number>
+     </property>
+     <widget class="QWidget" name="tab">
+      <attribute name="title">
+       <string>常规</string>
+      </attribute>
+      <widget class="QWidget" name="widgetNavigation" native="true">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>200</width>
+         <height>201</height>
+        </rect>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>200</width>
+         <height>201</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>200</width>
+         <height>201</height>
+        </size>
+       </property>
+       <widget class="QWidget" name="widgetHistory" native="true">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>20</y>
+          <width>200</width>
+          <height>181</height>
+         </rect>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>200</width>
+          <height>141</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>300</width>
+          <height>200</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color: rgb(255, 255, 255);</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="labelNavigation">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>0</y>
+          <width>121</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>31</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>历史记录:</string>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QWidget" name="widgetOperator" native="true">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>200</y>
+         <width>200</width>
+         <height>391</height>
+        </rect>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>200</width>
+         <height>391</height>
+        </size>
+       </property>
+       <layout class="QGridLayout" name="gridLayout_2">
+        <item row="0" column="0">
+         <widget class="QPushButton" name="pushButtonOpenTemplate">
+          <property name="minimumSize">
+           <size>
+            <width>71</width>
+            <height>61</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>打开模板</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="1">
+         <widget class="QPushButton" name="pushButtonAddPhoto">
+          <property name="minimumSize">
+           <size>
+            <width>71</width>
+            <height>61</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>添加照片</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <widget class="QPushButton" name="pushButtonForward">
+          <property name="minimumSize">
+           <size>
+            <width>71</width>
+            <height>61</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>向 前</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1">
+         <widget class="QPushButton" name="pushButtonUndo">
+          <property name="minimumSize">
+           <size>
+            <width>71</width>
+            <height>61</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>上一步</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="0">
+         <widget class="QPushButton" name="pushButtonBackward">
+          <property name="minimumSize">
+           <size>
+            <width>71</width>
+            <height>61</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>向 后</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="1">
+         <widget class="QPushButton" name="pushButtonRedu">
+          <property name="minimumSize">
+           <size>
+            <width>71</width>
+            <height>61</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>下一步</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="0">
+         <widget class="QPushButton" name="pushButtonDelete">
+          <property name="minimumSize">
+           <size>
+            <width>71</width>
+            <height>61</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>删除图片</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="1">
+         <widget class="QPushButton" name="pushButtonSendFile">
+          <property name="minimumSize">
+           <size>
+            <width>71</width>
+            <height>61</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>发送文件</string>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="0">
+         <widget class="QPushButton" name="pushButtonBuild">
+          <property name="minimumSize">
+           <size>
+            <width>71</width>
+            <height>61</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>保存当前文件</string>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="1">
+         <widget class="QPushButton" name="pushButtonSaveAll">
+          <property name="minimumSize">
+           <size>
+            <width>71</width>
+            <height>61</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>导出印刷</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+     <widget class="QWidget" name="tab_2">
+      <attribute name="title">
+       <string>图层</string>
+      </attribute>
+      <widget class="QWidget" name="widgetNavigation_2" native="true">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>200</width>
+         <height>161</height>
+        </rect>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>200</width>
+         <height>161</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>300</width>
+         <height>300</height>
+        </size>
+       </property>
+      </widget>
+      <widget class="ListWidgetLayout" name="listWidgetLayer">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>161</y>
+         <width>200</width>
+         <height>411</height>
+        </rect>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>200</width>
+         <height>0</height>
+        </size>
+       </property>
+      </widget>
+      <widget class="QSlider" name="horizontalSlider">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>570</y>
+         <width>200</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>31</height>
+        </size>
+       </property>
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+      </widget>
+     </widget>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>ListWidget</class>
+   <extends>QListWidget</extends>
+   <header>ListWidget.h</header>
+  </customwidget>
+  <customwidget>
+   <class>WidgetShowScene</class>
+   <extends>QWidget</extends>
+   <header>widgetshowscene.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>ListWidgetLayout</class>
+   <extends>QListWidget</extends>
+   <header>ListWidgetLayout.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>
