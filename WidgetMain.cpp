@@ -170,9 +170,9 @@ void WidgetMain::initData()
 
     //滑动条大小初始化
     //图层的
-    horizontalSlider->setMinimum(24);        //最小值24*24 像素
-    horizontalSlider->setMaximum(121);     //最大值121*121 像素
-    connect(horizontalSlider, SIGNAL(valueChanged(int)), this, SLOT(slotItemSizeValueChanged(int)));
+    //horizontalSlider->setMinimum(24);        //最小值24*24 像素
+    //horizontalSlider->setMaximum(121);     //最大值121*121 像素
+    //connect(horizontalSlider, SIGNAL(valueChanged(int)), this, SLOT(slotItemSizeValueChanged(int)));
     //编辑区缩放的
     horizontalSliderMap->setMinimum(1);         //最小值1/100
     horizontalSliderMap->setMaximum(100);   //最大值原始大小 100/100
@@ -180,10 +180,10 @@ void WidgetMain::initData()
     connect(horizontalSliderMap, SIGNAL(valueChanged(int)), this, SLOT(slotViewSizeValueChange(int)));
 
     //连接重新设置Z轴循序的
-    connect(listWidgetLayer, SIGNAL(signalResetZvalue(QString,int)), this, SLOT(slotResetZvalue(QString,int)));
+    //connect(listWidgetLayer, SIGNAL(signalResetZvalue(QString,int)), this, SLOT(slotResetZvalue(QString,int)));
 
     //设置焦点
-    connect(listWidgetLayer, SIGNAL(signalSetFocus(QString)), this, SLOT(slotSetFcous(QString)));
+    //connect(listWidgetLayer, SIGNAL(signalSetFocus(QString)), this, SLOT(slotSetFcous(QString)));
 
     this->setListWidgetPointer(listWidgetTemplate);
 
@@ -240,6 +240,7 @@ void WidgetMain::createUndoView()
     layout->setHorizontalSpacing(0);
     layout->setVerticalSpacing(0);
     //这一句看来是有用的
+    layout->setContentsMargins(0, 0, 0, 0);
     layout->setMargin(0);
     //也不是这个
     widgetHistory->setLayout(layout);
@@ -392,9 +393,9 @@ void WidgetMain::on_pushButtonSaveAll_clicked()
 
 void WidgetMain::on_pushButtonMinSize_clicked()
 {
-    if(windowState() != Qt::WindowFullScreen)
+    if(windowState() != Qt::WindowMinimized)
     {
-        this->setWindowState(Qt::WindowFullScreen);
+        this->setWindowState(Qt::WindowMinimized);
     }
 }
 
@@ -417,13 +418,13 @@ void WidgetMain::slotCreateItem(const QString &path)
     QListWidgetItem *pItem = new QListWidgetItem(fileName);
 
     pItem->setIcon(QPixmap(path));
-    listWidgetLayer->insertItem(0, pItem);
+    //listWidgetLayer->insertItem(0, pItem);
 }
 
 void WidgetMain::slotItemSizeValueChanged(int value)
 {
     qDebug() << value;
-    listWidgetLayer->setIconSize(QSize(value, value));
+    //listWidgetLayer->setIconSize(QSize(value, value));
 }
 
 void WidgetMain::slotResetZvalue(const QString &name, int value)
@@ -473,7 +474,7 @@ void WidgetMain::slotAdjustSize(const QSize &size)
 
 void WidgetMain::slotRemoveItem()
 {
-    listWidgetLayer->clear();
+    //listWidgetLayer->clear();
     pUndoStack_->clear();       //果然是这个
 }
 

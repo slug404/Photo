@@ -13,6 +13,9 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: rgb(52, 52, 52);</string>
+  </property>
   <layout class="QGridLayout" name="gridLayout">
    <property name="margin">
     <number>0</number>
@@ -20,7 +23,7 @@
    <property name="spacing">
     <number>0</number>
    </property>
-   <item row="0" column="0" colspan="3">
+   <item row="0" column="1" colspan="2">
     <widget class="QWidget" name="widgetTitle" native="true">
      <property name="minimumSize">
       <size>
@@ -28,10 +31,47 @@
        <height>31</height>
       </size>
      </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: rgb(51, 51, 51);
+</string>
+     </property>
+     <widget class="QLabel" name="labelLogo">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>31</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QLabel" name="labelName">
+      <property name="geometry">
+       <rect>
+        <x>500</x>
+        <y>0</y>
+        <width>91</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(255, 255, 255);
+font: 16pt &quot;Microsoft YaHei UI&quot;;</string>
+      </property>
+      <property name="text">
+       <string>个性日历</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
      <widget class="QPushButton" name="pushButtonClose">
       <property name="geometry">
        <rect>
-        <x>1255</x>
+        <x>1057</x>
         <y>0</y>
         <width>25</width>
         <height>25</height>
@@ -58,7 +98,7 @@ QPushButton:pressed
      <widget class="QPushButton" name="pushButtonMinSize">
       <property name="geometry">
        <rect>
-        <x>1230</x>
+        <x>1031</x>
         <y>0</y>
         <width>25</width>
         <height>25</height>
@@ -82,26 +122,13 @@ QPushButton:pressed
        <string/>
       </property>
      </widget>
-     <widget class="QLabel" name="labelLogo">
-      <property name="geometry">
-       <rect>
-        <x>0</x>
-        <y>0</y>
-        <width>31</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string/>
-      </property>
-     </widget>
     </widget>
    </item>
-   <item row="1" column="0">
+   <item row="0" column="0" rowspan="2">
     <widget class="QWidget" name="widgetLeft" native="true">
      <property name="minimumSize">
       <size>
-       <width>201</width>
+       <width>200</width>
        <height>0</height>
       </size>
      </property>
@@ -110,6 +137,12 @@ QPushButton:pressed
        <width>201</width>
        <height>16777215</height>
       </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QWidget#widgetLeft
+{
+	background-color: rgb(72, 72, 72);
+}</string>
      </property>
      <layout class="QGridLayout" name="gridLayout_3">
       <property name="margin">
@@ -123,17 +156,19 @@ QPushButton:pressed
         <property name="minimumSize">
          <size>
           <width>201</width>
-          <height>21</height>
+          <height>31</height>
          </size>
         </property>
         <property name="maximumSize">
          <size>
           <width>201</width>
-          <height>21</height>
+          <height>31</height>
          </size>
         </property>
         <property name="styleSheet">
-         <string notr="true">font: 11pt &quot;Microsoft YaHei UI&quot;;</string>
+         <string notr="true">color: rgb(255, 255, 255);
+font: 17pt &quot;Microsoft YaHei UI&quot;;
+background-color: rgb(72, 72, 72);</string>
         </property>
         <property name="text">
          <string>模    板</string>
@@ -156,6 +191,15 @@ QPushButton:pressed
           <width>201</width>
           <height>16777215</height>
          </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QListWidget#listWidgetTemplate
+{
+	background-color: rgb(72, 72, 72);
+}</string>
+        </property>
+        <property name="frameShape">
+         <enum>QFrame::NoFrame</enum>
         </property>
         <property name="autoScrollMargin">
          <number>10</number>
@@ -201,290 +245,73 @@ QPushButton:pressed
     </widget>
    </item>
    <item row="1" column="2">
-    <widget class="QTabWidget" name="tabWidget">
+    <widget class="QWidget" name="widgetRight" native="true">
      <property name="minimumSize">
       <size>
        <width>201</width>
        <height>0</height>
       </size>
      </property>
-     <property name="maximumSize">
-      <size>
-       <width>201</width>
-       <height>16777215</height>
-      </size>
+     <property name="styleSheet">
+      <string notr="true">background-color: rgb(72, 72, 72);
+color: rgb(255, 255, 255);
+font: 12pt &quot;Microsoft YaHei UI&quot;;</string>
      </property>
-     <property name="currentIndex">
-      <number>0</number>
-     </property>
-     <widget class="QWidget" name="tab">
-      <attribute name="title">
-       <string>常规</string>
-      </attribute>
-      <widget class="QWidget" name="widgetNavigation" native="true">
+     <widget class="QWidget" name="widgetNavigation" native="true">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>201</width>
+        <height>201</height>
+       </rect>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>201</width>
+        <height>201</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>201</width>
+        <height>201</height>
+       </size>
+      </property>
+      <widget class="QWidget" name="widgetHistory" native="true">
        <property name="geometry">
         <rect>
          <x>0</x>
-         <y>0</y>
+         <y>20</y>
          <width>200</width>
-         <height>201</height>
+         <height>180</height>
         </rect>
        </property>
        <property name="minimumSize">
         <size>
          <width>200</width>
-         <height>201</height>
-        </size>
-       </property>
-       <property name="maximumSize">
-        <size>
-         <width>200</width>
-         <height>201</height>
-        </size>
-       </property>
-       <widget class="QWidget" name="widgetHistory" native="true">
-        <property name="geometry">
-         <rect>
-          <x>0</x>
-          <y>20</y>
-          <width>200</width>
-          <height>181</height>
-         </rect>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>200</width>
-          <height>141</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>300</width>
-          <height>200</height>
-         </size>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">background-color: rgb(255, 255, 255);</string>
-        </property>
-       </widget>
-       <widget class="QLabel" name="labelNavigation">
-        <property name="geometry">
-         <rect>
-          <x>0</x>
-          <y>0</y>
-          <width>121</width>
-          <height>21</height>
-         </rect>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>16777215</width>
-          <height>31</height>
-         </size>
-        </property>
-        <property name="text">
-         <string>历史记录:</string>
-        </property>
-       </widget>
-      </widget>
-      <widget class="QWidget" name="widgetOperator" native="true">
-       <property name="geometry">
-        <rect>
-         <x>0</x>
-         <y>200</y>
-         <width>200</width>
-         <height>391</height>
-        </rect>
-       </property>
-       <property name="minimumSize">
-        <size>
-         <width>200</width>
-         <height>391</height>
-        </size>
-       </property>
-       <layout class="QGridLayout" name="gridLayout_2">
-        <item row="0" column="0">
-         <widget class="QPushButton" name="pushButtonOpenTemplate">
-          <property name="minimumSize">
-           <size>
-            <width>71</width>
-            <height>61</height>
-           </size>
-          </property>
-          <property name="text">
-           <string>打开模板</string>
-          </property>
-         </widget>
-        </item>
-        <item row="0" column="1">
-         <widget class="QPushButton" name="pushButtonAddPhoto">
-          <property name="minimumSize">
-           <size>
-            <width>71</width>
-            <height>61</height>
-           </size>
-          </property>
-          <property name="text">
-           <string>添加照片</string>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="0">
-         <widget class="QPushButton" name="pushButtonForward">
-          <property name="minimumSize">
-           <size>
-            <width>71</width>
-            <height>61</height>
-           </size>
-          </property>
-          <property name="text">
-           <string>向 前</string>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="1">
-         <widget class="QPushButton" name="pushButtonUndo">
-          <property name="minimumSize">
-           <size>
-            <width>71</width>
-            <height>61</height>
-           </size>
-          </property>
-          <property name="text">
-           <string>上一步</string>
-          </property>
-         </widget>
-        </item>
-        <item row="2" column="0">
-         <widget class="QPushButton" name="pushButtonBackward">
-          <property name="minimumSize">
-           <size>
-            <width>71</width>
-            <height>61</height>
-           </size>
-          </property>
-          <property name="text">
-           <string>向 后</string>
-          </property>
-         </widget>
-        </item>
-        <item row="2" column="1">
-         <widget class="QPushButton" name="pushButtonRedu">
-          <property name="minimumSize">
-           <size>
-            <width>71</width>
-            <height>61</height>
-           </size>
-          </property>
-          <property name="text">
-           <string>下一步</string>
-          </property>
-         </widget>
-        </item>
-        <item row="3" column="0">
-         <widget class="QPushButton" name="pushButtonDelete">
-          <property name="minimumSize">
-           <size>
-            <width>71</width>
-            <height>61</height>
-           </size>
-          </property>
-          <property name="text">
-           <string>删除图片</string>
-          </property>
-         </widget>
-        </item>
-        <item row="3" column="1">
-         <widget class="QPushButton" name="pushButtonSendFile">
-          <property name="minimumSize">
-           <size>
-            <width>71</width>
-            <height>61</height>
-           </size>
-          </property>
-          <property name="text">
-           <string>发送文件</string>
-          </property>
-         </widget>
-        </item>
-        <item row="4" column="0">
-         <widget class="QPushButton" name="pushButtonBuild">
-          <property name="minimumSize">
-           <size>
-            <width>71</width>
-            <height>61</height>
-           </size>
-          </property>
-          <property name="text">
-           <string>保存当前文件</string>
-          </property>
-         </widget>
-        </item>
-        <item row="4" column="1">
-         <widget class="QPushButton" name="pushButtonSaveAll">
-          <property name="minimumSize">
-           <size>
-            <width>71</width>
-            <height>61</height>
-           </size>
-          </property>
-          <property name="text">
-           <string>导出印刷</string>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </widget>
-     </widget>
-     <widget class="QWidget" name="tab_2">
-      <attribute name="title">
-       <string>图层</string>
-      </attribute>
-      <widget class="QWidget" name="widgetNavigation_2" native="true">
-       <property name="geometry">
-        <rect>
-         <x>0</x>
-         <y>0</y>
-         <width>200</width>
-         <height>161</height>
-        </rect>
-       </property>
-       <property name="minimumSize">
-        <size>
-         <width>200</width>
-         <height>161</height>
+         <height>141</height>
         </size>
        </property>
        <property name="maximumSize">
         <size>
          <width>300</width>
-         <height>300</height>
+         <height>200</height>
         </size>
        </property>
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(72, 72, 72);
+color: rgb(255, 255, 255);
+font: 12pt &quot;Microsoft YaHei UI&quot;;</string>
+       </property>
       </widget>
-      <widget class="ListWidgetLayout" name="listWidgetLayer">
+      <widget class="QLabel" name="labelNavigation">
        <property name="geometry">
         <rect>
          <x>0</x>
-         <y>161</y>
-         <width>200</width>
-         <height>411</height>
-        </rect>
-       </property>
-       <property name="minimumSize">
-        <size>
-         <width>200</width>
-         <height>0</height>
-        </size>
-       </property>
-      </widget>
-      <widget class="QSlider" name="horizontalSlider">
-       <property name="geometry">
-        <rect>
-         <x>0</x>
-         <y>570</y>
-         <width>200</width>
-         <height>21</height>
+         <y>0</y>
+         <width>121</width>
+         <height>16</height>
         </rect>
        </property>
        <property name="maximumSize">
@@ -493,10 +320,218 @@ QPushButton:pressed
          <height>31</height>
         </size>
        </property>
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
+       <property name="text">
+        <string>操作记录:</string>
        </property>
       </widget>
+     </widget>
+     <widget class="QWidget" name="widgetOperator" native="true">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>201</y>
+        <width>201</width>
+        <height>411</height>
+       </rect>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>201</width>
+        <height>391</height>
+       </size>
+      </property>
+      <layout class="QGridLayout" name="gridLayout_2">
+       <item row="0" column="0">
+        <widget class="QPushButton" name="pushButtonOpenTemplate">
+         <property name="minimumSize">
+          <size>
+           <width>71</width>
+           <height>61</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>86</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>打开模板</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QPushButton" name="pushButtonAddPhoto">
+         <property name="minimumSize">
+          <size>
+           <width>71</width>
+           <height>61</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>86</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>添加照片</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QPushButton" name="pushButtonForward">
+         <property name="minimumSize">
+          <size>
+           <width>71</width>
+           <height>61</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>86</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>向    前</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QPushButton" name="pushButtonUndo">
+         <property name="minimumSize">
+          <size>
+           <width>71</width>
+           <height>61</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>86</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>上 一 步</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0">
+        <widget class="QPushButton" name="pushButtonBackward">
+         <property name="minimumSize">
+          <size>
+           <width>71</width>
+           <height>61</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>86</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>向    后</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="1">
+        <widget class="QPushButton" name="pushButtonRedu">
+         <property name="minimumSize">
+          <size>
+           <width>71</width>
+           <height>61</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>86</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>下 一 步</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="0">
+        <widget class="QPushButton" name="pushButtonDelete">
+         <property name="minimumSize">
+          <size>
+           <width>71</width>
+           <height>61</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>86</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>删除图片</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="1">
+        <widget class="QPushButton" name="pushButtonSendFile">
+         <property name="minimumSize">
+          <size>
+           <width>71</width>
+           <height>61</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>86</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>发送文件</string>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="0">
+        <widget class="QPushButton" name="pushButtonBuild">
+         <property name="minimumSize">
+          <size>
+           <width>71</width>
+           <height>61</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>86</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>保存当前</string>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="1">
+        <widget class="QPushButton" name="pushButtonSaveAll">
+         <property name="minimumSize">
+          <size>
+           <width>71</width>
+           <height>61</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>86</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>导出印刷</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
      </widget>
     </widget>
    </item>
@@ -513,11 +548,6 @@ QPushButton:pressed
    <extends>QWidget</extends>
    <header>widgetshowscene.h</header>
    <container>1</container>
-  </customwidget>
-  <customwidget>
-   <class>ListWidgetLayout</class>
-   <extends>QListWidget</extends>
-   <header>ListWidgetLayout.h</header>
   </customwidget>
  </customwidgets>
  <resources/>
