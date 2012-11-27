@@ -119,6 +119,7 @@ void WidgetMain::on_pushButtonOpenTemplate_clicked()
             if(p)
                 delete p;
         }
+        listWidgetTemplate->clear();
 
         //listWidgetTemplate->setLayoutMode();
         for(int i = 0; i != size; ++i)

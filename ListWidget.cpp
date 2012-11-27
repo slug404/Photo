@@ -63,7 +63,10 @@ void ListWidget::mousePressEvent(QMouseEvent *event)
     QDrag *pDrag = new QDrag(this);
     pDrag->setMimeData(pMimeData);
     pDrag->setPixmap(pix);  //移动中显示的图片
-    pDrag->setHotSpot(event->pos());    //拖动鼠标指针的位置不变
+    int  itemIndex = pItem->data(Qt::UserRole).toInt();
+    QPoint offset = QPoint(0, 121*itemIndex);
+    pDrag->setHotSpot(event->pos() - offset);    //拖动鼠标指针的位置不变
+    //pDrag->setHotSpot(event->pos());    //拖动鼠标指针的位置不变
 
     QPixmap tmp = pix;
     QPainter painter;           //用来绘制tmp
