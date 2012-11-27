@@ -22,19 +22,19 @@
      <x>0</x>
      <y>0</y>
      <width>201</width>
-     <height>641</height>
+     <height>642</height>
     </rect>
    </property>
    <property name="minimumSize">
     <size>
      <width>200</width>
-     <height>641</height>
+     <height>642</height>
     </size>
    </property>
    <property name="maximumSize">
     <size>
      <width>201</width>
-     <height>641</height>
+     <height>642</height>
     </size>
    </property>
    <property name="styleSheet">
@@ -55,19 +55,19 @@
       <property name="minimumSize">
        <size>
         <width>201</width>
-        <height>31</height>
+        <height>33</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
         <width>201</width>
-        <height>31</height>
+        <height>32</height>
        </size>
       </property>
       <property name="styleSheet">
        <string notr="true">color: rgb(255, 255, 255);
 font: 17pt &quot;Microsoft YaHei UI&quot;;
-background-color: rgb(72, 72, 72);</string>
+border-image: url(:/images/Template.png);</string>
       </property>
       <property name="text">
        <string>模    板</string>
@@ -169,7 +169,7 @@ background-color: rgb(72, 72, 72);</string>
     <bool>true</bool>
    </property>
    <property name="styleSheet">
-    <string notr="true"/>
+    <string notr="true">border-image: url(:/images/LeftToolBar_Shadow.png);</string>
    </property>
   </widget>
   <widget class="QWidget" name="widgetRight" native="true">

@@ -403,6 +403,8 @@ void WidgetMain::on_pushButtonMinSize_clicked()
 
 void WidgetMain::on_pushButtonClose_clicked()
 {
+    pUndoView_->deleteLater();
+    pUndoStack_->deleteLater();
     this->close();
 }
 

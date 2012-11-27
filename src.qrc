@@ -5,5 +5,7 @@
         <file>images/close_OVER.png</file>
         <file>images/minimize.png</file>
         <file>images/minimize_OVER.png</file>
+        <file>images/LeftToolBar_Shadow.png</file>
+        <file>images/Template.png</file>
     </qresource>
 </RCC>

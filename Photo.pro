@@ -10,7 +10,6 @@ TARGET = Photo
 TEMPLATE = app
 
 SOURCES += main.cpp\
-        MainWindow.cpp \
     ListWidgetItem_Form.cpp \
     ListWidgetItem.cpp \
     ListWidget.cpp \
@@ -25,7 +24,7 @@ SOURCES += main.cpp\
     undoFramework/AddCommand.cpp \
     WidgetMain.cpp
 
-HEADERS  += MainWindow.h \
+HEADERS  += \
     ListWidgetItem_Form.h \
     ListWidgetItem.h \
     ListWidget.h \
@@ -40,7 +39,7 @@ HEADERS  += MainWindow.h \
     undoFramework/AddCommand.h \
     WidgetMain.h
 
-FORMS    += MainWindow.ui \
+FORMS    += \
     ListWidgetItem_Form.ui \
     WidgetMain.ui
 
