@@ -1,6 +1,7 @@
 #include <QtGui/QApplication>
 #include <QTextCodec>
 #include "MainWindow.h"
+#include "WidgetMain.h"
 
 int main(int argc, char *argv[])
 {
@@ -10,9 +11,11 @@ int main(int argc, char *argv[])
     QTextCodec::setCodecForLocale(QTextCodec::codecForName("UTF8"));
     QTextCodec::setCodecForCStrings(QTextCodec::codecForName("UTF8"));
 
-    MainWindow w;
+    //MainWindow w;
+    WidgetMain w;
     w.setWindowTitle("个性日历");
     w.setWindowIcon(QIcon(QString("./images/logo.png")));
+    w.setLogo(QPixmap(QString("./images/logo.png")));
     w.show();
     
     return a.exec();

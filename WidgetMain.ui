@@ -28,7 +28,7 @@
        <height>31</height>
       </size>
      </property>
-     <widget class="QPushButton" name="pushButton">
+     <widget class="QPushButton" name="pushButtonClose">
       <property name="geometry">
        <rect>
         <x>1255</x>
@@ -55,7 +55,7 @@ QPushButton:pressed
        <string/>
       </property>
      </widget>
-     <widget class="QPushButton" name="pushButton_2">
+     <widget class="QPushButton" name="pushButtonMinSize">
       <property name="geometry">
        <rect>
         <x>1230</x>
@@ -77,6 +77,19 @@ QPushButton:pressed
 {
 	border-image: url(:/images/minimize.png);
 }</string>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QLabel" name="labelLogo">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>31</width>
+        <height>31</height>
+       </rect>
       </property>
       <property name="text">
        <string/>
