@@ -36,7 +36,7 @@ bool GraphicsScene::saveFile()
 
     QPixmap tmp = image.scaled(QSize(image.width()/3, image.height()/3));
     tmp.save(tr("./") +QString::number(index_) + ".jpg", "jpg");
-    emit signalChangeBgBySave(index_, image.scaled(QSize(181, 121)));
+    emit signalChangeBgBySave(index_, image.scaled(QSize(151, 111)));
 
     (*pVectorImage_)[index_] = image.toImage();
 
@@ -115,6 +115,7 @@ void GraphicsScene::setImage(const QString &name, int index, const QPixmap &imag
     {
         emit signalChangeBgByReset(index);
     }
+    //this->saveFile();
 
     index_ = index;
     image_ = image;

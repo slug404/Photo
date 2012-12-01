@@ -7,5 +7,7 @@
         <file>images/minimize_OVER.png</file>
         <file>images/LeftToolBar_Shadow.png</file>
         <file>images/Template.png</file>
+        <file>images/button.png</file>
+        <file>images/button_hover.png</file>
     </qresource>
 </RCC>

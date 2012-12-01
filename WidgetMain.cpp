@@ -136,7 +136,7 @@ void WidgetMain::on_pushButtonOpenTemplate_clicked()
             ListWidgetItem_Form *pWidget = new ListWidgetItem_Form(fileName, pix, this);
             ListWidgetItem *pItem = new ListWidgetItem(pWidget, this);
             pItem->setData(Qt::UserRole, i);
-            pItem->setSizeHint(QSize(200, 121));
+            pItem->setSizeHint(QSize(181, 131));
             listWidgetTemplate->addItem(pItem);
             listWidgetTemplate->setItemWidget(pItem, pWidget);
         }
@@ -251,22 +251,11 @@ void WidgetMain::createUndoView()
 
 void WidgetMain::on_pushButtonAddPhoto_clicked()
 {
-    QString filePath = QFileDialog::getOpenFileName(this, tr("打开文件"), ".", "File(*.jpg *.jpeg)");
+    QString filePath = QFileDialog::getOpenFileName(this, tr("打开文件"), ".", "File(*.jpg *.jpeg *png)");
     //在这里插入图片到QGraphicsItem
     QPixmap pix(filePath);
     QFileInfo fileInfor(filePath);
     qDebug() << fileInfor.size();
-    if(pix.width() <= 200 || pix.height() <= 600)
-    {
-        QMessageBox::warning(this, tr("标题"), tr("插入的照片不能小于1200*1600像素"));
-        return;
-    }
-
-    if(fileInfor.size() <= 1024 * 1)
-    {
-        QMessageBox::warning(this, tr("标题"), tr("插入的照片不能小于1MB"));
-        return;
-    }
 
     GraphicsItem *p = new GraphicsItem(pix.rect(), pix);
     p->setData(Qt::UserRole, QObject::tr("photo"));

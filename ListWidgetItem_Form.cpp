@@ -4,7 +4,7 @@ ListWidgetItem_Form::ListWidgetItem_Form(const QString &name, const QPixmap &bgI
     name_(name),image_(bgImage),QWidget(parent)
 {
     setupUi(this);
-    imageBg_ = image_.scaled(181, 121);
+    imageBg_ = image_.scaled(151, 111);
     this->initGui();
 }
 

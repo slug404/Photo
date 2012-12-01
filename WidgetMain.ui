@@ -66,7 +66,7 @@
       </property>
       <property name="styleSheet">
        <string notr="true">color: rgb(255, 255, 255);
-font: 17pt &quot;Microsoft YaHei UI&quot;;
+font: 14pt &quot;Microsoft YaHei UI&quot;;
 border-image: url(:/images/Template.png);</string>
       </property>
       <property name="text">
@@ -92,7 +92,7 @@ border-image: url(:/images/Template.png);</string>
        </size>
       </property>
       <property name="layoutDirection">
-       <enum>Qt::RightToLeft</enum>
+       <enum>Qt::LeftToRight</enum>
       </property>
       <property name="autoFillBackground">
        <bool>false</bool>
@@ -190,7 +190,7 @@ border-image: url(:/images/Template.png);</string>
    <property name="styleSheet">
     <string notr="true">background-color: rgb(72, 72, 72);
 color: rgb(255, 255, 255);
-font: 12pt &quot;Microsoft YaHei UI&quot;;</string>
+</string>
    </property>
    <widget class="QWidget" name="widgetNavigation" native="true">
     <property name="geometry">
@@ -275,7 +275,23 @@ font: 12pt &quot;Microsoft YaHei UI&quot;;</string>
       <height>391</height>
      </size>
     </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton
+{
+	border-image: url(:/images/button.png);
+}
+QPushButton:hover
+{
+	border-image: url(:/images/button_hover.png);
+}</string>
+    </property>
     <layout class="QGridLayout" name="gridLayout_2">
+     <property name="margin">
+      <number>5</number>
+     </property>
+     <property name="spacing">
+      <number>3</number>
+     </property>
      <item row="0" column="0">
       <widget class="QPushButton" name="pushButtonOpenTemplate">
        <property name="minimumSize">
@@ -286,8 +302,8 @@ font: 12pt &quot;Microsoft YaHei UI&quot;;</string>
        </property>
        <property name="maximumSize">
         <size>
-         <width>86</width>
-         <height>16777215</height>
+         <width>101</width>
+         <height>86</height>
         </size>
        </property>
        <property name="text">
@@ -305,8 +321,8 @@ font: 12pt &quot;Microsoft YaHei UI&quot;;</string>
        </property>
        <property name="maximumSize">
         <size>
-         <width>86</width>
-         <height>16777215</height>
+         <width>101</width>
+         <height>86</height>
         </size>
        </property>
        <property name="text">
@@ -324,8 +340,8 @@ font: 12pt &quot;Microsoft YaHei UI&quot;;</string>
        </property>
        <property name="maximumSize">
         <size>
-         <width>86</width>
-         <height>16777215</height>
+         <width>101</width>
+         <height>86</height>
         </size>
        </property>
        <property name="text">
@@ -343,8 +359,8 @@ font: 12pt &quot;Microsoft YaHei UI&quot;;</string>
        </property>
        <property name="maximumSize">
         <size>
-         <width>86</width>
-         <height>16777215</height>
+         <width>101</width>
+         <height>86</height>
         </size>
        </property>
        <property name="text">
@@ -362,8 +378,8 @@ font: 12pt &quot;Microsoft YaHei UI&quot;;</string>
        </property>
        <property name="maximumSize">
         <size>
-         <width>86</width>
-         <height>16777215</height>
+         <width>101</width>
+         <height>86</height>
         </size>
        </property>
        <property name="text">
@@ -381,8 +397,8 @@ font: 12pt &quot;Microsoft YaHei UI&quot;;</string>
        </property>
        <property name="maximumSize">
         <size>
-         <width>86</width>
-         <height>16777215</height>
+         <width>101</width>
+         <height>86</height>
         </size>
        </property>
        <property name="text">
@@ -400,8 +416,8 @@ font: 12pt &quot;Microsoft YaHei UI&quot;;</string>
        </property>
        <property name="maximumSize">
         <size>
-         <width>86</width>
-         <height>16777215</height>
+         <width>101</width>
+         <height>86</height>
         </size>
        </property>
        <property name="text">
@@ -419,8 +435,8 @@ font: 12pt &quot;Microsoft YaHei UI&quot;;</string>
        </property>
        <property name="maximumSize">
         <size>
-         <width>86</width>
-         <height>16777215</height>
+         <width>101</width>
+         <height>86</height>
         </size>
        </property>
        <property name="text">
@@ -438,8 +454,8 @@ font: 12pt &quot;Microsoft YaHei UI&quot;;</string>
        </property>
        <property name="maximumSize">
         <size>
-         <width>86</width>
-         <height>16777215</height>
+         <width>101</width>
+         <height>86</height>
         </size>
        </property>
        <property name="text">
@@ -457,8 +473,8 @@ font: 12pt &quot;Microsoft YaHei UI&quot;;</string>
        </property>
        <property name="maximumSize">
         <size>
-         <width>86</width>
-         <height>16777215</height>
+         <width>101</width>
+         <height>86</height>
         </size>
        </property>
        <property name="text">
@@ -519,9 +535,9 @@ font: 12pt &quot;Microsoft YaHei UI&quot;;</string>
     <widget class="QLabel" name="labelName">
      <property name="geometry">
       <rect>
-       <x>500</x>
+       <x>40</x>
        <y>0</y>
-       <width>91</width>
+       <width>201</width>
        <height>31</height>
       </rect>
      </property>
@@ -530,10 +546,10 @@ font: 12pt &quot;Microsoft YaHei UI&quot;;</string>
 font: 16pt &quot;Microsoft YaHei UI&quot;;</string>
      </property>
      <property name="text">
-      <string>个性日历</string>
+      <string>www.yin99.cn</string>
      </property>
      <property name="alignment">
-      <set>Qt::AlignCenter</set>
+      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
      </property>
     </widget>
     <widget class="QPushButton" name="pushButtonClose">
